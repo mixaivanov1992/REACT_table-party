@@ -2,12 +2,12 @@ import LocalizedStrings from 'react-localization';
 
 const Localization = new LocalizedStrings({
     'ru-RU': {
-        incorrectFileFormat: 'Некорректный формат файла',
-        fileTooLarge: 'Файл слишком большой',
+        createRule: 'Создай правило!',
+        save: 'Сохранить',
     },
     'en-US': {
-        incorrectFileFormat: 'Incorrect file format',
-        fileTooLarge: 'The file is too large',
+        createRule: 'Create a rule!',
+        save: 'Save',
     },
 });
 export default Localization;

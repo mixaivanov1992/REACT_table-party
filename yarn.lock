@@ -1945,20 +1945,13 @@
   dependencies:
     "@types/node" "*"
 
-"@types/draft-js@*":
+"@types/draft-js@^0.11.9":
   "integrity" "sha512-cQJBZjjIlGaPA1tOY+wGz2KhlPtAAZOIXpUvGPxPRw5uzZ2tcj8m6Yu1QDV9YgP36+cqE3cUvgkARBzgUiuI/Q=="
   "resolved" "https://registry.npmjs.org/@types/draft-js/-/draft-js-0.11.9.tgz"
   "version" "0.11.9"
   dependencies:
     "@types/react" "*"
     "immutable" "~3.7.4"
-
-"@types/draftjs-to-html@^0.8.1":
-  "integrity" "sha512-NBkphQs+qZ/sAz/j1pCUaxkPAOx00LTsE88aMSSfcvK+UfCpjHJDqIMCkm6wKotuJvY5w0BtdRazQ0sAaXzPdg=="
-  "resolved" "https://registry.npmjs.org/@types/draftjs-to-html/-/draftjs-to-html-0.8.1.tgz"
-  "version" "0.8.1"
-  dependencies:
-    "@types/draft-js" "*"
 
 "@types/eslint-scope@^3.7.0":
   "integrity" "sha512-SCFeogqiptms4Fg29WpOTk5nHIzfpKCemSN63ksBQYKTcXoJEmJagV+DhVmbapZzY4/5YaOV1nZwrsU79fFm1g=="
@@ -2042,13 +2035,6 @@
   "integrity" "sha512-giAlZwstKbmvMk1OO7WXSj4OZ0keXAcl2TQq4LWHiiPH2ByaH7WeUzng+Qej8UPxxv+8lRTuouo0iaNDBuzIBA=="
   "resolved" "https://registry.npmjs.org/@types/html-minifier-terser/-/html-minifier-terser-5.1.1.tgz"
   "version" "5.1.1"
-
-"@types/html-to-draftjs@^1.4.0":
-  "integrity" "sha512-w7Te62TAk2xkl+f/PRepVfaVbsArRYRACqH7Rv9H97gKqglQye3Cf8EArsKuSsN7vW6/zf1kTCsm/jnSR0gDQA=="
-  "resolved" "https://registry.npmjs.org/@types/html-to-draftjs/-/html-to-draftjs-1.4.0.tgz"
-  "version" "1.4.0"
-  dependencies:
-    "@types/draft-js" "*"
 
 "@types/http-proxy@^1.17.5":
   "integrity" "sha512-9hdj6iXH64tHSLTY+Vt2eYOGzSogC+JQ2H7bdPWkuh7KXP5qLllWx++t+K9Wk556c3dkDdPws/SpMRi0sdCT1w=="
@@ -2161,14 +2147,6 @@
   "resolved" "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.11.tgz"
   "version" "17.0.11"
   dependencies:
-    "@types/react" "*"
-
-"@types/react-draft-wysiwyg@^1.13.4":
-  "integrity" "sha512-wasD1t78JDmQvdPDRPf/mf5FSHMlncunW0F6KMOKB3awzi3Wi21yHMGsRAUOkfTr3R8F+yceG8fSLz0kYWu/QA=="
-  "resolved" "https://registry.npmjs.org/@types/react-draft-wysiwyg/-/react-draft-wysiwyg-1.13.4.tgz"
-  "version" "1.13.4"
-  dependencies:
-    "@types/draft-js" "*"
     "@types/react" "*"
 
 "@types/react-paginate@^7.1.1":
@@ -4280,11 +4258,6 @@
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
 
-"classnames@^2.2.6":
-  "integrity" "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
-  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz"
-  "version" "2.3.1"
-
 "clean-css@^4.2.3":
   "integrity" "sha512-VcMWDN54ZN/DS+g58HYL5/n4Zrqe8vHJpGA8KdgUXFU4fuP/aHNw8eld9SyEIyabIMJX/0RaY/fplOo5hYLSFA=="
   "resolved" "https://registry.npmjs.org/clean-css/-/clean-css-4.2.3.tgz"
@@ -5505,7 +5478,7 @@
   "resolved" "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz"
   "version" "8.2.0"
 
-"draft-js@^0.10.x || ^0.11.x", "draft-js@^0.11.x":
+"draft-js@^0.11.7":
   "integrity" "sha512-ne7yFfN4sEL82QPQEn80xnADR8/Q6ALVworbC5UOSzOvjffmYfFsr3xSZtxbIirti14R7Y33EZC5rivpLgIbsg=="
   "resolved" "https://registry.npmjs.org/draft-js/-/draft-js-0.11.7.tgz"
   "version" "0.11.7"
@@ -5513,16 +5486,6 @@
     "fbjs" "^2.0.0"
     "immutable" "~3.7.4"
     "object-assign" "^4.1.1"
-
-"draftjs-to-html@^0.9.1":
-  "integrity" "sha512-fFstE6+IayaVFBEvaFt/wN8vdj8FsTRzij7dy7LI9QIwf5LgfHFi9zSpvCg+feJ2tbYVqHxUkjcibwpsTpgFVQ=="
-  "resolved" "https://registry.npmjs.org/draftjs-to-html/-/draftjs-to-html-0.9.1.tgz"
-  "version" "0.9.1"
-
-"draftjs-utils@^0.10.2":
-  "integrity" "sha512-EstHqr3R3JVcilJrBaO/A+01GvwwKmC7e4TCjC7S94ZeMh4IVmf60OuQXtHHpwItK8C2JCi3iljgN5KHkJboUg=="
-  "resolved" "https://registry.npmjs.org/draftjs-utils/-/draftjs-utils-0.10.2.tgz"
-  "version" "0.10.2"
 
 "duplexer@^0.1.1", "duplexer@^0.1.2":
   "integrity" "sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg=="
@@ -7229,11 +7192,6 @@
     "relateurl" "^0.2.7"
     "terser" "^4.6.3"
 
-"html-to-draftjs@^1.5.0":
-  "integrity" "sha512-kggLXBNciKDwKf+KYsuE+V5gw4dZ7nHyGMX9m0wy7urzWjKGWyNFetmArRLvRV0VrxKN70WylFsJvMTJx02OBQ=="
-  "resolved" "https://registry.npmjs.org/html-to-draftjs/-/html-to-draftjs-1.5.0.tgz"
-  "version" "1.5.0"
-
 "html-webpack-plugin@^5.3.2":
   "integrity" "sha512-HvB33boVNCz2lTyBsSiMffsJ+m0YLIQ+pskblXgN9fnjS1BgEcuAfdInfXfGrkdXV406k9FiDi86eVCDBgJOyQ=="
   "resolved" "https://registry.npmjs.org/html-webpack-plugin/-/html-webpack-plugin-5.3.2.tgz"
@@ -7426,14 +7384,9 @@
   "version" "8.0.1"
 
 "immutable@~3.7.4":
-  "integrity" "sha1-E7TTyxK++hVIKib+Gy665kAHHks="
+  "integrity" "sha512-AizQPcaofEtO11RZhPPHBOJRdo/20MKQF9mBLnVkBoyHi1/zXK8fzVdnEpSV9gxqtnh6Qomfp3F0xT5qP/vThw=="
   "resolved" "https://registry.npmjs.org/immutable/-/immutable-3.7.6.tgz"
   "version" "3.7.6"
-
-"immutable@3.x.x || 4.x.x":
-  "integrity" "sha1-wkOZUUVbs5kT2vKBN28VMOEErfM="
-  "resolved" "https://registry.npmjs.org/immutable/-/immutable-3.8.2.tgz"
-  "version" "3.8.2"
 
 "import-cwd@^2.0.0":
   "integrity" "sha1-qmzzbnInYShcs3HsZRn1PiQ1sKk="
@@ -8823,13 +8776,6 @@
   "integrity" "sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA="
   "resolved" "https://registry.npmjs.org/lines-and-columns/-/lines-and-columns-1.1.6.tgz"
   "version" "1.1.6"
-
-"linkify-it@^2.2.0":
-  "integrity" "sha512-GnAl/knGn+i1U/wjBz3akz2stz+HrHLsxMwHQGofCDfPvlf+gDKN58UtfmUquTY4/MXeE2x7k19KQmeoZi94Iw=="
-  "resolved" "https://registry.npmjs.org/linkify-it/-/linkify-it-2.2.0.tgz"
-  "version" "2.2.0"
-  dependencies:
-    "uc.micro" "^1.0.1"
 
 "loader-runner@^2.4.0":
   "integrity" "sha512-Jsmr89RcXGIwivFY21FcRrisYZfvLMTWx5kOLc+JTxtpBOG6xML0vzbc6SEQG2FO9/4Fc3wW4LVcB5DmGflaRw=="
@@ -11477,7 +11423,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.6.0", "react-dom@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x":
+"react-dom@*", "react-dom@^17.0.2", "react-dom@>=0.14.0", "react-dom@>=16.6.0":
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -11485,17 +11431,6 @@
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
     "scheduler" "^0.20.2"
-
-"react-draft-wysiwyg@*1.14.7":
-  "integrity" "sha512-D4X8F/ourvQZuqHzCQ6Vs6Tnt6TbGH58kvHQxC+aZGq+45ko2EyatL6G5C/paMaNKDZq2JRe7yAzykneMLpNOg=="
-  "resolved" "https://registry.npmjs.org/react-draft-wysiwyg/-/react-draft-wysiwyg-1.14.7.tgz"
-  "version" "1.14.7"
-  dependencies:
-    "classnames" "^2.2.6"
-    "draftjs-utils" "^0.10.2"
-    "html-to-draftjs" "^1.5.0"
-    "linkify-it" "^2.2.0"
-    "prop-types" "^15.7.2"
 
 "react-error-overlay@^6.0.9":
   "integrity" "sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew=="
@@ -11673,7 +11608,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16 || ^17 || ^18", "react@^16.8.3 || ^17", "react@^17.0.0 || ^16.0.0 || ^15.6.0", "react@^17.0.2", "react@>= 16", "react@>=0.14.0", "react@>=15", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x", "react@17.0.2":
+"react@*", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16 || ^17 || ^18", "react@^16.8.3 || ^17", "react@^17.0.0 || ^16.0.0 || ^15.6.0", "react@^17.0.2", "react@>= 16", "react@>=0.14.0", "react@>=15", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0", "react@17.0.2":
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -13743,11 +13678,6 @@
   "integrity" "sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ=="
   "resolved" "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.31.tgz"
   "version" "0.7.31"
-
-"uc.micro@^1.0.1":
-  "integrity" "sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA=="
-  "resolved" "https://registry.npmjs.org/uc.micro/-/uc.micro-1.0.6.tgz"
-  "version" "1.0.6"
 
 "unbox-primitive@^1.0.1":
   "integrity" "sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw=="

@@ -1,8 +1,10 @@
-import Content from '@shared/RuleEdit/Chapters/Sheets/SheetItem/SheetDialog/Content/Content';
+import { setSheetContent } from '@store/reducer/sheetReducer';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from '@hooks/useTypedSelector';
 import Dialog from '@shared/Dialog/Dialog';
-import Footer from '@shared/RuleEdit/Chapters/Sheets/SheetItem/SheetDialog/Footer/Footer';
 import Localization from '@localization/components/shared/ruleEdit/chapter/settings/sheets/sheetItem/sheetDialog';
 import React, { useState } from 'react';
+import TextEditor from '@shared/TextEditor/TextEditor';
 import styles from '@css/shared/ruleEdit/chapters/sheets/sheetItem/sheetDialog/SheetDialog.module.scss';
 
 interface Props {
@@ -14,41 +16,38 @@ interface Props {
 }
 
 const SheetDialog:React.FC<Props> = (props) => {
-    console.info('SheetDialog');
+    const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
+    console.info('SheetDialog');
+
     const {
         onClickCloseDialog, isOpen, chapterUid, sheetUid, sheetIndex,
     } = props;
-    const [errorMessage, setErrorMessage] = useState<string>('');
+
+    const sheetContent = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].content);
+    // const [errorMessage, setErrorMessage] = useState<string>('');
+
+    const editorSave = (content: string) => {
+        dispatch(setSheetContent(chapterUid, sheetUid, content));
+        onClickCloseDialog();
+    };
 
     return (
         <Dialog
             isOpen={isOpen}
             onClickCloseDialog={onClickCloseDialog}
             title={Localization.dataEntry}
-            beforeFooter={(
-                <Footer
-                    chapterUid={chapterUid}
-                    sheetUid={sheetUid}
-                    sheetIndex={sheetIndex}
-                    errorMessage={setErrorMessage}
-                />
-            )}
-            footer={(
-                <div>
-                    <button type="button" onClick={onClickCloseDialog}>{Localization.close}</button>
-                </div>
-            )}
             dialogSize="90"
             content={(
                 <>
-                    <Content
-                        chapterUid={chapterUid}
-                        sheetUid={sheetUid}
-                        sheetIndex={sheetIndex}
-                        errorMessage={setErrorMessage}
-                    />
-                    <div className={styles.error}>{errorMessage}</div>
+                    <TextEditor
+                        initialState={sheetContent}
+                        editorSave={editorSave}
+                        readOnly={false}
+                    >
+                        <button type="button" onClick={onClickCloseDialog}>{Localization.close}</button>
+                    </TextEditor>
+                    {/* <div className={styles.error}>{errorMessage}</div> */}
                 </>
             )}
         />

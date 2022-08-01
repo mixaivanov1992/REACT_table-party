@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Localization from '@localization/components/shared/ruleEdit/chapter/settings/sheets/sheetItem';
 import React, { useState } from 'react';
 import SheetDialog from '@shared/RuleEdit/Chapters/Sheets/SheetItem/SheetDialog/SheetDialog';
+import TextEditor from '@shared/TextEditor/TextEditor';
 import styles from '@css/shared/ruleEdit/chapters/sheets/sheetItem/SheetItem.module.scss';
 
 interface Props {
@@ -24,6 +25,7 @@ const SheetItem:React.FC<Props> = (props) => {
 
     const sheetUid = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].uid);
     const sheetCover = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].cover);
+    const sheetContent = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].content);
 
     const [isOpenDialog, setIsOpenDialog] = useState<boolean>(false);
 
@@ -72,9 +74,16 @@ const SheetItem:React.FC<Props> = (props) => {
                     key={uuidv4()}
                     className={styles.item}
                 >
-                    {sheetCover ? (
+                    {/* {sheetCover ? (
                         <div className={styles.cover}>{cover}</div>
-                    ) : <div className={styles.number}>{`${Localization.sheetNumber}${sheetNumber}`}</div>}
+                    ) : <div className={styles.number}>{`${Localization.sheetNumber}${sheetNumber}`}</div>} */}
+                    <TextEditor
+                        initialState={sheetContent}
+                        editorSave={() => {}}
+                        readOnly
+                    >
+                        &#8203;
+                    </TextEditor>
                 </div>
                 <button
                     type="button"

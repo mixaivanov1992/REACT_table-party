@@ -1,0 +1,72 @@
+@use "../../core";
+.textEditor {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	.toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		border: 0.1em solid core.$border;
+		padding: 0.5em;
+		display: flex;
+		height: 3.5em;
+		overflow: auto;
+		margin-bottom: 1em;
+		button,
+		span {
+			color: core.$second-color;
+			border: 0.1em solid core.$border;
+			padding: 0.5em;
+			min-width: 2.5em;
+			height: 2em;
+			border-radius: 0.2em;
+			margin: 0.2em;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			background: core.$fourth-color;
+			text-transform: capitalize;
+			&:hover {
+				box-shadow: 0.1em 0.1em 0em core.$layer;
+			}
+		}
+	}
+	.editor {
+		flex: 1;
+		border: 0.1em solid core.$border;
+		height: calc(70% - 5.5em);
+		overflow: auto;
+		padding: 1em;
+		margin-bottom: 1em;
+		img:focus {
+			opacity: 0;
+		}
+	}
+	.selectionWindow {
+		position: absolute;
+		z-index: 100;
+		border: 0.1em solid core.$border;
+		top: 4em;
+		left: calc(50% - 8em);
+		background: core.$fourth-color;
+		+ .editor span::selection {
+			background: transparent;
+		}
+	}
+	.footer {
+		text-align: right;
+		button {
+			margin-right: 0.5em;
+		}
+	}
+}
+
+@media screen and (max-width: 600px) {
+	@import "./_resolution/mobile";
+}
+@media screen and (min-width: 601px) {
+	@import "./_resolution/display";
+}

@@ -69,18 +69,8 @@ npm install react-transition-group --save                                       
 npm install @types/react-transition-group --save-dev
 npm install normalize.css --save                                                                -   normalize
 npm install react-localization --save                                                           -   локализация
-npm install react-draft-wysiwyg --save                                                          -   редактор
-npm install @types/react-draft-wysiwyg --save-dev
-
-
-npm install html-to-draftjs --save                                                              -   конвертация результат HTML для редактора
-npm install @types/html-to-draftjs --save-dev
-
-npm install draftjs-to-html --save                                                              -   конвертация результат редактора в HTML
-npm install @types/draftjs-to-html --save-dev
-
-
-
+npm install draft-js --save                                                                     -   редактор
+npm install @types/draft-js --save-dev
 
 npm install uuid --save                                                                         -   uuid
 npm install @types/uuid --save-dev
