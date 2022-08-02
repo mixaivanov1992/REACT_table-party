@@ -78,15 +78,13 @@ const SimpleButtons: React.FC<Props> = (props) => {
             {actionsList.map((item) => {
                 const Icon = item.icon;
                 return (
-                    <span
+                    <button
                         key={uuidv4()}
-                        role="button"
-                        tabIndex={-1}
+                        type="button"
                         onMouseDown={(event) => handleActionClick(event, item.method, item.arguments)}
-                        onKeyPress={(event) => event.key === 'Enter' && handleActionClick(event, item.method, item.arguments)}
                     >
                         {Icon ? <Icon /> : item.content}
-                    </span>
+                    </button>
                 );
             })}
         </>

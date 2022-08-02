@@ -17,7 +17,7 @@ const Sheets: React.FC<Props> = (props) => {
     const sheetCount = useTypedSelector((state) => state.sheetReducer[chapterUid]?.length || 0);
 
     const renderContent = (index: number): JSX.Element => (
-        <SheetItem chapterUid={chapterUid} sheetIndex={index} />
+        <SheetItem ruleUid={ruleUid} chapterUid={chapterUid} sheetIndex={index} chapterIndex={chapterIndex} />
     );
 
     return (

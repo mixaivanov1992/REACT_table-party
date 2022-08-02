@@ -5,15 +5,17 @@ import {
     ChapterState,
     DeleteChapters,
     RemoveChapter,
+    SetChapterCover,
     SetChapterName,
-} from '@models/reducer/chapterReducer';
+} from '@models/store/reducer/chapterReducer';
 import { Chapters } from '@models/services/ruleService';
-import { DefaultRuleKey } from '@models/reducer/ruleReducer';
+import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 
 const initialState: ChapterState = {
     [DefaultRuleKey]: [{
         uid: '',
         name: '',
+        cover: '',
     }],
 };
 
@@ -44,6 +46,18 @@ export const chapterReducer = (state = initialState, action: ChapterAction): Cha
         for (const index in chapters) {
             if (chapters[index].uid === uid) {
                 chapters[index].name = name;
+                break;
+            }
+        }
+        return { ...state, chapters };
+    }
+    case ChapterActionType.SET_CHAPTER_COVER: {
+        const { rule, uid, cover } = action;
+        const chapters = [...state[rule]];
+
+        for (const index in chapters) {
+            if (chapters[index].uid === uid) {
+                chapters[index].cover = cover;
                 break;
             }
         }
@@ -81,4 +95,11 @@ export const removeChapter = (rule: string, uid: string): RemoveChapter => ({
 export const deleteChapters = (rule: string): DeleteChapters => ({
     type: ChapterActionType.DELETE_CHAPTERS,
     rule,
+});
+
+export const setChapterCover = (rule: string, uid: string, cover: string): SetChapterCover => ({
+    type: ChapterActionType.SET_CHAPTER_COVER,
+    rule,
+    uid,
+    cover,
 });

@@ -1,92 +1,48 @@
 import '@css/shared/textEditor/textEditor.css';
 import 'draft-js/dist/Draft.css';
 import {
-    AiOutlineFileImage, AiOutlineLink,
-} from 'react-icons/ai';
-import {
-    AtomicBlockUtils, ContentBlock, DraftEditorCommand, Editor, EditorState, RichUtils, convertFromRaw, convertToRaw,
+    ContentBlock, DraftEditorCommand, Editor, EditorState, RichUtils, convertFromRaw, convertToRaw,
 } from 'draft-js';
+import { DialogList } from '@models/components/textEditor';
 import { colors, fontsFamily, fontsSize } from '@shared/TextEditor/styleMap';
 import { linkDecorator } from '@shared/TextEditor/Link';
 import { mediaBlockRenderer } from '@shared/TextEditor/Media';
-import Colors from '@shared/TextEditor/Toolbar/Colors';
-import Localization from '@localization/components/shared/editor';
+import ColorHandler from '@shared/TextEditor/Toolbar/ColorHandler';
+import ImageHandler from '@shared/TextEditor/Toolbar/ImageHandler';
+import LinkHandler from '@shared/TextEditor/Toolbar/LinkHandler';
+import Localization from '@localization/components/shared/textEditor';
 import React, { ReactNode, useRef, useState } from 'react';
 import SimpleButtons from '@shared/TextEditor/Toolbar/SimpleButtons';
-import UndoRedo from '@shared/TextEditor/Toolbar/UndoRedo';
+import UndoRedoButton from '@shared/TextEditor/Toolbar/UndoRedoButton';
 import styles from '@css/shared/textEditor/TextEditor.module.scss';
 
 interface Props {
     initialState: string,
-    readOnly: boolean
     editorSave(content: string): void,
     children: ReactNode
 }
 
 const TextEditor: React.FC<Props> = (props) => {
-    const {
-        initialState, editorSave, readOnly, children,
-    } = props;
-    const [selectionWindow, setSelectionWindow] = useState<JSX.Element | null>(null);
     Localization.setLanguage(navigator.language);
+    const {
+        initialState, editorSave, children,
+    } = props;
+
+    const [isOpen, setIsOpen] = useState<DialogList | null>(null);
 
     const [editorState, setEditorState] = React.useState<EditorState>(
         initialState
             ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialState)), linkDecorator)
             : EditorState.createEmpty(linkDecorator),
     );
-
-    if (readOnly) {
-        return (
-            <div className={styles.textEditor}>
-                <div className={styles.readOnly}>
-                    <Editor
-                        editorState={editorState}
-                        onChange={() => {}}
-                        blockRendererFn={mediaBlockRenderer}
-                        readOnly
-                    />
-                </div>
-            </div>
-        );
-    }
+    const editor = useRef() as any;
 
     const handleSave = () => {
         editorSave(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
     };
 
-    const handleInsertImage = (e: React.MouseEvent | React.KeyboardEvent) => {
-        e.preventDefault();
-        const src = prompt('Please enter the URL of your picture');
-        if (!src) {
-            return;
-        }
-        const style = { height: '200px', width: '100px' };
-        const parentStyle = { textAlign: 'center' };
-        const contentState = editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity('image', 'IMMUTABLE', { src, style, parentStyle });
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = EditorState.set(editorState, {
-            currentContent: contentStateWithEntity,
-        });
-        return setEditorState(AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, ' '));
-    };
-
-    const handleAddLink = (e: React.MouseEvent | React.KeyboardEvent) => {
-        e.preventDefault();
-        const selection = editorState.getSelection();
-        const link = prompt('Please enter the URL of your link');
-        if (!link) {
-            setEditorState(RichUtils.toggleLink(editorState, selection, null));
-            return;
-        }
-        const content = editorState.getCurrentContent();
-        const contentWithEntity = content.createEntity('LINK', 'MUTABLE', {
-            url: link,
-        });
-        const newEditorState = EditorState.push(editorState, contentWithEntity, 'apply-entity');
-        const entityKey = contentWithEntity.getLastCreatedEntityKey();
-        setEditorState(RichUtils.toggleLink(newEditorState, selection, entityKey));
+    const focus = (): void => {
+        editor.current?.focus();
     };
 
     const handleKeyCommand = (command: DraftEditorCommand) => {
@@ -96,11 +52,6 @@ const TextEditor: React.FC<Props> = (props) => {
             return 'handled';
         }
         return 'not-handled';
-    };
-
-    const editor = useRef() as any;
-    const focus = (): void => {
-        editor.current?.focus();
     };
 
     const getBlockStyle = (contentBlock: ContentBlock) => {
@@ -123,21 +74,14 @@ const TextEditor: React.FC<Props> = (props) => {
         <div className={styles.textEditor}>
             <div className={styles.toolbar}>
                 <SimpleButtons editorState={editorState} setEditorState={setEditorState} />
-                <Colors editorState={editorState} setEditorState={setEditorState} selectionWindow={selectionWindow} setSelectionWindow={setSelectionWindow} />
-                <button type="button" onMouseDown={handleInsertImage}>
-                    <AiOutlineFileImage />
-                    &#8203;
-                </button>
-                <button type="button" onMouseDown={handleAddLink} disabled={editorState.getSelection().isCollapsed()}>
-                    <AiOutlineLink />
-                    &#8203;
-                </button>
-                <UndoRedo editorState={editorState} setEditorState={setEditorState} />
+                <ColorHandler editorState={editorState} setEditorState={setEditorState} isOpen={isOpen} setIsOpen={setIsOpen} />
+                <LinkHandler editorState={editorState} setEditorState={setEditorState} setIsOpen={setIsOpen} />
+                <ImageHandler editorState={editorState} setEditorState={setEditorState} isOpen={isOpen} setIsOpen={setIsOpen} />
+                <UndoRedoButton editorState={editorState} setEditorState={setEditorState} />
             </div>
-            {selectionWindow ? <div className={styles.selectionWindow}>{selectionWindow}</div> : null}
             <div
                 className={styles.editor}
-                onClick={() => { setSelectionWindow(null); focus(); }}
+                onClick={() => { setIsOpen(null); focus(); }}
                 onKeyPress={() => {}}
                 role="button"
                 tabIndex={-1}

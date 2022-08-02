@@ -4,7 +4,6 @@ export type SheetState = Sheets;
 
 export enum SheetActionType{
     SET_SHEET_CONTENT = 'SET_SHEET_CONTENT',
-    SET_SHEET_COVER = 'SET_SHEET_COVER',
     ADD_SHEETS = 'ADD_SHEETS',
     DELETE_SHEET = 'DELETE_SHEET',
     DELETE_SHEETS = 'DELETE_SHEETS'
@@ -32,11 +31,5 @@ export interface SetSheetContent{
     uid: string,
     content: string
 }
-export interface SetSheetCover{
-    type: SheetActionType.SET_SHEET_COVER,
-    chapter: string,
-    uid: string,
-    cover: string
-}
 
-export type SheetAction = SetSheetContent | SetSheetCover | AddSheet | DeleteSheet | DeleteSheets;
+export type SheetAction = SetSheetContent | AddSheet | DeleteSheet | DeleteSheets;

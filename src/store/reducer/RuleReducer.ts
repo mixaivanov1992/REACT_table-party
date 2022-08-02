@@ -1,6 +1,6 @@
 import {
-    AddRule, DefaultRuleKey, RuleAction, RuleActionType, RuleState, SetGameName,
-} from '@models/reducer/ruleReducer';
+    AddRule, DefaultRuleKey, RuleAction, RuleActionType, RuleState, SetGameName, SetRuleCover,
+} from '@models/store/reducer/ruleReducer';
 import { Rule, Version } from '@models/services/ruleService';
 
 const versionIndex = Object.keys(Version);
@@ -10,6 +10,7 @@ const initialState: RuleState = {
     [DefaultRuleKey]: {
         author: '',
         name: '',
+        cover: '',
         pageId: 0,
         language: navigator.language,
         isPrivate: false,
@@ -26,6 +27,13 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
         newState[uid].name = name;
         return newState;
     }
+    case RuleActionType.SET_RULE_COVER: {
+        const { uid, cover } = action;
+        const newState = { ...state };
+        newState[uid].cover = cover;
+
+        return newState;
+    }
     case RuleActionType.ADD_RULE: {
         const { rule } = action;
         return { ...state, ...rule };
@@ -38,6 +46,11 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
 export const setGameName = (uid: string, name: string): SetGameName => ({
     type: RuleActionType.SET_GAME_NAME,
     name,
+    uid,
+});
+export const setRuleCover = (uid: string, cover: string): SetRuleCover => ({
+    type: RuleActionType.SET_RULE_COVER,
+    cover,
     uid,
 });
 

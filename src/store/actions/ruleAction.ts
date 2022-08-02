@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios';
 import { Chapters, Rule, Sheets } from '@models/services/ruleService';
-import { ServerAnswer } from '@models/actions/serverAnswerAction';
+import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { saveRule } from '@src/services/ruleService';
 
 export async function saveRuleAction<T extends object>(args: T): Promise<ServerAnswer> {

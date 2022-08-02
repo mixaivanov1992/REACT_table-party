@@ -11,6 +11,7 @@ const Edit: React.FC<Props> = (props) => {
     console.info('Edit');
     const { ruleId } = props;
     const { username } = useTypedSelector((state) => state.personalDataReducer);
+    const cover = useTypedSelector((state) => state.RuleReducer[ruleId].cover);
     const gameName = useTypedSelector((state) => state.RuleReducer[ruleId].name);
 
     const components = useMemo((): JSX.Element => (
@@ -19,7 +20,7 @@ const Edit: React.FC<Props> = (props) => {
 
     return (
         <div>
-            <Settings ruleUid={ruleId} gameName={gameName} username={username} />
+            <Settings ruleUid={ruleId} gameName={gameName} username={username} cover={cover} />
             {components}
         </div>
     );

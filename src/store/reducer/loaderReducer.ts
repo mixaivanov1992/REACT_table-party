@@ -1,6 +1,6 @@
 import {
     LoaderAction, LoaderActionType, LoaderState, ShowLoader,
-} from '@models/reducer/loaderReducer';
+} from '@models/store/reducer/loaderReducer';
 
 const initialState: LoaderState = {
     isLoading: false,

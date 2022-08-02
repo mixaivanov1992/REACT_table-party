@@ -13,6 +13,7 @@ const Localization = new LocalizedStrings({
         close: 'Закрыть',
         limitReached: 'Достигнут предел',
         maximumChapters: 'Общее максимальное количество глав составляет 100',
+        linkImage: 'Обложка (ссылка на изображение)',
     },
     'en-US': {
         addChapter: 'Add a chapter(s)',
@@ -26,6 +27,7 @@ const Localization = new LocalizedStrings({
         close: 'Close',
         limitReached: 'The limit has been reached',
         maximumChapters: 'The total maximum number of chapters is 100',
+        linkImage: 'Cover (link to the image)',
     },
 });
 export default Localization;

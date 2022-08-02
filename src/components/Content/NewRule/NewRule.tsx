@@ -1,4 +1,4 @@
-import { DefaultRuleKey } from '@models/reducer/ruleReducer';
+import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import Chapters from '@shared/RuleEdit/Chapters/Chapters';
 import React, { ReactNode, useMemo } from 'react';
@@ -10,6 +10,7 @@ interface Props {
 const NewRule: React.FC<Props> = (props) => {
     console.info('NewRule');
     const gameName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
+    const cover = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].cover);
     const { username } = useTypedSelector((state) => state.personalDataReducer);
 
     const { children } = props;
@@ -21,7 +22,7 @@ const NewRule: React.FC<Props> = (props) => {
         <>
             {children}
             <div>
-                <Settings ruleUid={DefaultRuleKey} gameName={gameName} username={username} />
+                <Settings ruleUid={DefaultRuleKey} gameName={gameName} username={username} cover={cover} />
                 {components}
             </div>
         </>

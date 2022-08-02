@@ -14,3 +14,22 @@ $svg-first-color: invert(81%) sepia(11%) saturate(2517%) hue-rotate(107deg)
 	brightness(75%) contrast(74%);
 $svg-second-color: invert(11%) sepia(9%) saturate(1205%) hue-rotate(173deg)
 	brightness(96%) contrast(87%);
+
+@mixin button1 {
+	color: $second-color;
+	border: 0.1em solid $border;
+	padding: 0.5em;
+	min-width: 2.5em;
+	height: 2em;
+	border-radius: 0.2em;
+	margin: 0.2em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	background: $fourth-color;
+	text-transform: capitalize;
+	&:hover {
+		box-shadow: 0.1em 0.1em 0em $layer;
+	}
+}

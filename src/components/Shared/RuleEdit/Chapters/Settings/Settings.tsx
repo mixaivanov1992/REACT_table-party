@@ -1,5 +1,5 @@
 import { addSheet, deleteSheets } from '@store/reducer/sheetReducer';
-import { removeChapter, setChapterName } from '@store/reducer/chapterReducer';
+import { removeChapter, setChapterCover, setChapterName } from '@store/reducer/chapterReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
@@ -23,6 +23,7 @@ const Settings: React.FC<Props> = (props) => {
     const { ruleUid, chapterIndex } = props;
     const chapterUid = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].uid);
     const chapterName = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].name);
+    const chapterCover = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].cover);
 
     const [sheetCount, SetSheetCount] = useState<number>(1);
     const stateSheetCount = useTypedSelector((state) => state.sheetReducer[chapterUid]?.length || 0);
@@ -54,19 +55,19 @@ const Settings: React.FC<Props> = (props) => {
 
     return (
         <div className={styles.settings}>
-            <div className={styles.sheet}>
+            <div>
                 <InputWrapper
-                    htmlFor="sheetCount"
-                    text={Localization.numberSheets}
-                    value={sheetCount}
+                    htmlFor={`cover${chapterUid}`}
+                    text={Localization.linkImage}
+                    value={chapterCover}
                 >
-                    <InputNumber
-                        uid={chapterUid}
-                        value={sheetCount}
-                        onInputData={onInputSheet}
+                    <input
+                        onChange={(e) => { dispatch(setChapterCover(ruleUid, chapterUid, e.currentTarget.value)); }}
+                        id={`cover${chapterUid}`}
+                        type="text"
+                        value={chapterCover}
                     />
                 </InputWrapper>
-                <div><button type="button" onClick={onClickAddSheet}>{Localization.addSheets}</button></div>
             </div>
             <div className={styles.chapter}>
                 <InputWrapper
@@ -86,6 +87,20 @@ const Settings: React.FC<Props> = (props) => {
                     />
                 </InputWrapper>
                 <div><button type="button" onClick={onClickRemoveChapter}>{Localization.deleteChapter}</button></div>
+            </div>
+            <div className={styles.sheet}>
+                <InputWrapper
+                    htmlFor="sheetCount"
+                    text={Localization.numberSheets}
+                    value={sheetCount}
+                >
+                    <InputNumber
+                        uid={chapterUid}
+                        value={sheetCount}
+                        onInputData={onInputSheet}
+                    />
+                </InputWrapper>
+                <div><button type="button" onClick={onClickAddSheet}>{Localization.addSheets}</button></div>
             </div>
         </div>
     );

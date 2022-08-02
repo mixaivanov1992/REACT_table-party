@@ -1,8 +1,8 @@
 import { API_URL } from '@src/http';
 import { AuthResponse } from '@models/services/authResponse';
 import { Dispatch } from 'react';
-import { ReducersActions } from '@models/actions/reducersAction';
-import { ServerAnswer } from '@models/actions/serverAnswerAction';
+import { ReducersActions } from '@models/store/actions/reducersAction';
+import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import {
     forgotPassword, login, logout, registration,
 } from '@src/services/authService';

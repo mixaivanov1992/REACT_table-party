@@ -7,7 +7,7 @@ interface Props {
     setEditorState: React.Dispatch<React.SetStateAction<EditorState>>;
 }
 
-const UndoRedo: React.FC<Props> = (props) => {
+const UndoRedoButton: React.FC<Props> = (props) => {
     const { editorState, setEditorState } = props;
     return (
         <>
@@ -23,4 +23,4 @@ const UndoRedo: React.FC<Props> = (props) => {
     );
 };
 
-export default UndoRedo;
+export default UndoRedoButton;

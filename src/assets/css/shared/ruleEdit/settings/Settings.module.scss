@@ -2,19 +2,12 @@
 .settings {
 	border: 0.1em solid core.$border;
 	background-color: core.$fourth-color;
-	padding-top: 2em;
-	.game_name {
-		margin: 0 1em;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-	}
+	padding: 2em 1em;
+	.game_name,
 	.chapter {
-		margin: 0 1em;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		margin-bottom: 1em;
 	}
 	button {
 		margin-bottom: 1em;

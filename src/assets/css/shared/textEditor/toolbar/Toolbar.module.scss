@@ -1,4 +1,5 @@
-.colors {
+@use "../../../core";
+.colorHandler {
 	width: 16em;
 	display: flex;
 	justify-content: space-around;
@@ -10,4 +11,16 @@
 		width: 1.5em;
 		height: 1.5em;
 	}
+}
+.imageHandler {
+	padding: 1em;
+}
+
+.selectionWindow {
+	position: absolute;
+	z-index: 100;
+	border: 0.1em solid core.$border;
+	top: 4em;
+	left: calc(50% - 8em);
+	background: core.$fourth-color;
 }

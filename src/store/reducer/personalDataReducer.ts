@@ -3,7 +3,7 @@ import { GuestPages } from '@store/defaultParameters/pages/guestPages';
 import { InitialPages } from '@store/defaultParameters/pages/initialPages';
 import {
     PersonalDataAction, PersonalDataActionType, PersonalDataState, Roles, SetPersonalData, UserData,
-} from '@models/reducer/personalDataReducer';
+} from '@models/store/reducer/personalDataReducer';
 import { UserPage } from '@store/defaultParameters/pages/userPages';
 
 const initialState: PersonalDataState = {

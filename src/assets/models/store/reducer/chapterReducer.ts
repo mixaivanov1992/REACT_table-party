@@ -6,6 +6,7 @@ export enum ChapterActionType{
     ADD_CHAPTERS = 'ADD_CHAPTERS',
     REMOVE_CHAPTER = 'REMOVE_CHAPTER',
     SET_CHAPTER_NAME = 'SET_CHAPTER_NAME',
+    SET_CHAPTER_COVER = 'SET_CHAPTER_COVER',
     DELETE_CHAPTERS = 'DELETE_CHAPTERS',
 }
 
@@ -32,4 +33,11 @@ export interface DeleteChapters{
     rule: string,
 }
 
-export type ChapterAction = AddChapter | RemoveChapter | SetChapterName | DeleteChapters;
+export interface SetChapterCover{
+    type: ChapterActionType.SET_CHAPTER_COVER,
+    rule: string,
+    uid: string,
+    cover: string
+}
+
+export type ChapterAction = AddChapter | RemoveChapter | SetChapterName | DeleteChapters | SetChapterCover;

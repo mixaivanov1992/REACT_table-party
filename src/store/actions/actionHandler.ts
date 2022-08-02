@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
-import { ReducersActions } from '@models/actions/reducersAction';
-import { ServerAnswer } from '@models/actions/serverAnswerAction';
+import { ReducersActions } from '@models/store/actions/reducersAction';
+import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { showLoader } from '@store/reducer/loaderReducer';
 import Localization from '@localization/actions/errors';
 

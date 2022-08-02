@@ -43,7 +43,6 @@ const SheetDialog:React.FC<Props> = (props) => {
                     <TextEditor
                         initialState={sheetContent}
                         editorSave={editorSave}
-                        readOnly={false}
                     >
                         <button type="button" onClick={onClickCloseDialog}>{Localization.close}</button>
                     </TextEditor>

@@ -3,18 +3,16 @@ import {
     DeleteSheet,
     DeleteSheets,
     SetSheetContent,
-    SetSheetCover,
     SheetAction,
     SheetActionType,
     SheetState,
-} from '@models/reducer/sheetReducer';
+} from '@models/store/reducer/sheetReducer';
 import { Sheets } from '@models/services/ruleService';
 
 const initialState: SheetState = {
     0: [{
         uid: '',
         content: '',
-        cover: '',
     }],
 };
 
@@ -32,16 +30,11 @@ export const sheetReducer = (state = initialState, action: SheetAction): SheetSt
         }
         return newState;
     }
-    case SheetActionType.SET_SHEET_CONTENT:
-    case SheetActionType.SET_SHEET_COVER: {
-        const { chapter, uid, type } = action;
+    case SheetActionType.SET_SHEET_CONTENT: {
+        const { chapter, uid } = action;
         const sheets = state[chapter].filter((item) => item.uid === uid);
         for (const item of sheets) {
-            if (SheetActionType.SET_SHEET_CONTENT === type) {
-                item.content = action.content;
-            } else {
-                item.cover = action.cover;
-            }
+            item.content = action.content;
         }
         return { ...state, sheets };
     }
@@ -84,11 +77,4 @@ export const setSheetContent = (chapter: string, uid: string, content: string): 
     chapter,
     uid,
     content,
-});
-
-export const setSheetCover = (chapter: string, uid: string, cover: string): SetSheetCover => ({
-    type: SheetActionType.SET_SHEET_COVER,
-    chapter,
-    uid,
-    cover,
 });

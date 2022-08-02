@@ -1,46 +1,50 @@
 @use "../../../../../core";
+@import "../../../../../core";
 
 .sheet {
 	display: flex;
 	flex-direction: column;
 	width: calc(33% - 2em);
+	.sheet_number {
+		text-align: center;
+		margin-bottom: 0.3em;
+	}
 	.item {
+		cursor: pointer;
+		position: relative;
 		height: 20em;
 		overflow: hidden;
 		display: flex;
 		border: 0.1em solid core.$border;
 		background-color: core.$third-color;
 		margin-bottom: 0.5em;
-		cursor: pointer;
 
-		.cover,
-		.number {
+		.menu {
+			position: absolute;
+			z-index: 1;
+			width: 100%;
+			height: 100%;
 			display: flex;
 			justify-content: center;
-			text-align: center;
-			align-items: center;
-			width: 100%;
-		}
-		.cover {
-			img {
-				width: 100%;
-				height: 100%;
+			align-items: flex-end;
+			button {
+				@include button1;
 			}
 		}
-		&:after {
-			content: "";
-			padding-top: 100%;
-			float: left;
+	}
+	.pictureMissing,
+	img {
+		width: 100%;
+		height: 100%;
+	}
+	.pictureMissing {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		svg {
+			font-size: 15em;
 		}
 	}
-	button {
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-}
-.sheet:first-child + .sheet {
-	margin-right: 1em;
-	margin-left: 1em;
 }
 
 @media screen and (max-width: 600px) {

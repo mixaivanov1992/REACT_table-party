@@ -16,6 +16,10 @@
 		transition: transform 0.1s;
 		transform: translateY(0px);
 		background: core.$fourth-color;
+		max-width: 90%;
+		white-space: nowrap;
+		overflow: hidden;
+		cursor: text;
 	}
 	.raise {
 		transform: translateY(-1em);

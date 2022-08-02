@@ -1,9 +1,9 @@
-import { DefaultRuleKey } from '@models/reducer/ruleReducer';
+import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { PageRoute } from '@models/accessiblePage';
 import { actionHandler } from '@store/actions/actionHandler';
 import { addChapter } from '@store/reducer/chapterReducer';
 import { saveRuleAction } from '@store/actions/ruleAction';
-import { setGameName } from '@store/reducer/ruleReducer';
+import { setGameName, setRuleCover } from '@store/reducer/ruleReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDeleteAllChapters } from '@hooks/useDeleteAllChapters';
 import { useDispatch } from 'react-redux';
@@ -20,6 +20,7 @@ import styles from '@css/shared/ruleEdit/settings/Settings.module.scss';
 interface Props{
     ruleUid: string,
     gameName: string,
+    cover: string,
     username: string
 }
 
@@ -28,9 +29,11 @@ const Settings: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
 
-    const { ruleUid, gameName, username } = props;
+    const {
+        ruleUid, gameName, username, cover,
+    } = props;
     const deleteAllChapters = useDeleteAllChapters(ruleUid);
-    const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid, username, gameName);
+    const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid, username, gameName, cover);
     const history = useHistory();
 
     const [chapterCount, setChapterCount] = useState<number>(1);
@@ -43,7 +46,7 @@ const Settings: React.FC<Props> = (props) => {
     const onClickChapterAdd = (): void => {
         if ((stateChapterCount + chapterCount) <= 100) {
             const chapters = {
-                [ruleUid]: [...Array(chapterCount)].map(() => ({ uid: uuidv4(), name: '' })),
+                [ruleUid]: [...Array(chapterCount)].map(() => ({ uid: uuidv4(), name: '', cover: '' })),
             };
             dispatch(addChapter(chapters));
         } else {
@@ -75,6 +78,20 @@ const Settings: React.FC<Props> = (props) => {
     }
     return (
         <div className={styles.settings}>
+            <div>
+                <InputWrapper
+                    htmlFor={`cover${ruleUid}`}
+                    text={Localization.linkImage}
+                    value={cover}
+                >
+                    <input
+                        onChange={(e) => { dispatch(setRuleCover(ruleUid, e.currentTarget.value)); }}
+                        id={`cover${ruleUid}`}
+                        type="text"
+                        value={cover}
+                    />
+                </InputWrapper>
+            </div>
             <div className={styles.game_name}>
                 <InputWrapper
                     htmlFor="gameName"

@@ -1,6 +1,6 @@
 import {
     MessageAction, MessageActionType, MessageState, ShowMessage,
-} from '@models/reducer/messageReducer';
+} from '@models/store/reducer/messageReducer';
 
 const initialState: MessageState = {
     isOpen: false,
