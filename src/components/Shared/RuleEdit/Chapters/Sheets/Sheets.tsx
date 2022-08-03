@@ -1,4 +1,5 @@
 import { useTypedSelector } from '@hooks/useTypedSelector';
+import Localization from '@localization/components/shared/ruleEdit/chapter/sheets/';
 import Paginate from '@shared/Paginate/Paginate';
 import React from 'react';
 import SheetItem from '@shared/RuleEdit/Chapters/Sheets/SheetItem/SheetItem';
@@ -9,7 +10,8 @@ interface Props {
     chapterIndex: number,
 }
 const Sheets: React.FC<Props> = (props) => {
-    console.info('sheets');
+    console.info('Sheets');
+    Localization.setLanguage(navigator.language);
 
     const sheetCountPerPage = 3;
     const { ruleUid, chapterIndex } = props;
@@ -22,7 +24,11 @@ const Sheets: React.FC<Props> = (props) => {
 
     return (
         <div className={styles.sheets}>
-            {!!sheetCount && <Paginate renderContent={renderContent} itemCount={sheetCount} itemsPerPage={sheetCountPerPage} />}
+            {sheetCount
+                ? (
+                    <Paginate renderContent={renderContent} itemCount={sheetCount} itemsPerPage={sheetCountPerPage} />
+                )
+                : <div className={styles.noData}>{Localization.noData}</div>}
         </div>
     );
 };

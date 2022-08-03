@@ -12,6 +12,7 @@ export const GuestPages: AccessiblePages = [{
     exact: true,
     component: 'Login/Login',
     isContentComponent: false,
+    fullScreenAccessible: false,
     linkIcon: {
         path: 'io5',
         name: 'IoPersonCircle',
@@ -24,6 +25,7 @@ export const GuestPages: AccessiblePages = [{
     exact: true,
     component: 'Login/Registration/Registration',
     isContentComponent: false,
+    fullScreenAccessible: false,
     sort: 0,
 }, {
     linkLocation: [],
@@ -32,5 +34,6 @@ export const GuestPages: AccessiblePages = [{
     exact: true,
     component: 'Login/ForgotPassword/ForgotPassword',
     isContentComponent: false,
+    fullScreenAccessible: false,
     sort: 0,
 }];

@@ -2,7 +2,7 @@ import { setSheetContent } from '@store/reducer/sheetReducer';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import Dialog from '@shared/Dialog/Dialog';
-import Localization from '@localization/components/shared/ruleEdit/chapter/settings/sheets/sheetItem/sheetDialog';
+import Localization from '@localization/components/shared/ruleEdit/chapter/sheets/sheetItem/sheetDialog';
 import React, { useState } from 'react';
 import TextEditor from '@shared/TextEditor/TextEditor';
 import styles from '@css/shared/ruleEdit/chapters/sheets/sheetItem/sheetDialog/SheetDialog.module.scss';

@@ -1,4 +1,5 @@
 @use "../core";
+@import "../core";
 .content {
 	flex: 1 0;
 	background: core.$third-color;
@@ -38,11 +39,29 @@
 			position: relative;
 		}
 	}
-	.header + div {
+	.menu {
+		display: flex;
+		justify-content: right;
+		margin-right: 1.5em;
+		> button {
+			font-size: 1.8em;
+			@include button1;
+		}
+	}
+	> div:last-child {
+		position: relative;
 		flex: 1;
 		margin-left: 1.5em;
 		margin-right: 1.5em;
 		margin-bottom: 1.5em;
+	}
+	&.fullscreen {
+		z-index: 80;
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		left: 0;
+		top: 0;
 	}
 }
 @media screen and (max-width: 600px) {

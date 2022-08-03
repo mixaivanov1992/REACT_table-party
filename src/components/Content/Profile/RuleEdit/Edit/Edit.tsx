@@ -1,5 +1,6 @@
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import Chapters from '@shared/RuleEdit/Chapters/Chapters';
+import Menu from '@shared/RuleEdit/Menu/Menu';
 import React, { useMemo } from 'react';
 import Settings from '@components/Shared/RuleEdit/Settings/Settings';
 
@@ -20,7 +21,8 @@ const Edit: React.FC<Props> = (props) => {
 
     return (
         <div>
-            <Settings ruleUid={ruleId} gameName={gameName} username={username} cover={cover} />
+            <Menu ruleUid={ruleId} gameName={gameName} cover={cover} username={username} />
+            <Settings ruleUid={ruleId} gameName={gameName} cover={cover} />
             {components}
         </div>
     );

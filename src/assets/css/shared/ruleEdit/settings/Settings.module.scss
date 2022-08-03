@@ -3,8 +3,7 @@
 	border: 0.1em solid core.$border;
 	background-color: core.$fourth-color;
 	padding: 2em 1em;
-	.game_name,
-	.chapter {
+	> div {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;

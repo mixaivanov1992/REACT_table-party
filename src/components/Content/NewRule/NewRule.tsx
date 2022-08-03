@@ -1,6 +1,7 @@
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import Chapters from '@shared/RuleEdit/Chapters/Chapters';
+import Menu from '@shared/RuleEdit/Menu/Menu';
 import React, { ReactNode, useMemo } from 'react';
 import Settings from '@components/Shared/RuleEdit/Settings/Settings';
 
@@ -9,7 +10,7 @@ interface Props {
 }
 const NewRule: React.FC<Props> = (props) => {
     console.info('NewRule');
-    const gameName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
+    const name = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
     const cover = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].cover);
     const { username } = useTypedSelector((state) => state.personalDataReducer);
 
@@ -22,7 +23,8 @@ const NewRule: React.FC<Props> = (props) => {
         <>
             {children}
             <div>
-                <Settings ruleUid={DefaultRuleKey} gameName={gameName} username={username} cover={cover} />
+                <Menu ruleUid={DefaultRuleKey} gameName={name} cover={cover} username={username} />
+                <Settings ruleUid={DefaultRuleKey} gameName={name} cover={cover} />
                 {components}
             </div>
         </>

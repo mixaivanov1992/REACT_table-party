@@ -3,7 +3,7 @@ import { IoMdImages } from 'react-icons/io';
 import { deleteSheet } from '@store/reducer/sheetReducer';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
-import Localization from '@localization/components/shared/ruleEdit/chapter/settings/sheets/sheetItem';
+import Localization from '@localization/components/shared/ruleEdit/chapter/sheets/sheetItem';
 import React, { useState } from 'react';
 import SheetDialog from '@shared/RuleEdit/Chapters/Sheets/SheetItem/SheetDialog/SheetDialog';
 import styles from '@css/shared/ruleEdit/chapters/sheets/sheetItem/SheetItem.module.scss';

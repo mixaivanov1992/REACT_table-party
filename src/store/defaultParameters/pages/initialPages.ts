@@ -9,6 +9,7 @@ export const InitialPages: AccessiblePages = [{
     linkLocation: [LinkLocation.navbar],
     pageRoute: PageRoute.home,
     pageAlias: PageAlias.home,
+    fullScreenAccessible: false,
     exact: true,
     component: 'Home/Home',
     isContentComponent: true,
@@ -24,6 +25,7 @@ export const InitialPages: AccessiblePages = [{
     exact: true,
     component: 'Rules/Rules',
     isContentComponent: true,
+    fullScreenAccessible: true,
     linkIcon: {
         path: 'io5',
         name: 'IoDiceSharp',
@@ -36,6 +38,7 @@ export const InitialPages: AccessiblePages = [{
     exact: true,
     component: 'About/About',
     isContentComponent: true,
+    fullScreenAccessible: false,
     linkIcon: {
         path: 'im',
         name: 'ImUsers',
@@ -48,5 +51,6 @@ export const InitialPages: AccessiblePages = [{
     exact: false,
     component: 'Page404/Page404',
     isContentComponent: true,
+    fullScreenAccessible: false,
     sort: 99,
 }];

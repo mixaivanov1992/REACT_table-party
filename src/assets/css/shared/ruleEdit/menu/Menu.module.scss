@@ -1,0 +1,11 @@
+@use "../../../core";
+@import "../../../core";
+.menu {
+	position: absolute;
+	top: -4.4em;
+	left: 0;
+	button {
+		font-size: 1.8em;
+		@include button1;
+	}
+}

@@ -1,14 +1,8 @@
-import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
-import { PageRoute } from '@models/accessiblePage';
-import { actionHandler } from '@store/actions/actionHandler';
 import { addChapter } from '@store/reducer/chapterReducer';
-import { saveRuleAction } from '@store/actions/ruleAction';
 import { setGameName, setRuleCover } from '@store/reducer/ruleReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDeleteAllChapters } from '@hooks/useDeleteAllChapters';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { usePrepareRuleDataForSave } from '@hooks/usePrepareRuleDataForSave';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import InputNumber from '@shared/InputNumber/InputNumber';
@@ -21,7 +15,6 @@ interface Props{
     ruleUid: string,
     gameName: string,
     cover: string,
-    username: string
 }
 
 const Settings: React.FC<Props> = (props) => {
@@ -30,11 +23,9 @@ const Settings: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
 
     const {
-        ruleUid, gameName, username, cover,
+        ruleUid, gameName, cover,
     } = props;
     const deleteAllChapters = useDeleteAllChapters(ruleUid);
-    const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid, username, gameName, cover);
-    const history = useHistory();
 
     const [chapterCount, setChapterCount] = useState<number>(1);
     const stateChapterCount = useTypedSelector((state) => state.chapterReducer[ruleUid]?.length || 0);
@@ -61,21 +52,6 @@ const Settings: React.FC<Props> = (props) => {
     const onInputChapter = (count: string): void => {
         setChapterCount(+count);
     };
-
-    async function onClickSave(): Promise<void> {
-        const result = await actionHandler(dispatch, saveRuleAction, prepareRuleDataForSave());
-
-        if (result.isSuccess) {
-            if (ruleUid === DefaultRuleKey) {
-                deleteAllChapters();
-            }
-            const baseUrl = PageRoute.ruleEdit.split(':')[0];
-            history.push(`${baseUrl}123`);
-            dispatch(showMessage(true, Localization.dataSaved, result.message));
-        } else {
-            dispatch(showMessage(true, Localization.error, result.message));
-        }
-    }
     return (
         <div className={styles.settings}>
             <div>
@@ -105,9 +81,6 @@ const Settings: React.FC<Props> = (props) => {
                         value={gameName}
                     />
                 </InputWrapper>
-                {gameName
-                    ? <div><button type="button" onClick={onClickSave}>{Localization.save}</button></div>
-                    : <div><button type="button" disabled>{Localization.save}</button></div>}
             </div>
             <div className={styles.chapter}>
                 <InputWrapper

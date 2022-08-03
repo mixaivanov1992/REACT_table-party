@@ -8,7 +8,7 @@ import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
 import Localization from '@localization/components/shared/ruleEdit/chapter/settings';
 import React, { useState } from 'react';
-import styles from '@css/shared/ruleEdit/chapters/settings/Settings.module.scss';
+import styles from '@css/shared/ruleEdit/settings/Settings.module.scss';
 
 interface Props {
     ruleUid: string,
@@ -27,7 +27,6 @@ const Settings: React.FC<Props> = (props) => {
 
     const [sheetCount, SetSheetCount] = useState<number>(1);
     const stateSheetCount = useTypedSelector((state) => state.sheetReducer[chapterUid]?.length || 0);
-    const chapterNumber = chapterIndex + 1;
 
     const onClickRemoveChapter = (): void => {
         dispatch(deleteSheets([chapterUid]));
@@ -69,15 +68,15 @@ const Settings: React.FC<Props> = (props) => {
                     />
                 </InputWrapper>
             </div>
-            <div className={styles.chapter}>
+            <div>
                 <InputWrapper
-                    htmlFor={`chapterName-${chapterNumber}`}
+                    htmlFor={`chapterName-${chapterUid}`}
                     text={Localization.chapterTitle}
                     value={chapterName}
                 >
                     <input
                         type="text"
-                        id={`chapterName-${chapterNumber}`}
+                        id={`chapterName-${chapterUid}`}
                         value={chapterName}
                         onChange={
                             (e) => {
@@ -88,7 +87,7 @@ const Settings: React.FC<Props> = (props) => {
                 </InputWrapper>
                 <div><button type="button" onClick={onClickRemoveChapter}>{Localization.deleteChapter}</button></div>
             </div>
-            <div className={styles.sheet}>
+            <div>
                 <InputWrapper
                     htmlFor="sheetCount"
                     text={Localization.numberSheets}

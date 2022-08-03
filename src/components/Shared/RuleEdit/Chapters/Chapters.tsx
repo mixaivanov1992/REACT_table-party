@@ -16,7 +16,7 @@ const Chapter: React.FC<Props> = (props) => {
 
     const { ruleUid } = props;
     const chapterCount = useTypedSelector((state) => state.chapterReducer[ruleUid]?.length || 0);
-    const itemsPerPage = 5;
+    const itemsPerPage = 1;
 
     const renderContent = (index: number): JSX.Element => (
         <div className={styles.container}>

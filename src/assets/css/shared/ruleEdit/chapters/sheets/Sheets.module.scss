@@ -2,10 +2,18 @@
 .sheets {
 	display: flex;
 	justify-content: center;
-	margin: 0 1em 1em;
+	margin-top: 1em;
+	padding-top: 1em;
 	flex-wrap: wrap;
+	background-color: core.$fourth-color;
+	border: 0.1em solid core.$border;
 	> div:last-child {
 		width: 100%;
+	}
+	.noData {
+		margin-top: 1em;
+		padding: 2em;
+		text-align: center;
 	}
 }
 

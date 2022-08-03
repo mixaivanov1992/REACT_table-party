@@ -32,4 +32,21 @@ $svg-second-color: invert(11%) sepia(9%) saturate(1205%) hue-rotate(173deg)
 	&:hover {
 		box-shadow: 0.1em 0.1em 0em $layer;
 	}
+	&:disabled {
+		opacity: 0.2;
+		&:hover {
+			box-shadow: none;
+		}
+		&:active {
+			color: $second-color;
+			background: $fourth-color;
+			opacity: 0.2;
+		}
+	}
+	&:focus {
+		outline: 0;
+	}
+	&:active {
+		opacity: 0.5;
+	}
 }
