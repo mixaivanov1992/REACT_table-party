@@ -3,7 +3,6 @@
 	display: flex;
 	justify-content: center;
 	margin-top: 1em;
-	padding-top: 1em;
 	flex-wrap: wrap;
 	background-color: core.$fourth-color;
 	border: 0.1em solid core.$border;
@@ -11,7 +10,6 @@
 		width: 100%;
 	}
 	.noData {
-		margin-top: 1em;
 		padding: 2em;
 		text-align: center;
 	}

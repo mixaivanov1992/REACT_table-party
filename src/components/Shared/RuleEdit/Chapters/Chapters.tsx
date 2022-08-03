@@ -1,8 +1,8 @@
 import { useTypedSelector } from '@hooks/useTypedSelector';
+import ChapterController from '@shared/RuleEdit/Settings/ChapterController';
 import Localization from '@localization/components/shared/ruleEdit/chapter';
 import Paginate from '@shared/Paginate/Paginate';
 import React from 'react';
-import Settings from '@shared/RuleEdit/Chapters/Settings/Settings';
 import Sheets from '@shared/RuleEdit/Chapters/Sheets/Sheets';
 import styles from '@css/shared/ruleEdit/chapters/Chapters.module.scss';
 
@@ -20,7 +20,8 @@ const Chapter: React.FC<Props> = (props) => {
 
     const renderContent = (index: number): JSX.Element => (
         <div className={styles.container}>
-            <Settings ruleUid={ruleUid} chapterIndex={index} />
+            <div className={styles.header}>{`${Localization.chapter}${index + 1}`}</div>
+            <ChapterController ruleUid={ruleUid} chapterIndex={index} />
             <Sheets ruleUid={ruleUid} chapterIndex={index} />
         </div>
     );

@@ -1,34 +1,34 @@
-import { AiFillSave, AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
+import { AiFillSave } from 'react-icons/ai';
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { PageRoute } from '@models/accessiblePage';
 import { actionHandler } from '@store/actions/actionHandler';
 import { saveRuleAction } from '@store/actions/ruleAction';
 import { showMessage } from '@store/reducer/messageReducer';
-import { useDeleteAllChapters } from '@hooks/useDeleteAllChapters';
+import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { usePrepareRuleDataForSave } from '@hooks/usePrepareRuleDataForSave';
+import { useTypedSelector } from '@hooks/useTypedSelector';
 import Localization from '@localization/components/shared/ruleEdit/menu';
 import React from 'react';
 import styles from '@css/shared/ruleEdit/menu/Menu.module.scss';
 
 interface Props{
-    ruleUid: string,
-    gameName: string,
-    username: string,
-    cover: string
+    ruleUid: string
 }
 
 const Menu: React.FC<Props> = (props) => {
-    console.info('Menu');
     const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
     const {
-        ruleUid, gameName, username, cover,
+        ruleUid,
     } = props;
 
+    const gameName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
+    const cover = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].cover);
+    const { username } = useTypedSelector((state) => state.personalDataReducer);
     const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid, username, gameName, cover);
-    const deleteAllChapters = useDeleteAllChapters(ruleUid);
+    const deleteRuleItems = useDeleteRuleItems(ruleUid);
     const history = useHistory();
 
     async function onClickSave(): Promise<void> {
@@ -36,10 +36,10 @@ const Menu: React.FC<Props> = (props) => {
 
         if (result.isSuccess) {
             if (ruleUid === DefaultRuleKey) {
-                deleteAllChapters();
+                deleteRuleItems();
+                const baseUrl = PageRoute.ruleEdit.split(':')[0];
+                history.push(`${baseUrl}123`);
             }
-            const baseUrl = PageRoute.ruleEdit.split(':')[0];
-            history.push(`${baseUrl}123`);
             dispatch(showMessage(true, Localization.dataSaved, result.message));
         } else {
             dispatch(showMessage(true, Localization.error, result.message));

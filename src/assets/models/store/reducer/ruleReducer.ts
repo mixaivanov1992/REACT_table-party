@@ -4,14 +4,14 @@ export type RuleState = Rule;
 
 export const DefaultRuleKey = 'DefaultRuleKey';
 export enum RuleActionType {
-    SET_GAME_NAME = 'SET_GAME_NAME',
+    SET_RULE_NAME = 'SET_RULE_NAME',
     ADD_RULE = 'ADD_RULE',
     SET_RULE_COVER = 'SET_RULE_COVER',
     REMOVE_RULE = 'REMOVE_RULE'
 }
 
-export interface SetGameName {
-    type: RuleActionType.SET_GAME_NAME,
+export interface SetRuleName {
+    type: RuleActionType.SET_RULE_NAME,
     name: string,
     uid: string
 }
@@ -32,4 +32,4 @@ export interface SetRuleCover{
     cover: string
 }
 
-export type RuleAction = SetGameName | AddRule | RemoveRule | SetRuleCover;
+export type RuleAction = SetRuleName | AddRule | RemoveRule | SetRuleCover;
