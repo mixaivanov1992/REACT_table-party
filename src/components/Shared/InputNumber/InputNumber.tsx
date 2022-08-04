@@ -10,6 +10,7 @@ const InputNumber: React.FC<Props> = (props) => {
     const { uid, value, onInputData } = props;
     return (
         <input
+            id={uid}
             key={uid}
             type="text"
             onInput={(e) => {

@@ -1,26 +1,57 @@
 @use "../../../core";
-.colorHandler {
-	width: 16em;
+.selectionWindow {
+	width: 100%;
+	position: absolute;
+	top: 3em;
+	right: 0;
 	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-	padding: 0.5em;
-	> span {
-		cursor: pointer;
-		display: inline-block;
-		width: 1.5em;
-		height: 1.5em;
+	justify-content: center;
+	> div {
+		background: core.$fourth-color;
+		border: 0.1em solid core.$border;
+		z-index: 100;
+		max-width: 100%;
+	}
+	.colorHandler {
+		width: 16em;
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		padding: 0.5em;
+		> span {
+			cursor: pointer;
+			display: inline-block;
+			width: 1.5em;
+			height: 1.5em;
+		}
+	}
+	.imageHandler {
+		padding: 1em;
+		.size {
+			display: flex;
+			> label {
+				width: 50%;
+			}
+		}
+		.align {
+			width: 100%;
+			margin-bottom: 1em;
+			select {
+				width: 100%;
+			}
+		}
+		.align + div {
+			text-align: right;
+			> button {
+				margin-left: 0.25em;
+			}
+		}
 	}
 }
-.imageHandler {
-	padding: 1em;
-}
 
-.selectionWindow {
-	position: absolute;
-	z-index: 100;
-	border: 0.1em solid core.$border;
-	top: 4em;
-	left: calc(50% - 8em);
-	background: core.$fourth-color;
+@media screen and (max-width: 600px) {
+	@import "./_resolution/mobile";
+}
+@media screen and (min-width: 601px) {
+	@import "./_resolution/display";
 }
