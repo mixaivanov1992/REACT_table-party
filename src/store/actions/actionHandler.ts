@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
-import { ReducersActions } from '@models/store/actions/reducersAction';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
+import { ShowLoader } from '@models/store/reducer/loaderReducer';
 import { showLoader } from '@store/reducer/loaderReducer';
 import Localization from '@localization/actions';
 
@@ -13,14 +13,9 @@ function errorHandler(text: string): string {
     return Localization.unknownError;
 }
 
-export async function actionHandler
-    <
-        D extends Dispatch<ReducersActions>,
-        F extends Function,
-        O extends Object
-    >(dispatch: D, action: F, args: O): Promise<ServerAnswer> {
+export async function actionHandler(dispatch: Dispatch<ShowLoader>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
     dispatch(showLoader(true));
-    const result = { ...await action({ dispatch, ...args }) } as ServerAnswer;
+    const result = { ...await action() };
     dispatch(showLoader(false));
 
     if (!result.isSuccess) {

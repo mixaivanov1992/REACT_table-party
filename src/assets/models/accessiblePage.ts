@@ -14,7 +14,8 @@ export enum PageRoute{
     forgotPassword = '/forgot-password',
     newRule = '/new-rule',
     profile = '/profile',
-    ruleEdit = '/rule-edit/:url',
+    ruleEdit = '/rule-edit/:id',
+    runRule = '/run-rule/:url',
     page404 = '*',
 }
 export enum PageAlias{
@@ -27,6 +28,7 @@ export enum PageAlias{
     newRule = 'newRule',
     profile = 'profile',
     ruleEdit = 'ruleEdit',
+    runRule = 'runRule',
     page404 = 'page404',
 }
 

@@ -1,7 +1,7 @@
 import { AccessiblePages, PageRoute } from '@models/accessiblePage';
 import { Link } from 'react-router-dom';
 import { actionHandler } from '@store/actions/actionHandler';
-import { logoutAction } from '@store/actions/authAction';
+import { actionLogout } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,7 +23,8 @@ const Header: React.FC<Props> = (props) => {
     const { accessiblePages } = props;
 
     const onClickLogout = ():void => {
-        actionHandler(dispatch, logoutAction, {});
+        const logout = actionLogout(dispatch);
+        actionHandler(dispatch, logout);
     };
 
     return (

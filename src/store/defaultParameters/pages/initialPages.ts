@@ -53,4 +53,13 @@ export const InitialPages: AccessiblePages = [{
     isContentComponent: true,
     fullScreenAccessible: false,
     sort: 99,
+}, {
+    linkLocation: [],
+    pageRoute: PageRoute.runRule,
+    pageAlias: PageAlias.runRule,
+    exact: true,
+    component: 'RunRule/RunRule',
+    isContentComponent: false,
+    fullScreenAccessible: false,
+    sort: 0,
 }];

@@ -2,7 +2,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useHistory } from 'react-router-dom';
 import { PageRoute } from '@models/accessiblePage';
 import { actionHandler } from '@store/actions/actionHandler';
-import { loginAction } from '@store/actions/authAction';
+import { actionLogin } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Field from '@components/Login/Field/Field';
@@ -31,7 +31,8 @@ const Login: React.FC = () => {
             setMessage(Localization.passwordNotField);
             return;
         }
-        const result = await actionHandler(dispatch, loginAction, { email, password });
+        const login = actionLogin(dispatch, email, password);
+        const result = await actionHandler(dispatch, login);
         if (result.isSuccess) {
             history.push(PageRoute.home);
         } else {

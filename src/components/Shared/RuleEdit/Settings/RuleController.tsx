@@ -24,7 +24,7 @@ const RuleController: React.FC<Props> = (props) => {
     const ruleName = useTypedSelector((state) => state.RuleReducer[ruleUid].name);
     const ruleCover = useTypedSelector((state) => state.RuleReducer[ruleUid].cover);
     const stateChapterCount = useTypedSelector((state) => state.chapterReducer[ruleUid]?.length || 0);
-    const deleteRuleItems = useDeleteRuleItems(ruleUid);
+    const deleteRuleItems = useDeleteRuleItems(dispatch, ruleUid);
 
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [countItem, SetCountItem] = useState<number>(1);

@@ -1,5 +1,5 @@
+import { actionCheckAuth } from '@store/actions/authAction';
 import { actionHandler } from '@store/actions/actionHandler';
-import { checkAuthAction } from '@store/actions/authAction';
 import { store } from '@store/index';
 import { useDispatch } from 'react-redux';
 import Loader from '@shared/Loader/Loader';
@@ -11,10 +11,11 @@ const App: React.FC = () => {
     console.info('App');
     console.info('state', store.getState());
     const dispatch = useDispatch();
+    const checkAuth = actionCheckAuth(dispatch);
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
-            actionHandler(dispatch, checkAuthAction, {});
+            actionHandler(dispatch, checkAuth);
         }
     }, []);
 

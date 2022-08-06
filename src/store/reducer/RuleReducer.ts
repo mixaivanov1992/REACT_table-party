@@ -1,5 +1,5 @@
 import {
-    AddRule, DefaultRuleKey, RuleAction, RuleActionType, RuleState, SetRuleCover, SetRuleName,
+    AddRule, DefaultRuleKey, RuleAction, RuleActionType, RuleState, SetAuthor, SetRuleCover, SetRuleName,
 } from '@models/store/reducer/ruleReducer';
 import { Rule, Version } from '@models/services/ruleService';
 
@@ -27,6 +27,12 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
         newState[uid].name = name;
         return newState;
     }
+    case RuleActionType.SET_RULE_AUTHOR: {
+        const { uid, author } = action;
+        const newState = { ...state };
+        newState[uid].author = author;
+        return newState;
+    }
     case RuleActionType.SET_RULE_COVER: {
         const { uid, cover } = action;
         const newState = { ...state };
@@ -42,11 +48,16 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
         return state;
     }
 };
+export const setAuthor = (uid: string, author: string): SetAuthor => ({
+    type: RuleActionType.SET_RULE_AUTHOR,
+    uid,
+    author,
+});
 
 export const setRuleName = (uid: string, name: string): SetRuleName => ({
     type: RuleActionType.SET_RULE_NAME,
-    name,
     uid,
+    name,
 });
 export const setRuleCover = (uid: string, cover: string): SetRuleCover => ({
     type: RuleActionType.SET_RULE_COVER,

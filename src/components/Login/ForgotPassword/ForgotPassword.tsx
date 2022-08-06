@@ -1,5 +1,5 @@
+import { actionForgotPassword } from '@store/actions/authAction';
 import { actionHandler } from '@store/actions/actionHandler';
-import { forgotPasswordAction } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
 import Field from '@components/Login/Field/Field';
 import GoBack from '@components/Login/GoBack/GoBack';
@@ -22,7 +22,8 @@ const ForgotPassword: React.FC = () => {
             setMessage(Localization.emailNotField);
             return;
         }
-        const result = await actionHandler(dispatch, forgotPasswordAction, { email });
+        const forgotPassword = actionForgotPassword(email);
+        const result = await actionHandler(dispatch, forgotPassword);
         if (result.isSuccess) {
             setIsSent(true);
         } else {

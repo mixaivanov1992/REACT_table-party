@@ -1,10 +1,8 @@
 import { AiFillSave } from 'react-icons/ai';
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
-import { PageRoute } from '@models/accessiblePage';
 import { actionHandler } from '@store/actions/actionHandler';
-import { saveRuleAction } from '@store/actions/ruleAction';
+import { actionSaveRule } from '@store/actions/ruleAction';
 import { showMessage } from '@store/reducer/messageReducer';
-import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { usePrepareRuleDataForSave } from '@hooks/usePrepareRuleDataForSave';
@@ -26,18 +24,14 @@ const Menu: React.FC<Props> = (props) => {
 
     const ruleName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
     const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid);
-    const deleteRuleItems = useDeleteRuleItems(ruleUid);
     const history = useHistory();
 
     async function onClickSave(): Promise<void> {
-        const result = await actionHandler(dispatch, saveRuleAction, prepareRuleDataForSave());
+        const { rule, chapters, sheets } = prepareRuleDataForSave();
+        const saveRule = actionSaveRule(dispatch, rule, chapters, sheets, history);
+        const result = await actionHandler(dispatch, saveRule);
 
         if (result.isSuccess) {
-            if (ruleUid === DefaultRuleKey) {
-                deleteRuleItems();
-                const baseUrl = PageRoute.ruleEdit.split(':')[0];
-                history.push(`${baseUrl}123`);
-            }
             dispatch(showMessage(true, Localization.dataSaved, Localization.ruleSaved));
         } else {
             dispatch(showMessage(true, Localization.error, result.message));

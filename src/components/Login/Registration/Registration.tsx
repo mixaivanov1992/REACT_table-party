@@ -1,5 +1,5 @@
 import { actionHandler } from '@store/actions/actionHandler';
-import { registrationAction } from '@store/actions/authAction';
+import { actionRegistration } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
 import Field from '@components/Login/Field/Field';
 import GoBack from '@components/Login/GoBack/GoBack';
@@ -41,7 +41,8 @@ const Registration: React.FC = () => {
             setMessage(Localization.passwordsNotMatch);
             return;
         }
-        const result = await actionHandler(dispatch, registrationAction, { email, username, password });
+        const registration = actionRegistration(email, username, password);
+        const result = await actionHandler(dispatch, registration);
         if (result.isSuccess) {
             setIsRegistered(true);
         } else {
