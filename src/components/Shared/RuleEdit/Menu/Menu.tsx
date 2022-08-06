@@ -24,10 +24,8 @@ const Menu: React.FC<Props> = (props) => {
         ruleUid,
     } = props;
 
-    const gameName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
-    const cover = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].cover);
-    const { username } = useTypedSelector((state) => state.personalDataReducer);
-    const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid, username, gameName, cover);
+    const ruleName = useTypedSelector((state) => state.RuleReducer[DefaultRuleKey].name);
+    const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid);
     const deleteRuleItems = useDeleteRuleItems(ruleUid);
     const history = useHistory();
 
@@ -40,7 +38,7 @@ const Menu: React.FC<Props> = (props) => {
                 const baseUrl = PageRoute.ruleEdit.split(':')[0];
                 history.push(`${baseUrl}123`);
             }
-            dispatch(showMessage(true, Localization.dataSaved, result.message));
+            dispatch(showMessage(true, Localization.dataSaved, Localization.ruleSaved));
         } else {
             dispatch(showMessage(true, Localization.error, result.message));
         }
@@ -48,7 +46,7 @@ const Menu: React.FC<Props> = (props) => {
 
     return (
         <div className={styles.menu}>
-            {gameName
+            {ruleName
                 ? (
                     <div>
                         <button type="button" onClick={onClickSave}>

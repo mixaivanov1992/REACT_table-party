@@ -11,7 +11,7 @@ export interface Sheets{
 }
 export type RuleData = {
     author: string,
-    pageId: number,
+    url: string,
     name: string,
     cover: string,
     language: string,

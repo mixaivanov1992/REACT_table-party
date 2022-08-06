@@ -14,7 +14,7 @@ interface Parameters {
 const RuleEdit: React.FC<Props> = (props) => {
     console.info('RuleEdit');
     const { children } = props;
-    const { ruleId } = useParams<Parameters>();
+    const { ruleId } = useParams<Parameters>();// url
 
     const { username } = useTypedSelector((state) => state.personalDataReducer);
     const author = useTypedSelector((state) => state.RuleReducer[ruleId]?.author);
