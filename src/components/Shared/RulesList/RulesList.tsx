@@ -22,7 +22,6 @@ const RulesList: React.FC<Props> = (props) => {
     const rulesKey = Object.keys(rulesReducer).filter((key) => DefaultRuleKey !== key);
     const rules = rulesKey.map((key) => {
         const { name, cover, url } = rulesReducer[key];
-        console.log(ruleEdit + key, 123);
         return (
             <div key={uuidv4()} className={styles.rule}>
                 <div className={styles.logo}>

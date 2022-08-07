@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from 'uuid';
 import DynamicIcon from '@shared/DynamicIcon/DynamicIcon';
 import Localization from '@localization/components/navBar';
 import React from 'react';
-import styles from '@css/navBar/NavBar.module.scss';
+import styles from '@css/navBar/Navbar.module.scss';
 
 interface Props {
     accessiblePages: AccessiblePages
 }
 
-const NavBar: React.FC<Props> = (props) => {
-    console.debug('MinNavBar');
+const Navbar: React.FC<Props> = (props) => {
+    console.debug('Navbar');
     Localization.setLanguage(navigator.language);
 
     const { accessiblePages } = props;
@@ -49,4 +49,4 @@ const NavBar: React.FC<Props> = (props) => {
     );
 };
 
-export default NavBar;
+export default Navbar;

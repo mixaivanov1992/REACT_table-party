@@ -1,0 +1,57 @@
+@use "../../core";
+
+.navbar {
+	position: relative;
+	width: calc(18% - 0.2em);
+	border-right: 0.2em solid core.$border;
+	.chapters {
+		padding: 1em 0;
+		height: calc(100% - 4em);
+		overflow-y: auto;
+		direction: rtl;
+		width: 100%;
+		.chapter {
+			cursor: pointer;
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto;
+			width: 80%;
+			height: 20%;
+			.name {
+				text-align: center;
+			}
+			.cover {
+				border: 0.1em solid core.$border;
+				margin-bottom: 1em;
+				height: calc(100% - 1.2em);
+			}
+		}
+		.selected {
+			transform: scale(1.1);
+			.cover {
+				border: 0.2em solid core.$second-color;
+				height: calc(100% - 1.4em);
+			}
+		}
+	}
+	.menu {
+		height: 4em;
+		background-color: core.$third-color;
+		padding: 1em 0;
+		border-top: 0.1em solid core.$border;
+		text-align: center;
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		button:first-child {
+			margin-right: 0.5em;
+		}
+	}
+}
+@media screen and (max-width: 600px) {
+	@import "./_resolution/mobile";
+}
+@media screen and (min-width: 601px) {
+	@import "./_resolution/display";
+}

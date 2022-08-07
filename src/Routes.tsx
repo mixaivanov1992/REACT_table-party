@@ -9,7 +9,7 @@ import Breadcrumbs from '@components/Breadcrumbs/Breadcrumbs';
 import Content from '@components/Content/Content';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
-import NavBar from '@components/NavBar/NavBar';
+import Navbar from '@components/Navbar/Navbar';
 import React from 'react';
 
 const Routes: React.FC = () => {
@@ -31,7 +31,7 @@ const Routes: React.FC = () => {
                     <Header accessiblePages={headerFilter} />
                     <Breadcrumbs accessiblePages={accessiblePages} />
                     <div className="content">
-                        <NavBar accessiblePages={navbarFilter} />
+                        <Navbar accessiblePages={navbarFilter} />
                         <Content accessiblePage={accessiblePage} />
                     </div>
                     <Footer accessiblePages={footerFilter} />
