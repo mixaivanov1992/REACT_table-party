@@ -10,6 +10,9 @@ const RunRule: React.FC = () => {
     console.info('RunRule');
     const { url } = useParams<Parameters>();
 
+    const rule = useTypedSelector((state) => Object.keys(state.RuleReducer).filter((key, q, q2) => (console.log(key, q, q2))));
+    console.log(rule);
+
     return (
         <div>123</div>
     );

@@ -13,10 +13,9 @@ export const useDeleteRuleItems = (dispatch: Dispatch<ChapterAction | SheetActio
         const chapters = chapterReducer[ruleUid].map((chapter) => (chapter.uid));
         dispatch(deleteSheets(chapters));
         dispatch(deleteChapters(ruleUid));
-
-        if (DefaultRuleKey === ruleUid) {
-            dispatch(setRuleName(ruleUid, ''));
-            dispatch(setRuleCover(ruleUid, ''));
-        }
+    }
+    if (DefaultRuleKey === ruleUid) {
+        dispatch(setRuleName(ruleUid, ''));
+        dispatch(setRuleCover(ruleUid, ''));
     }
 };

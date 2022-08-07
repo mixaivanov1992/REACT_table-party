@@ -54,6 +54,8 @@ const RuleController: React.FC<Props> = (props) => {
     const onClickRemoveRule = (): void => {
         if (stateChapterCount || (DefaultRuleKey !== ruleUid && stateChapterCount)) {
             setIsOpen(true);
+        } else if (DefaultRuleKey === ruleUid && (ruleName || ruleCover)) {
+            deleteRuleItems();
         }
     };
 

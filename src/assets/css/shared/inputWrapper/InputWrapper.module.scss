@@ -5,6 +5,8 @@
 	position: relative;
 	margin-bottom: 0.5em;
 	> input {
+		z-index: 1;
+		background: transparent;
 		margin-bottom: 0.5em;
 	}
 	> span {
@@ -20,11 +22,21 @@
 		white-space: nowrap;
 		overflow: hidden;
 		cursor: text;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		background: core.$fourth-color;
 	}
+
 	.raise {
 		transform: translateY(-1em);
+		z-index: 2;
 	}
 	input:focus + span {
+		z-index: 2;
 		color: core.$first-color;
 		transform: translateY(-1em);
 	}
