@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import DynamicIcon from '@shared/DynamicIcon/DynamicIcon';
 import Localization from '@localization/components/navBar';
 import React from 'react';
-import styles from '@css/navBar/Navbar.module.scss';
+import styles from '@css/navbar/Navbar.module.scss';
 
 interface Props {
     accessiblePages: AccessiblePages
