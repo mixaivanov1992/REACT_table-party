@@ -16,6 +16,7 @@ export enum PageRoute{
     profile = '/profile',
     ruleEdit = '/rule-edit/:id',
     runRule = '/run-rule/:url',
+    searchRules = '/search-rules/:name',
     page404 = '*',
 }
 export enum PageAlias{
@@ -29,6 +30,7 @@ export enum PageAlias{
     profile = 'profile',
     ruleEdit = 'ruleEdit',
     runRule = 'runRule',
+    searchRules = 'searchRules',
     page404 = 'page404',
 }
 

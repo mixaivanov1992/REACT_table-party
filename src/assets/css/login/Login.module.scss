@@ -1,84 +1,49 @@
 @use "../core";
+@import "./form.scss";
+
 .login {
-	display: flex;
-	height: 100vh;
-	align-items: center;
-	justify-content: center;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+	@include login_form;
 	background-image: url("../../img/login-background.jpg");
-	&::after {
-		content: "";
-		background: core.$layer;
-		height: 100vh;
-		width: 100vw;
-		position: fixed;
+	.forgot_password {
+		margin-right: 0.5em;
 	}
-	.wrapper {
-		z-index: 1;
-		-webkit-box-shadow: 0px 0px 20px 0px core.$shadow;
-		-moz-box-shadow: 0px 0px 20px 0px core.$shadow;
-		box-shadow: 0px 0px 20px 0px core.$shadow;
-		background-color: core.$fourth-color;
-		border: 0.1em solid core.$border;
-		border-radius: 0.3em;
-		padding: 3% 5%;
-		text-align: center;
-		position: relative;
-		.header {
-			font-size: 2em;
-			margin-bottom: 0.5em;
-		}
-		.forgot_password {
-			margin-right: 0.5em;
-		}
-		.login_btn,
-		.registration {
-			margin-bottom: 1em;
-		}
-		.registration,
-		.forgot_password {
-			display: inline-block;
-			text-decoration: none;
-			font-weight: bold;
+	.login_btn,
+	.registration {
+		margin-bottom: 1em;
+	}
+	.registration,
+	.forgot_password {
+		display: inline-block;
+		text-decoration: none;
+		font-weight: bold;
+		color: core.$first-color;
+		&:hover {
 			color: core.$first-color;
-			&:hover {
-				color: core.$first-color;
-			}
 		}
-		.message {
-			transition: all 0.1s;
-			color: core.$danger;
-			margin-bottom: 1em;
-		}
-		.social {
+	}
+	.social {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.google {
+			color: core.$placeholder;
+			font-size: 1.2em;
+			font-weight: 600;
+			padding: 0.5em;
 			display: flex;
 			justify-content: center;
-			align-items: center;
-			.google {
-				color: core.$placeholder;
-				font-size: 1.2em;
-				font-weight: 600;
-				padding: 0.5em;
-				display: flex;
-				justify-content: center;
-				cursor: pointer;
-				margin-bottom: 1rem;
-				border: 0.1em solid core.$border;
-				border-radius: 0.25em;
-				width: 100%;
-				background-color: core.$fourth-color;
-				svg {
-					margin-right: 0.5em;
-				}
+			cursor: pointer;
+			margin-bottom: 1rem;
+			border: 0.1em solid core.$border;
+			border-radius: 0.25em;
+			width: 100%;
+			background-color: core.$fourth-color;
+			svg {
+				margin-right: 0.5em;
 			}
 		}
+		> div:hover {
+			background-color: core.$third-color;
+		}
 	}
-}
-@media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
-}
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
 }

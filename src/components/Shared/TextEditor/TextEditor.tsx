@@ -33,7 +33,7 @@ const TextEditor: React.FC<Props> = (props) => {
     const [editorState, setEditorState] = React.useState<EditorState>(
         initialState
             ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialState)), linkDecorator)
-            : EditorState.createEmpty(linkDecorator),
+            : EditorState.createEmpty(linkDecorator), // проверить
     );
     const editor = useRef() as any;
 

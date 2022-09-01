@@ -1,24 +1,19 @@
 @use "../../core";
 
 .navbar {
-	position: relative;
-	width: calc(18% - 0.2em);
-	border-right: 0.2em solid core.$border;
 	.chapters {
-		padding: 1em 0;
 		height: calc(100% - 4em);
-		overflow-y: auto;
-		direction: rtl;
-		width: 100%;
 		.chapter {
+			padding: 1em 0;
+			transition: transform 300ms;
 			cursor: pointer;
 			display: flex;
 			flex-direction: column;
-			margin: 0 auto;
-			width: 80%;
-			height: 20%;
 			.name {
 				text-align: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 			.cover {
 				border: 0.1em solid core.$border;
@@ -27,31 +22,150 @@
 			}
 		}
 		.selected {
-			transform: scale(1.1);
 			.cover {
-				border: 0.2em solid core.$second-color;
+				border: 0.1em solid core.$second-color;
 				height: calc(100% - 1.4em);
 			}
 		}
 	}
-	.menu {
-		height: 4em;
-		background-color: core.$third-color;
-		padding: 1em 0;
-		border-top: 0.1em solid core.$border;
-		text-align: center;
-		width: 100%;
+}
+.show_hide_navbar {
+	z-index: 4;
+	position: fixed;
+	height: calc(100% - 5em);
+	display: flex;
+	align-items: center;
+	> svg {
 		position: absolute;
-		bottom: 0;
-		left: 0;
-		button:first-child {
-			margin-right: 0.5em;
+		cursor: pointer;
+		font-size: 2.5em;
+		&:hover {
+			fill: core.$first-color;
 		}
 	}
 }
+
 @media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
+	.navbar {
+		overflow-y: auto;
+		background-color: core.$fourth-color;
+		position: fixed;
+		width: 100%;
+		z-index: 3;
+		display: flex;
+		justify-content: center;
+		.chapters {
+			height: 100vh;
+			width: 80%;
+			.chapter {
+				width: 100%;
+				height: 35%;
+				margin: 0;
+			}
+		}
+	}
+	.show_hide_navbar {
+		> svg {
+			font-size: 2em;
+		}
+	}
+	.navbar_enter {
+		opacity: 0;
+	}
+	.navbar_enter_active {
+		opacity: 1;
+		transition: opacity 500ms;
+	}
+	.navbar_exit {
+		width: 100%;
+		opacity: 1;
+	}
+	.navbar_exit_active {
+		width: 0px;
+		opacity: 0;
+		transition: opacity 100ms, width 500ms;
+	}
 }
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
+@media screen and (min-width: 601px) and (max-width: 900px) {
+	.navbar {
+		overflow-y: auto;
+		background-color: core.$fourth-color;
+		position: fixed;
+		width: 100%;
+		z-index: 3;
+		display: flex;
+		justify-content: center;
+		.chapters {
+			justify-content: center;
+			height: 100vh;
+			width: 80%;
+			flex-wrap: wrap;
+			display: flex;
+			.chapter {
+				width: 48%;
+				height: 35%;
+				margin: 0 1%;
+			}
+		}
+	}
+	.navbar_enter {
+		opacity: 0;
+	}
+	.navbar_enter_active {
+		opacity: 1;
+		transition: opacity 500ms;
+	}
+	.navbar_exit {
+		width: 100%;
+		opacity: 1;
+	}
+	.navbar_exit_active {
+		width: 0px;
+		opacity: 0;
+		transition: opacity 100ms, width 500ms;
+	}
+}
+@media screen and (min-width: 901px) {
+	.navbar {
+		border-right: 0.1em solid core.$border;
+		position: relative;
+		width: calc(25% - 0.2em);
+		.chapters {
+			overflow-y: auto;
+			direction: rtl;
+			width: 100%;
+			height: calc(100% - 4em);
+			flex-direction: column;
+			align-items: center;
+			display: flex;
+			.chapter {
+				width: 60%;
+				height: 25%;
+				&:hover {
+					transform: scale(1.1);
+				}
+			}
+			.selected {
+				transform: scale(1.1);
+			}
+		}
+	}
+	.navbar_enter {
+		opacity: 0;
+		width: 0px;
+	}
+	.navbar_enter_active {
+		opacity: 1;
+		width: calc(25% - 0.2em);
+		transition: opacity 1000ms, width 500ms;
+	}
+	.navbar_exit {
+		width: calc(25% - 0.2em);
+		opacity: 1;
+	}
+	.navbar_exit_active {
+		width: 0px;
+		opacity: 0;
+		transition: opacity 200ms, width 500ms;
+	}
 }

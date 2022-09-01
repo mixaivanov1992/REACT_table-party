@@ -2,59 +2,85 @@
 .runRule {
 	overflow: hidden;
 	height: 100vh;
-	> .cover {
-		position: relative;
-		width: 100vw;
-		height: 100vh;
-		img {
-			width: 100%;
-			height: 100%;
-		}
-		> div {
-			display: flex;
-			justify-content: center;
+	position: relative;
+	> .close {
+		position: absolute;
+		top: 0.3em;
+		right: 0.4em;
+		> svg:first-child {
 			position: absolute;
-			bottom: 1em;
-			width: 100vw;
-			> div {
-				cursor: pointer;
-				position: relative;
-				animation-duration: 500ms;
-				animation-name: MoveUpDown;
-				animation-iteration-count: infinite;
-				svg {
-					position: relative;
-					color: core.$first-color;
-					font-size: 4em;
-					z-index: 3;
-				}
-				.svg_background {
-					position: absolute;
-					top: 0.5em;
-					left: 1em;
-					width: 2em;
-					height: 3em;
-					background-color: core.$fourth-color;
-				}
-			}
+			fill: core.$second-color;
+		}
+		> svg:last-child {
+			position: relative;
+			fill: core.$fourth-color;
+		}
+		> svg {
+			z-index: 1;
+			cursor: pointer;
+			font-size: 2.5em;
 		}
 	}
 	> .rule {
+		position: relative;
 		width: 100vw;
 		height: 100vh;
 		display: flex;
-		.content {
-			flex: 1;
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: calc(100% - 5em);
+			.header {
+				text-align: center;
+				padding: 1em 3em;
+				border-bottom: 0.1em solid core.$border;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+			.content {
+				overflow: auto;
+				padding: 1em;
+			}
+		}
+		.menu {
+			width: 100%;
+			height: 5em;
+			text-align: center;
+			background-color: core.$third-color;
+			border-top: 0.1em solid core.$border;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: flex;
+			> div:first-child {
+				padding: 0.5em 0;
+			}
+			> div:last-child {
+				padding: 0.5em 0;
+			}
 		}
 	}
 }
 
-@keyframes MoveUpDown {
-	0%,
-	100% {
-		bottom: 0;
+@media screen and (max-width: 900px) {
+	.menu {
+		justify-content: center;
+		> div:first-child {
+			margin-right: 0.5em;
+		}
 	}
-	50% {
-		bottom: 1em;
+}
+@media screen and (min-width: 901px) {
+	.menu {
+		> div:first-child {
+			width: calc(25% - 0.2em);
+			border-right: 0.1em solid core.$border;
+		}
+		> div:last-child {
+			flex: 1;
+		}
 	}
 }

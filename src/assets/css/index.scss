@@ -1,21 +1,15 @@
 @use "core";
-@media screen and (max-width: 600px) {
-	body {
-		font-size: 4vw;
-		#root {
-			min-height: 100vh;
-		}
+@media screen and (max-width: 900px) {
+	#root {
+		min-height: 100vh;
 	}
 }
-@media screen and (min-width: 601px) {
-	body {
-		font-size: 1vw;
-		#root {
-			height: 100vh;
+@media screen and (min-width: 901px) {
+	#root {
+		height: 100vh;
+		overflow: hidden;
+		> div {
 			overflow: hidden;
-			> div {
-				overflow: hidden;
-			}
 		}
 	}
 }
@@ -23,6 +17,7 @@ body {
 	background: core.$fourth-color;
 	margin: 0px;
 	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
 }
 html,
 *,

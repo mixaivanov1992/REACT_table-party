@@ -62,4 +62,13 @@ export const InitialPages: AccessiblePages = [{
     isContentComponent: false,
     fullScreenAccessible: false,
     sort: 0,
+}, {
+    linkLocation: [],
+    pageRoute: PageRoute.searchRules,
+    pageAlias: PageAlias.searchRules,
+    exact: false,
+    component: 'SearchRules/SearchRules',
+    isContentComponent: true,
+    fullScreenAccessible: false,
+    sort: 0,
 }];

@@ -24,4 +24,4 @@ export enum Version {
 }
 
 type SheetData = Array<{uid: string, content: string}>;
-type ChapterData = Array<{uid: string, name: string, cover: string}>
+export type ChapterData = Array<{uid: string, name: string, cover: string}>

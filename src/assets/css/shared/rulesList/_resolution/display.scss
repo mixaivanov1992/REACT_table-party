@@ -1,9 +1,0 @@
-.rulesList {
-	.rule {
-		transition: transform 0.3s;
-		width: calc(25% - 2em);
-		&:hover {
-			transform: scale(1.1);
-		}
-	}
-}

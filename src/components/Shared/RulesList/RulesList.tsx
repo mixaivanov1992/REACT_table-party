@@ -10,16 +10,21 @@ import styles from '@css/shared/rulesList/RulesList.module.scss';
 interface Props {
     rulePlay: string,
     ruleEdit?: string,
+    nameContains?: string,
     children?: ReactNode,
 }
 
 const RulesList: React.FC<Props> = (props) => {
     console.info('RulesList');
     Localization.setLanguage(navigator.language);
-    const { children, rulePlay, ruleEdit } = props;
+    const {
+        children, rulePlay, ruleEdit, nameContains,
+    } = props;
     const rulesReducer = useTypedSelector((state) => state.RuleReducer);
 
-    const rulesKey = Object.keys(rulesReducer).filter((key) => DefaultRuleKey !== key);
+    const rulesKey = Object.keys(rulesReducer).filter(
+        (key) => DefaultRuleKey !== key && rulesReducer[key].name.toLowerCase().includes(nameContains?.toLowerCase() || ''),
+    );
     const rules = rulesKey.map((key) => {
         const { name, cover, url } = rulesReducer[key];
         return (
@@ -47,6 +52,7 @@ const RulesList: React.FC<Props> = (props) => {
 RulesList.defaultProps = {
     ruleEdit: undefined,
     children: undefined,
+    nameContains: undefined,
 };
 
 export default RulesList;

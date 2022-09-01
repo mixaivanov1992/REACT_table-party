@@ -38,6 +38,9 @@
 			.close {
 				padding: 1em;
 				cursor: pointer;
+				&:hover {
+					background-color: core.$second-color;
+				}
 			}
 		}
 		.container {
@@ -64,9 +67,35 @@
 	}
 }
 
-@media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
+@media screen and (max-width: 900px) {
+	.dialog {
+		width: 100vw;
+		height: 100vh;
+		left: 0;
+		top: 0;
+	}
 }
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
+@media screen and (min-width: 901px) {
+	.dialog {
+		border-bottom-right-radius: 0.5em;
+		border-bottom-left-radius: 0.5em;
+		.header {
+			.close {
+				&:active {
+					opacity: 0.9;
+				}
+			}
+		}
+	}
+	.dialog_90 {
+		width: 90vw;
+		height: 90vh;
+	}
+	.dialog_50 {
+		width: 50vw;
+		height: 50vh;
+	}
+	.dialog_auto {
+		width: 50vw;
+	}
 }

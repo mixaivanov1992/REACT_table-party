@@ -1,22 +1,22 @@
 @use "../../core";
 .go_back {
-    cursor: pointer;
-    border-radius: 50%;
-    position: absolute;
-    background: core.$second-color;
-    left: -1.2em;
-    top: 1.2em;
-    padding: 0.5em;
-    > span {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        svg {
-            font-size: 1.5em;
-            color: core.$third-color;
-        }
-    }
-    &:hover {
-        background: core.$first-color;
-    }
+	cursor: pointer;
+	border-radius: 50%;
+	position: absolute;
+	background: core.$second-color;
+	left: -1.2em;
+	top: 1.2em;
+	padding: 0.5em;
+	> span {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		svg {
+			font-size: 1.5em;
+			color: core.$third-color;
+		}
+	}
+	&:hover {
+		background: core.$first-color;
+	}
 }

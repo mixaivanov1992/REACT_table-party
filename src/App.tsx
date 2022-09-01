@@ -4,21 +4,27 @@ import { store } from '@store/index';
 import { useDispatch } from 'react-redux';
 import Loader from '@shared/Loader/Loader';
 import Message from '@shared/Message/Message';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import Routes from '@src/Routes';
 
 const App: React.FC = () => {
     console.info('App');
-    console.info('state', store.getState());
     const dispatch = useDispatch();
     const checkAuth = actionCheckAuth(dispatch);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
+    async function tokenRecovery() {
         if (localStorage.getItem('token')) {
-            actionHandler(dispatch, checkAuth);
+            await actionHandler(dispatch, checkAuth);
         }
-    }, []);
+        setIsLoading(false);
+    }
+    if (isLoading) {
+        tokenRecovery();
+        return <Loader />;
+    }
 
+    console.info('state', store.getState());
     return (
         <>
             <Loader />

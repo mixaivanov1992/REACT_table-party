@@ -9,6 +9,7 @@ const Localization = new LocalizedStrings({
         newRule: 'Новое правило',
         profile: 'Профиль',
         ruleEdit: 'Правка правила',
+        searchRules: 'Поиск правил',
     },
     'en-US': {
         home: 'Home page',
@@ -18,6 +19,7 @@ const Localization = new LocalizedStrings({
         newRule: 'New rules',
         profile: 'Profile',
         ruleEdit: 'Rule edit',
+        searchRules: 'Search for rules',
     },
 });
 export default Localization;

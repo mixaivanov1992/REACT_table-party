@@ -1,48 +1,10 @@
 @use "../../core";
+@import "../form.scss";
+
 .registration {
-	display: flex;
-	height: 100vh;
-	align-items: center;
-	justify-content: center;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+	@include login_form;
 	background-image: url("../../../img/login-background.jpg");
-	&::after {
-		content: "";
-		background: rgba(0, 0, 0, 0.2);
-		height: 100vh;
-		width: 100vw;
-		position: fixed;
+	.registration_btn {
+		margin-bottom: 1em;
 	}
-	.wrapper {
-		z-index: 1;
-		-webkit-box-shadow: 0px 0px 20px 0px core.$shadow;
-		-moz-box-shadow: 0px 0px 20px 0px core.$shadow;
-		box-shadow: 0px 0px 20px 0px core.$shadow;
-		background-color: core.$fourth-color;
-		border: 0.1em solid core.$border;
-		border-radius: 0.3em;
-		padding: 3% 5%;
-		text-align: center;
-		position: relative;
-		.header {
-			font-size: 2em;
-			margin-bottom: 0.5em;
-		}
-		.registration_btn {
-			margin-bottom: 1em;
-		}
-		.message {
-			transition: all 0.1s;
-			color: core.$danger;
-			margin-bottom: 1em;
-		}
-	}
-}
-@media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
-}
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
 }

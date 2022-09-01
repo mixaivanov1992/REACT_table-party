@@ -5,33 +5,33 @@
 	display: flex;
 	flex-direction: column;
 	padding-top: 1em;
-	width: calc(33% - 2em);
-	.sheet_number {
-		text-align: center;
-		margin-bottom: 0.3em;
-	}
+	width: calc(100% - 2em);
 	.item {
+		width: 15em;
+		height: 15em;
+		margin: 0 auto 0.5em;
 		cursor: pointer;
 		position: relative;
-		height: 20em;
-		overflow: hidden;
 		display: flex;
 		border: 0.1em solid core.$border;
 		background-color: core.$third-color;
-		margin-bottom: 0.5em;
 
 		.menu {
+			width: 100%;
+			height: 100%;
 			position: absolute;
-			z-index: 1;
-			bottom: 0;
-			left: 43%;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
 			button {
+				z-index: 2;
 				@include button1;
 			}
 		}
 		.text_editor {
 			width: 100%;
 			height: 100%;
+			z-index: 1;
 			> img {
 				width: 100%;
 				height: 100%;
@@ -41,16 +41,34 @@
 				justify-content: center;
 				align-items: center;
 				svg {
-					font-size: 15em;
+					width: 100%;
+					height: 100%;
+				}
+			}
+			&:hover {
+				&::after {
+					content: "";
+					background-color: core.$layer;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					position: absolute;
 				}
 			}
 		}
 	}
 }
 
-@media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
+@media screen and (max-width: 900px) {
+	.sheet {
+		width: 100%;
+		margin-bottom: 2em;
+	}
 }
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
+@media screen and (min-width: 901px) {
+	.sheet:first-child + .sheet {
+		margin-right: 1em;
+		margin-left: 1em;
+	}
 }

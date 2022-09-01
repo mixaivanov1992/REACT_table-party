@@ -1,0 +1,45 @@
+@use "../core";
+
+@mixin login_form {
+	display: flex;
+	height: 100vh;
+	align-items: center;
+	justify-content: center;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	&::after {
+		content: "";
+		background: core.$layer;
+		height: 100vh;
+		width: 100vw;
+		position: fixed;
+	}
+	.wrapper {
+		z-index: 1;
+		-webkit-box-shadow: 0px 0px 20px 0px core.$shadow;
+		-moz-box-shadow: 0px 0px 20px 0px core.$shadow;
+		box-shadow: 0px 0px 20px 0px core.$shadow;
+		background-color: core.$fourth-color;
+		border: 0.1em solid core.$border;
+		border-radius: 0.3em;
+		padding: 3% 5%;
+		text-align: center;
+		position: relative;
+		.header {
+			word-wrap: break-word;
+			font-size: 2em;
+			margin-bottom: 0.5em;
+		}
+		.message {
+			transition: all 0.1s;
+			color: core.$danger;
+			margin-bottom: 1em;
+		}
+	}
+	@media screen and (max-width: 600px) {
+		.wrapper {
+			width: 80%;
+		}
+	}
+}

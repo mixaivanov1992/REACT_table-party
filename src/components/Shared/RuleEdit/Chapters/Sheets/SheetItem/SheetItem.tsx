@@ -26,7 +26,6 @@ const SheetItem:React.FC<Props> = (props) => {
     const {
         ruleUid, sheetIndex, chapterUid, chapterIndex,
     } = props;
-    const sheetNumber = sheetIndex + 1;
 
     const sheetUid = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].uid);
     const chapterCover = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].cover);
@@ -86,7 +85,6 @@ const SheetItem:React.FC<Props> = (props) => {
                 )}
             />
             <div className={styles.sheet}>
-                <div className={styles.sheet_number}>{Localization.sheetNumber + sheetNumber}</div>
                 <div className={styles.item}>
                     <div
                         className={styles.text_editor}

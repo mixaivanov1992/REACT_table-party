@@ -32,7 +32,7 @@ const Chapter: React.FC<Props> = (props) => {
                 ? (
                     <>
                         <Paginate renderContent={renderContent} itemCount={chapterCount} itemsPerPage={itemsPerPage} />
-                        <div className={styles.chapter_navigation}>{Localization.chapterNavigation}</div>
+                        <div className={styles.navigation}>{Localization.chaptersNavigation}</div>
                     </>
                 )
                 : <div className={styles.noData}>{Localization.noData}</div>}

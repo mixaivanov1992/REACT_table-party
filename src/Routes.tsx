@@ -15,6 +15,9 @@ import React from 'react';
 const Routes: React.FC = () => {
     console.info('Routes');
     const { accessiblePages } = useTypedSelector((state) => state.personalDataReducer);
+    const headerFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.header));
+    const navbarFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.navbar));
+    const footerFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.footer));
 
     const routes = accessiblePages.map((accessiblePage) => {
         const {
@@ -22,10 +25,6 @@ const Routes: React.FC = () => {
         } = accessiblePage;
 
         if (isContentComponent) {
-            const headerFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.header));
-            const navbarFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.navbar));
-            const footerFilter = accessiblePages.filter((item) => item.linkLocation.includes(LinkLocation.footer));
-
             return (
                 <Route key={uuidv4()} exact={exact} path={pageRoute}>
                     <Header accessiblePages={headerFilter} />

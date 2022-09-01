@@ -1,5 +1,5 @@
 import { AccessiblePages, PageRoute } from '@models/accessiblePage';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { actionHandler } from '@store/actions/actionHandler';
 import { actionLogout } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
@@ -7,7 +7,7 @@ import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import DynamicIcon from '@shared/DynamicIcon/DynamicIcon';
 import Localization from '@localization/components/header';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '@css/header/Header.module.scss';
 
 interface Props {
@@ -19,18 +19,32 @@ const Header: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
 
+    const [search, setSearch] = useState<string>('');
     const { isAuthorized } = useTypedSelector((state) => state.personalDataReducer);
     const { accessiblePages } = props;
 
+    const history = useHistory();
     const onClickLogout = ():void => {
         const logout = actionLogout(dispatch);
         actionHandler(dispatch, logout);
+    };
+    const path = PageRoute.searchRules.split(':')[0];
+    const onClickSearch = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter') {
+            history.push(path + search);
+        }
     };
 
     return (
         <header className={styles.header}>
             <div className={styles.search}>
-                <input type="search" placeholder={Localization.searchRules} />
+                <input
+                    type="search"
+                    onChange={(e) => { setSearch(e.currentTarget.value); }}
+                    onKeyPress={onClickSearch}
+                    placeholder={Localization.searchRules}
+                    value={search}
+                />
             </div>
             <div>
                 <div className={styles.user_menu}>

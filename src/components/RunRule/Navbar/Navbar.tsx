@@ -1,58 +1,68 @@
+import { AiOutlineMenu } from 'react-icons/ai';
+import { CSSTransition } from 'react-transition-group';
+import { ChapterData } from '@models/services/ruleService';
 import { IoMdImages } from 'react-icons/io';
 import { useIsValidHttpUrl } from '@hooks/useIsValidHttpUrl';
-import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import React, { useState } from 'react';
 import styles from '@css/runRule/navbar/Navbar.module.scss';
 
 interface Props {
-    ruleId: string
+    chapters: ChapterData,
+    selectedChapter: number,
+    onClickChapterSelection: (index: number) => void
 }
 
 const Navbar: React.FC<Props> = (props) => {
     console.info('Navbar');
-    const { ruleId } = props;
-    const chapters = useTypedSelector((state) => state.chapterReducer[ruleId]);
+    const {
+        chapters, selectedChapter, onClickChapterSelection,
+    } = props;
+    const [isOpenNavbar, setIsOpenNavbar] = useState<boolean>(true);
     const isValidHttpUrl = useIsValidHttpUrl();
-    const [selected, setSelected] = useState<number>(0);
 
-    const chapterCount = chapters.length ? chapters.length - 1 : 0;
-
-    const nextItem = () => {
-        if (selected < chapterCount) {
-            setSelected(selected + 1);
-        }
-    };
-    const prevItem = () => {
-        if (selected > 0) {
-            setSelected(selected - 1);
-        }
+    const onClickShowHideNavbar = () => {
+        setIsOpenNavbar(!isOpenNavbar);
     };
 
     return (
-        <div className={styles.navbar}>
-            <div className={styles.chapters}>
-                {
-                    chapters.map((item, index) => (
-                        <div
-                            key={uuidv4()}
-                            role="button"
-                            tabIndex={-1}
-                            onKeyPress={() => {}}
-                            onClick={() => { setSelected(index); }}
-                            className={`${styles.chapter} ${index === selected ? styles.selected : ''}`}
-                        >
-                            <div className={styles.name}>{item.name}</div>
-                            {isValidHttpUrl(item.cover) ? <img className={styles.cover} src={item.cover} alt={item.name} /> : <IoMdImages className={styles.cover} />}
-                        </div>
-                    ))
-                }
+        <>
+            <div className={styles.show_hide_navbar}>
+                <AiOutlineMenu onClick={onClickShowHideNavbar} />
             </div>
-            <div className={styles.menu}>
-                <button type="button" onClick={prevItem}>Prev</button>
-                <button type="button" onClick={nextItem}>Next</button>
-            </div>
-        </div>
+            <CSSTransition
+                in={isOpenNavbar}
+                timeout={500}
+                classNames={{
+                    enter: `${styles.navbar_enter}`,
+                    enterActive: `${styles.navbar_enter_active}`,
+                    exit: `${styles.navbar_exit}`,
+                    exitActive: `${styles.navbar_exit_active}`,
+                }}
+                mountOnEnter
+                unmountOnExit
+            >
+                <div className={styles.navbar}>
+                    <div className={styles.chapters}>
+                        {
+                            chapters.map((item, index) => (
+                                <div
+                                    key={uuidv4()}
+                                    role="button"
+                                    tabIndex={-1}
+                                    onKeyPress={() => {}}
+                                    onClick={() => { onClickChapterSelection(index); }}
+                                    className={`${styles.chapter} ${index === selectedChapter ? styles.selected : ''}`}
+                                >
+                                    <div className={styles.name}>{item.name}</div>
+                                    {isValidHttpUrl(item.cover) ? <img className={styles.cover} src={item.cover} alt={item.name} /> : <IoMdImages className={styles.cover} />}
+                                </div>
+                            ))
+                        }
+                    </div>
+                </div>
+            </CSSTransition>
+        </>
     );
 };
 
