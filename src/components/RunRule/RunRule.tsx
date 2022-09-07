@@ -92,12 +92,12 @@ const RunRule: React.FC = () => {
                 <div className={styles.menu}>
                     <div>
                         <div>{Localization.chapters}</div>
-                        <button disabled={!selectedChapter || selectedChapter < chapterCount} type="button" onClick={onClickPrevChapter}>{Localization.back}</button>
+                        <button disabled={!selectedChapter} type="button" onClick={onClickPrevChapter}>{Localization.back}</button>
                         <button disabled={selectedChapter >= chapterCount} type="button" onClick={onClickNextChapter}>{Localization.forward}</button>
                     </div>
                     <div>
                         <div>{Localization.sheets}</div>
-                        <button disabled={!selectedSheet || selectedSheet < sheetCount} type="button" onClick={onClickPrevSheet}>{Localization.back}</button>
+                        <button disabled={!selectedSheet} type="button" onClick={onClickPrevSheet}>{Localization.back}</button>
                         <button disabled={selectedSheet >= sheetCount} type="button" onClick={onClickNextSheet}>{Localization.forward}</button>
                     </div>
                 </div>

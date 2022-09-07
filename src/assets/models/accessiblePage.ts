@@ -41,7 +41,6 @@ export interface AccessiblePage {
     readonly exact: boolean,
     readonly component: string,
     readonly isContentComponent: boolean,
-    readonly fullScreenAccessible: boolean,
     readonly linkIcon?: IconData,
     readonly sort: number
 }

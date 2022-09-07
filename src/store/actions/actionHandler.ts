@@ -1,6 +1,9 @@
 import { Dispatch } from 'react';
+import { RuleAction } from '@models/store/reducer/ruleReducer';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
+import { SetPersonalData } from '@models/store/reducer/personalDataReducer';
 import { ShowLoader } from '@models/store/reducer/loaderReducer';
+import { actionCheckAuth } from '@store/actions/authAction';
 import { showLoader } from '@store/reducer/loaderReducer';
 import Localization from '@localization/actions';
 
@@ -13,8 +16,14 @@ function errorHandler(text: string): string {
     return Localization.unknownError;
 }
 
-export async function actionHandler(dispatch: Dispatch<ShowLoader>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
+export async function actionHandler(dispatch: Dispatch<ShowLoader | SetPersonalData | RuleAction>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
     dispatch(showLoader(true));
+    if (localStorage.getItem('token')) {
+        const result = await actionCheckAuth(dispatch);
+        if (!result.isSuccess) {
+            return { ...result, message: errorHandler(result.message) };
+        }
+    }
     const result = { ...await action() };
     dispatch(showLoader(false));
 

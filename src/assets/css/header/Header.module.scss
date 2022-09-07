@@ -18,8 +18,8 @@
 	.search + div {
 		flex: 1;
 		display: -webkit-flex;
-		justify-content: space-between;
 		align-items: center;
+		justify-content: end;
 	}
 	.user_menu {
 		.profile,
@@ -32,6 +32,9 @@
 			svg {
 				color: core.$second-color;
 				font-size: 2.8em;
+				&:hover {
+					fill: core.$first-color;
+				}
 			}
 		}
 		a {
@@ -39,6 +42,9 @@
 		}
 		.logout {
 			cursor: pointer;
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 		span {
 			display: inline-block;
@@ -48,9 +54,24 @@
 	}
 }
 
-@media screen and (max-width: 600px) {
-	@import "./_resolution/mobile";
+@media screen and (max-width: 900px) {
+	.search {
+		flex: 1;
+		input {
+			width: 100%;
+		}
+	}
 }
-@media screen and (min-width: 601px) {
-	@import "./_resolution/display";
+@media screen and (min-width: 901px) {
+	.header {
+		.search {
+			width: 50%;
+			input {
+				width: 70%;
+				&:focus {
+					width: 100%;
+				}
+			}
+		}
+	}
 }

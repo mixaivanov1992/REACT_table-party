@@ -1,9 +1,14 @@
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
+import { PageRoute } from '@models/accessiblePage';
+import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
+import { actionDeleteRule } from '@store/actions/ruleAction';
+import { actionHandler } from '@store/actions/actionHandler';
 import { addChapter } from '@store/reducer/chapterReducer';
-import { setRuleCover, setRuleName } from '@store/reducer/ruleReducer';
+import { removeRule, setRuleCover, setRuleName } from '@store/reducer/ruleReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import Dialog from '@shared/Dialog/Dialog';
@@ -52,20 +57,26 @@ const RuleController: React.FC<Props> = (props) => {
     };
 
     const onClickRemoveRule = (): void => {
-        if (stateChapterCount || (DefaultRuleKey !== ruleUid && stateChapterCount)) {
-            setIsOpen(true);
-        } else if (DefaultRuleKey === ruleUid && (ruleName || ruleCover)) {
-            deleteRuleItems();
-        }
+        setIsOpen(true);
     };
 
-    const onClickConfirmRemove = (): void => {
+    const history = useHistory();
+    async function onClickConfirmRemove() {
         setIsOpen(false);
-        deleteRuleItems();
         if (DefaultRuleKey !== ruleUid) {
-            // удалить правило
+            const deleteRule = actionDeleteRule(ruleUid);
+            const result = await actionHandler(dispatch, deleteRule);
+            if (result.isSuccess) {
+                deleteRuleItems();
+                dispatch(removeRule(ruleUid));
+                history.push(PageRoute.home);
+            } else {
+                dispatch(showMessage(true, Localization.error, Localization.failedDeleteRule));
+            }
+        } else {
+            deleteRuleItems();
         }
-    };
+    }
 
     const onClickCloseDialog = (): void => {
         setIsOpen(false);
@@ -86,6 +97,7 @@ const RuleController: React.FC<Props> = (props) => {
                 )}
             />
             <Settings
+                settingsType={SettingsType.RULE}
                 title={ruleName}
                 onChangeTitle={onChangeRuleName}
                 countItem={countItem}

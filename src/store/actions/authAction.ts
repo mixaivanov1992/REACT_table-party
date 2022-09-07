@@ -48,7 +48,7 @@ export const actionForgotPassword = (email:string) => async ():Promise<ServerAns
     }
 };
 
-export const actionCheckAuth = (dispatch:Dispatch<SetPersonalData | RuleAction>) => async ():Promise<ServerAnswer> => {
+export const actionCheckAuth = async (dispatch:Dispatch<SetPersonalData | RuleAction>):Promise<ServerAnswer> => {
     try {
         const response = await axios.get<AuthResponse>(`${API_URL}/refresh-token`, { withCredentials: true });
         const { accessToken, userData } = response.data;

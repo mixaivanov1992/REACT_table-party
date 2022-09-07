@@ -1,19 +1,19 @@
-import { PageRoute } from '@models/accessiblePage';
-import React, { ReactNode } from 'react';
+import { PageAlias, PageRoute } from '@models/accessiblePage';
+import Header from '@components/Content/Header/Header';
+import React from 'react';
 import RulesList from '@shared/RulesList/RulesList';
+import styles from '@css/content/rules/Rules.module.scss';
 
-interface Props {
-    children: ReactNode
-}
-const Rules: React.FC<Props> = (props) => {
+const Rules: React.FC = () => {
     console.info('Rules');
-    const { children } = props;
     const rulePlay = PageRoute.runRule.split(':')[0];
     return (
-        <>
-            {children}
-            <RulesList rulePlay={rulePlay} />
-        </>
+        <main className={styles.rules}>
+            <div className={styles.container}>
+                <Header pageAlias={PageAlias.rules} />
+                <RulesList rulePlay={rulePlay} />
+            </div>
+        </main>
     );
 };
 

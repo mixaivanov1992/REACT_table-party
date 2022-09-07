@@ -1,3 +1,4 @@
+import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
 import { addSheet, deleteSheets } from '@store/reducer/sheetReducer';
 import { removeChapter, setChapterCover, setChapterName } from '@store/reducer/chapterReducer';
 import { showMessage } from '@store/reducer/messageReducer';
@@ -79,6 +80,7 @@ const ChapterController: React.FC<Props> = (props) => {
                 )}
             />
             <Settings
+                settingsType={SettingsType.CHAPTER}
                 title={chapterName}
                 onChangeTitle={onChangeChapterName}
                 countItem={countItem}

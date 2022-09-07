@@ -1,9 +1,4 @@
 @use "core";
-@media screen and (max-width: 900px) {
-	#root {
-		min-height: 100vh;
-	}
-}
 @media screen and (min-width: 901px) {
 	#root {
 		height: 100vh;
@@ -148,13 +143,6 @@ input:-webkit-autofill:active {
 #root {
 	display: flex;
 	flex-direction: column;
-	> .content {
-		display: flex;
-		flex-wrap: wrap;
-		flex: 1;
-		margin-left: 1rem;
-		margin-right: 1rem;
-	}
 }
 
 .dialog_enter {

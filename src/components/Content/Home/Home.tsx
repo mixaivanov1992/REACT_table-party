@@ -1,24 +1,24 @@
+import { PageAlias } from '@models/accessiblePage';
 import { v4 as uuidv4 } from 'uuid';
+import Header from '@components/Content/Header/Header';
 import Localization from '@localization/components/content/home';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styles from '@css/content/home/Home.module.scss';
 
-interface Props {
-    children: ReactNode
-}
-const Home: React.FC<Props> = (props) => {
+const Home: React.FC = () => {
     console.info('Home');
     Localization.setLanguage(navigator.language);
-    const { children } = props;
     return (
-        <>
-            {children}
-            <div className={styles.home}>
-                {
-                    Localization.description.map((localization) => <p key={uuidv4()} className={styles.text}>{localization}</p>)
-                }
+        <main className={styles.home}>
+            <div className={styles.container}>
+                <Header pageAlias={PageAlias.home} />
+                <div>
+                    {
+                        Localization.description.map((localization) => <p key={uuidv4()} className={styles.text}>{localization}</p>)
+                    }
+                </div>
             </div>
-        </>
+        </main>
     );
 };
 

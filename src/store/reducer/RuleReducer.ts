@@ -1,5 +1,5 @@
 import {
-    AddRule, DefaultRuleKey, RuleAction, RuleActionType, RuleState, SetAuthor, SetRuleCover, SetRuleName,
+    AddRule, DefaultRuleKey, RemoveRule, RuleAction, RuleActionType, RuleState, SetAuthor, SetRuleCover, SetRuleName,
 } from '@models/store/reducer/ruleReducer';
 import { Rule, Version } from '@models/services/ruleService';
 
@@ -44,6 +44,12 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
         const { rule } = action;
         return { ...state, ...rule };
     }
+    case RuleActionType.REMOVE_RULE: {
+        const { uid } = action;
+        const newState = { ...state };
+        delete newState[uid];
+        return newState;
+    }
     default:
         return state;
     }
@@ -62,6 +68,10 @@ export const setRuleName = (uid: string, name: string): SetRuleName => ({
 export const setRuleCover = (uid: string, cover: string): SetRuleCover => ({
     type: RuleActionType.SET_RULE_COVER,
     cover,
+    uid,
+});
+export const removeRule = (uid: string): RemoveRule => ({
+    type: RuleActionType.REMOVE_RULE,
     uid,
 });
 

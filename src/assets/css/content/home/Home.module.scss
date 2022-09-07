@@ -1,12 +1,17 @@
 @use "../../core";
+@import "../content";
 .home {
-    .text {
-        margin-top: 0;
-        &:last-child {
-            text-align: right;
-        }
-    }
-    .text {
-        text-indent: 1em;
-    }
+	@include content;
+	.container > div:last-child {
+		@include margins;
+	}
+	.text {
+		margin-top: 0;
+		&:last-child {
+			text-align: right;
+		}
+	}
+	.text {
+		text-indent: 1em;
+	}
 }

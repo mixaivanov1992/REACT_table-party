@@ -1,0 +1,26 @@
+@use "../core";
+@import "../core";
+
+@mixin content {
+	flex: 1 0;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+	height: calc(100% - 1rem);
+	background-color: core.$fourth-color;
+	.container {
+		flex: 1 0;
+		background: core.$third-color;
+		border: 0.1em solid core.$border;
+		border-radius: 0.3em;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow-y: auto;
+	}
+}
+@mixin margins {
+	margin-left: 1.5em;
+	margin-right: 1.5em;
+	margin-bottom: 1.5em;
+}

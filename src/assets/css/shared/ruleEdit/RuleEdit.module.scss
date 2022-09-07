@@ -1,0 +1,28 @@
+@use "../../core";
+@import "../../content/content";
+
+.ruleEdit {
+	@include content;
+	&.fullscreen {
+		z-index: 80;
+		position: fixed;
+		width: 100vw;
+		height: 100vh;
+		left: 0;
+		top: 0;
+	}
+	.container > div:last-child {
+		@include margins;
+	}
+	.top_menu {
+		border: 0.1em solid core.$border;
+		margin-bottom: 1rem;
+		border-radius: 0.3em;
+		background-color: core.$third-color;
+		display: flex;
+		button {
+			font-size: 1.5em;
+			@include button1;
+		}
+	}
+}

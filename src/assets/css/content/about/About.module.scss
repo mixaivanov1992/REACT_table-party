@@ -1,9 +1,14 @@
 @use "../../core";
+@import "../content";
 .about {
-    .text {
-        margin-top: 0;
-    }
-    .text {
-        text-indent: 1em;
-    }
+	@include content;
+	.container > div:last-child {
+		@include margins;
+	}
+	.text {
+		margin-top: 0;
+	}
+	.text {
+		text-indent: 1em;
+	}
 }

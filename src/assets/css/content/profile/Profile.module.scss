@@ -1,45 +1,44 @@
 @use "../../core";
+@import "../content";
 .profile {
-    ul {
-        display: flex;
-        justify-content: center;
-        padding: 0;
-        margin: 0;
-        position: relative;
-        &::before {
-            content: "";
-            width: 100%;
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            border-bottom: 0.1em solid core.$border;
-        }
-        li {
-            z-index: 1;
-            cursor: pointer;
-            list-style-type: none;
-            padding: 1em;
-            margin-left: 1em;
-            border-top-left-radius: 0.25em;
-            border-top-right-radius: 0.25em;
-            border-top: 0.1em solid core.$border;
-            border-left: 0.1em solid core.$border;
-            border-right: 0.1em solid core.$border;
-            border-bottom: 0.1em solid transparent;
-            &:first-child {
-                margin-left: 0;
-            }
-        }
-        .active {
-            background-color: core.$fourth-color;
-            border-bottom: 0.1em solid core.$fourth-color;
-        }
-    }
-    .content {
-        padding: 1em;
-        background-color: core.$fourth-color;
-        border-left: 0.1em solid core.$border;
-        border-right: 0.1em solid core.$border;
-        border-bottom: 0.1em solid core.$border;
-    }
+	@include content;
+	ul {
+		display: flex;
+		justify-content: center;
+		padding: 0;
+		margin: 0;
+		position: relative;
+		&::before {
+			content: "";
+			width: 100%;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			border-bottom: 0.1em solid core.$border;
+		}
+		li {
+			z-index: 1;
+			cursor: pointer;
+			list-style-type: none;
+			padding: 1em;
+			margin-left: 1em;
+			border-top-left-radius: 0.25em;
+			border-top-right-radius: 0.25em;
+			border-top: 0.1em solid core.$border;
+			border-left: 0.1em solid core.$border;
+			border-right: 0.1em solid core.$border;
+			border-bottom: 0.1em solid transparent;
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+		.active {
+			background-color: core.$fourth-color;
+			border-bottom: 0.1em solid core.$fourth-color;
+		}
+	}
+	.content {
+		padding: 1em;
+		background-color: core.$fourth-color;
+	}
 }

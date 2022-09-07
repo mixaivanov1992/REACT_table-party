@@ -1,3 +1,4 @@
+import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
 import { v4 as uuidv4 } from 'uuid';
 import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
@@ -6,6 +7,7 @@ import React from 'react';
 import styles from '@css/shared/ruleEdit/settings/Settings.module.scss';
 
 interface Props {
+    settingsType: SettingsType,
     title: string,
     onChangeTitle: (title: string) => void
     countItem: number,
@@ -21,7 +23,7 @@ const Settings: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
 
     const {
-        title, onChangeTitle, countItem, onInputCountItem, cover, onChangeCover, onClickAddItem, onClickRemoveItem,
+        settingsType, title, onChangeTitle, countItem, onInputCountItem, cover, onChangeCover, onClickAddItem, onClickRemoveItem,
     } = props;
 
     const uniqueId = uuidv4();
@@ -29,7 +31,7 @@ const Settings: React.FC<Props> = (props) => {
         <div className={styles.settings}>
             <InputWrapper
                 htmlFor={`cover${uniqueId}`}
-                text={Localization.linkImage}
+                text={Localization[settingsType].cover}
                 value={cover}
             >
                 <input
@@ -42,7 +44,7 @@ const Settings: React.FC<Props> = (props) => {
             <div>
                 <InputWrapper
                     htmlFor={`title${uniqueId}`}
-                    text={Localization.title}
+                    text={Localization[settingsType].title}
                     value={title}
                 >
                     <input
@@ -52,12 +54,12 @@ const Settings: React.FC<Props> = (props) => {
                         onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
                     />
                 </InputWrapper>
-                <div><button type="button" onClick={onClickRemoveItem}>{Localization.deleteItem}</button></div>
+                <div><button type="button" onClick={onClickRemoveItem}>{Localization[settingsType].deleteItem}</button></div>
             </div>
             <div>
                 <InputWrapper
                     htmlFor={`count${uniqueId}`}
-                    text={Localization.countItem}
+                    text={Localization[settingsType].countItem}
                     value={countItem}
                 >
                     <InputNumber

@@ -6,11 +6,11 @@ import { LinkLocation } from '@models/accessiblePage';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import Breadcrumbs from '@components/Breadcrumbs/Breadcrumbs';
-import Content from '@components/Content/Content';
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
 import Navbar from '@components/Navbar/Navbar';
 import React from 'react';
+import styles from '@css/Route.module.scss';
 
 const Routes: React.FC = () => {
     console.info('Routes');
@@ -25,13 +25,14 @@ const Routes: React.FC = () => {
         } = accessiblePage;
 
         if (isContentComponent) {
+            const Component = require(`./components/Content/${component}`).default;
             return (
                 <Route key={uuidv4()} exact={exact} path={pageRoute}>
                     <Header accessiblePages={headerFilter} />
                     <Breadcrumbs accessiblePages={accessiblePages} />
-                    <div className="content">
+                    <div className={styles.content}>
                         <Navbar accessiblePages={navbarFilter} />
-                        <Content accessiblePage={accessiblePage} />
+                        <Component />
                     </div>
                     <Footer accessiblePages={footerFilter} />
                 </Route>

@@ -1,21 +1,14 @@
 import { PageRoute } from '@models/accessiblePage';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import RulesList from '@shared/RulesList/RulesList';
 
-interface Props {
-    children: ReactNode
-}
-
-const MyRules: React.FC<Props> = (props) => {
+const MyRules: React.FC = () => {
     console.info('MyRules');
-    const { children } = props;
     const ruleEdit = PageRoute.ruleEdit.split(':')[0];
     const rulePlay = PageRoute.runRule.split(':')[0];
 
     return (
-        <RulesList rulePlay={rulePlay} ruleEdit={ruleEdit}>
-            {children}
-        </RulesList>
+        <RulesList rulePlay={rulePlay} ruleEdit={ruleEdit} />
     );
 };
 

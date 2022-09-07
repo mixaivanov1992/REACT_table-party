@@ -9,10 +9,9 @@ export const UserPage: AccessiblePages = [{
     linkLocation: [LinkLocation.navbar],
     pageRoute: PageRoute.newRule,
     pageAlias: PageAlias.newRule,
-    fullScreenAccessible: true,
+    isContentComponent: true,
     exact: true,
     component: 'NewRule/NewRule',
-    isContentComponent: true,
     linkIcon: {
         path: 'gi',
         name: 'GiRuleBook',
@@ -25,7 +24,6 @@ export const UserPage: AccessiblePages = [{
     exact: true,
     component: 'Profile/Profile',
     isContentComponent: true,
-    fullScreenAccessible: true,
     linkIcon: {
         path: 'io5',
         name: 'IoPersonCircle',
@@ -35,9 +33,8 @@ export const UserPage: AccessiblePages = [{
     linkLocation: [LinkLocation.separately],
     pageRoute: PageRoute.ruleEdit,
     pageAlias: PageAlias.ruleEdit,
-    fullScreenAccessible: true,
+    isContentComponent: true,
     exact: true,
     component: 'Profile/RuleEdit/RuleEdit',
-    isContentComponent: true,
     sort: 0,
 }];

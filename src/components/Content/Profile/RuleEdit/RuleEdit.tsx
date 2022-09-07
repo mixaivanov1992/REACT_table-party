@@ -1,19 +1,15 @@
+import { PageAlias } from '@models/accessiblePage';
 import { useParams } from 'react-router-dom';
 import { useTypedSelector } from '@hooks/useTypedSelector';
-import Edit from '@components/Content/Profile/RuleEdit/Edit/Edit';
+import Edit from '@shared/RuleEdit/RuleEdit';
 import Page404 from '@components/Content/Page404/Page404';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-interface Props {
-    children: ReactNode
-}
 interface Parameters {
     id: string
 }
 
-const RuleEdit: React.FC<Props> = (props) => {
-    console.info('RuleEdit');
-    const { children } = props;
+const RuleEdit: React.FC = () => {
     const { id: ruleId } = useParams<Parameters>();
 
     const { username } = useTypedSelector((state) => state.personalDataReducer);
@@ -21,10 +17,7 @@ const RuleEdit: React.FC<Props> = (props) => {
 
     if (username === author) {
         return (
-            <>
-                {children}
-                <Edit ruleId={ruleId} />
-            </>
+            <Edit ruleUid={ruleId} pageAlias={PageAlias.ruleEdit} />
         );
     }
 

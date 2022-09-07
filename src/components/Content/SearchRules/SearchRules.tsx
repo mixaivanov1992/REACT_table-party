@@ -1,26 +1,25 @@
-import { PageRoute } from '@models/accessiblePage';
+import { PageAlias, PageRoute } from '@models/accessiblePage';
 import { useParams } from 'react-router-dom';
-import React, { ReactNode } from 'react';
+import Header from '@components/Content/Header/Header';
+import React from 'react';
 import RulesList from '@shared/RulesList/RulesList';
+import styles from '@css/content/searchRules/SearchRules.module.scss';
 
 interface Parameters {
     name: string,
 }
-interface Props {
-    children: ReactNode
-}
 
-const SearchRules: React.FC<Props> = (props) => {
+const SearchRules: React.FC = () => {
     console.info('SearchRules');
-    const { children } = props;
     const { name } = useParams<Parameters>();
     const rulePlay = PageRoute.runRule.split(':')[0];
-    console.log(name);
     return (
-        <>
-            {children}
-            <RulesList rulePlay={rulePlay} nameContains={name} />
-        </>
+        <main className={styles.searchRules}>
+            <div className={styles.container}>
+                <Header pageAlias={PageAlias.searchRules} />
+                <RulesList rulePlay={rulePlay} nameContains={name} />
+            </div>
+        </main>
     );
 };
 

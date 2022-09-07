@@ -1,5 +1,5 @@
 import { actionCheckAuth } from '@store/actions/authAction';
-import { actionHandler } from '@store/actions/actionHandler';
+import { showLoader } from '@store/reducer/loaderReducer';
 import { store } from '@store/index';
 import { useDispatch } from 'react-redux';
 import Loader from '@shared/Loader/Loader';
@@ -10,14 +10,15 @@ import Routes from '@src/Routes';
 const App: React.FC = () => {
     console.info('App');
     const dispatch = useDispatch();
-    const checkAuth = actionCheckAuth(dispatch);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     async function tokenRecovery() {
+        dispatch(showLoader(true));
         if (localStorage.getItem('token')) {
-            await actionHandler(dispatch, checkAuth);
+            await actionCheckAuth(dispatch);
         }
         setIsLoading(false);
+        dispatch(showLoader(false));
     }
     if (isLoading) {
         tokenRecovery();
