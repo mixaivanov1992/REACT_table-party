@@ -26,8 +26,8 @@ const Dialog: React.FC<Props> = (props) => {
             document.body.style.overflow = 'hidden';
             document.body.appendChild(root);
             return () => {
-                main.style.overflow = 'auto';
-                document.body.style.overflow = 'auto';
+                main.style.overflow = 'inherit';
+                document.body.style.overflow = 'inherit';
                 document.body.removeChild(root);
             };
         }

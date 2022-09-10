@@ -1,10 +1,12 @@
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { IoMdImages } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { actionGetRules } from '@store/actions/ruleAction';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import Localization from '@localization/components/shared/rulesList';
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styles from '@css/shared/rulesList/RulesList.module.scss';
 
 interface Props {
@@ -16,7 +18,22 @@ interface Props {
 
 const RulesList: React.FC<Props> = (props) => {
     console.info('RulesList');
+    const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
+    const limit = 12;
+    const [currentPage, setCurrentPage] = useState<number>(0);
+    const getRules = actionGetRules(dispatch, limit, currentPage);
+
+    useEffect(() => {
+        getRules();
+        setCurrentPage((prevState) => prevState + 1);
+    }, []);
+
+    const onClickShowMore = () => {
+        getRules();
+        setCurrentPage((prevState) => prevState + 1);
+    };
+
     const {
         children, rulePlay, ruleEdit, nameContains,
     } = props;
@@ -44,9 +61,10 @@ const RulesList: React.FC<Props> = (props) => {
     });
 
     return (
-        <div>
+        <>
             <div className={styles.rulesList}>{rules}</div>
-        </div>
+            <div className={styles.show_more}><button type="button" onClick={onClickShowMore}>{Localization.showMore}</button></div>
+        </>
     );
 };
 RulesList.defaultProps = {
