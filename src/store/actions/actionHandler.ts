@@ -19,10 +19,7 @@ function errorHandler(text: string): string {
 export async function actionHandler(dispatch: Dispatch<ShowLoader | SetPersonalData | RuleAction>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
     dispatch(showLoader(true));
     if (localStorage.getItem('token')) {
-        const result = await actionCheckAuth(dispatch);
-        if (!result.isSuccess) {
-            return { ...result, message: errorHandler(result.message) };
-        }
+        await actionCheckAuth(dispatch);
     }
     const result = { ...await action() };
     dispatch(showLoader(false));
