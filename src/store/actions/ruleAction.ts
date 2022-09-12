@@ -9,7 +9,9 @@ import { RulesResponse } from '@models/services/rulesResponse';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { SheetAction } from '@models/store/reducer/sheetReducer';
 import { addChapter } from '@store/reducer/chapterReducer';
-import { addRule, setRuleCover, setRuleName } from '@store/reducer/ruleReducer';
+import {
+    addRule, addRules, setRuleCover, setRuleName,
+} from '@store/reducer/ruleReducer';
 import { addSheet } from '@store/reducer/sheetReducer';
 import { saveRule } from '@src/services/ruleService';
 import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
@@ -83,13 +85,10 @@ export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | Ru
 export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, page: number) => async ():Promise<ServerAnswer> => {
     try {
         const response = await axios.get<RulesResponse>(`${API_URL}/rules/${limit}/${page}`);
-        const { rules } = response.data;
+        const { numberRecords, rules } = response.data;
 
-        rules.forEach((rule: Rule) => {
-            dispatch(addRule(rule));
-        });
-
-        return { isSuccess: true, message: '' };
+        dispatch(addRules(rules));
+        return { isSuccess: true, message: '', data: { numberRecords } };
     } catch (error) {
         const err = error as AxiosError;
         const message = err.response?.data?.message as string || '';

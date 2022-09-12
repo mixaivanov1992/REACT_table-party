@@ -13,7 +13,7 @@ const RuleEdit: React.FC = () => {
     const { id: ruleId } = useParams<Parameters>();
 
     const { username } = useTypedSelector((state) => state.personalDataReducer);
-    const author = useTypedSelector((state) => state.RuleReducer[ruleId]?.author);
+    const author = useTypedSelector((state) => state.ruleReducer[ruleId]?.author);
 
     if (username === author) {
         return (

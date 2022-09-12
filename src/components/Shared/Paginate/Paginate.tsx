@@ -27,11 +27,15 @@ const Paginate: React.FC<Props> = (props) => {
         const newOffset = (event.selected * itemsPerPage) % itemCount;
         setItemOffset(newOffset);
     };
+    if (itemOffset === itemCount) {
+        setItemOffset((prevState) => prevState - 1);
+    }
     return (
         <>
             <PaginateItems renderContent={renderContent} currentItems={currentItems} />
             <div className={styles.paginate}>
                 <ReactPaginate
+                    forcePage={itemOffset}
                     breakLabel="..."
                     nextLabel="»"
                     onPageChange={handlePageClick}

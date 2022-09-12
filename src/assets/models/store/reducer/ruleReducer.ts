@@ -7,6 +7,7 @@ export enum RuleActionType {
     SET_RULE_AUTHOR = 'SET_RULE_AUTHOR',
     SET_RULE_NAME = 'SET_RULE_NAME',
     ADD_RULE = 'ADD_RULE',
+    ADD_RULES = 'ADD_RULES',
     SET_RULE_COVER = 'SET_RULE_COVER',
     REMOVE_RULE = 'REMOVE_RULE'
 }
@@ -28,6 +29,11 @@ export interface AddRule {
     rule: Rule
 }
 
+export interface AddRules {
+    type: RuleActionType.ADD_RULES,
+    rules: Array<Rule>
+}
+
 export interface RemoveRule {
     type: RuleActionType.REMOVE_RULE,
     uid: string
@@ -39,4 +45,4 @@ export interface SetRuleCover{
     cover: string
 }
 
-export type RuleAction = SetAuthor | SetRuleName | AddRule | RemoveRule | SetRuleCover;
+export type RuleAction = SetAuthor | SetRuleName | AddRule | AddRules | RemoveRule | SetRuleCover;

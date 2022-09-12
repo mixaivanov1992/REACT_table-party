@@ -18,7 +18,7 @@ const Save: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
     const { ruleUid } = props;
 
-    const ruleName = useTypedSelector((state) => state.RuleReducer[ruleUid].name);
+    const ruleName = useTypedSelector((state) => state.ruleReducer[ruleUid].name);
     const prepareRuleDataForSave = usePrepareRuleDataForSave(ruleUid);
     const history = useHistory();
 

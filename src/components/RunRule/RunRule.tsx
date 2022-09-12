@@ -26,7 +26,7 @@ const RunRule: React.FC = () => {
     const [selectedChapter, setSelectedChapter] = useState<number>(0);
     const [selectedSheet, setSelectedSheet] = useState<number>(0);
 
-    const rules = useTypedSelector((state) => state.RuleReducer);
+    const rules = useTypedSelector((state) => state.ruleReducer);
     const ruleId = Object.keys(rules).filter((key) => rules[key].url === url)[0];
     const chapters = useTypedSelector((state) => state.chapterReducer[ruleId]);
     const sheets = useTypedSelector((state) => chapters && state.sheetReducer[chapters[selectedChapter]?.uid]);

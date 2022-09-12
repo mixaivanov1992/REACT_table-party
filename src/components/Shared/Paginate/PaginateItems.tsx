@@ -8,6 +8,7 @@ interface Props {
 const PaginateItems: React.FC<Props> = (props) => {
     console.info('PaginateItem');
     const { renderContent, currentItems } = props;
+
     return (
         <>
             {

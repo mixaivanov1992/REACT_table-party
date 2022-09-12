@@ -7,6 +7,7 @@ const Localization = new LocalizedStrings({
         removal: 'Удаление',
         confirm: 'Подтвердить',
         deleteSheet: 'Вы действительно хотите удалить лист?',
+        deleteSheetBtn: 'Удалить лист',
     },
     'en-US': {
         dataEntry: 'Data entry',
@@ -14,6 +15,7 @@ const Localization = new LocalizedStrings({
         removal: 'Removal',
         confirm: 'Confirm',
         deleteSheet: 'Do you really want to delete the sheet?',
+        deleteSheetBtn: 'Delete a sheet',
     },
 });
 export default Localization;

@@ -1,4 +1,3 @@
-import { RuleReducer } from '@store/reducer/ruleReducer';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { chapterReducer } from '@store/reducer/chapterReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
@@ -6,6 +5,7 @@ import { loaderReducer } from '@store/reducer/loaderReducer';
 import { messageReducer } from '@store/reducer/messageReducer';
 import { persistReducer, persistStore } from 'redux-persist';
 import { personalDataReducer } from '@store/reducer/personalDataReducer';
+import { ruleReducer } from '@store/reducer/ruleReducer';
 import { sheetReducer } from '@store/reducer/sheetReducer';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -13,12 +13,12 @@ import thunk from 'redux-thunk';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['loaderReducer', 'messageReducer'],
+    blacklist: ['loaderReducer', 'messageReducer', 'ruleReducer', 'chapterReducer', 'sheetReducer'],
 };
 // localStorage.clear();
 export const rootReducer = combineReducers({
     personalDataReducer,
-    RuleReducer,
+    ruleReducer,
     chapterReducer,
     sheetReducer,
     loaderReducer,

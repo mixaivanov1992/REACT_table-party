@@ -99,6 +99,7 @@ const SheetItem:React.FC<Props> = (props) => {
                     </div>
                     <div className={styles.menu}>
                         <button
+                            title={Localization.deleteSheetBtn}
                             type="button"
                             onClick={onClickDeleteSheet}
                         >

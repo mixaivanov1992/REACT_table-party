@@ -26,8 +26,8 @@ const RuleController: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
     const { ruleUid } = props;
 
-    const ruleName = useTypedSelector((state) => state.RuleReducer[ruleUid].name);
-    const ruleCover = useTypedSelector((state) => state.RuleReducer[ruleUid].cover);
+    const ruleName = useTypedSelector((state) => state.ruleReducer[ruleUid].name);
+    const ruleCover = useTypedSelector((state) => state.ruleReducer[ruleUid].cover);
     const stateChapterCount = useTypedSelector((state) => state.chapterReducer[ruleUid]?.length || 0);
     const deleteRuleItems = useDeleteRuleItems(dispatch, ruleUid);
 

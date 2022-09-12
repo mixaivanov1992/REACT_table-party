@@ -2,6 +2,7 @@ import { PageAlias, PageRoute } from '@models/accessiblePage';
 import Header from '@components/Content/Header/Header';
 import React from 'react';
 import RulesList from '@shared/RulesList/RulesList';
+import ShowMoreRule from '@shared/ShowMoreRule/ShowMoreRule';
 import styles from '@css/content/rules/Rules.module.scss';
 
 const Rules: React.FC = () => {
@@ -12,6 +13,7 @@ const Rules: React.FC = () => {
             <div className={styles.container}>
                 <Header pageAlias={PageAlias.rules} />
                 <RulesList rulePlay={rulePlay} />
+                <ShowMoreRule />
             </div>
         </main>
     );

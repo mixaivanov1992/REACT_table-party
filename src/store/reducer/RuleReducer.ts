@@ -1,5 +1,5 @@
 import {
-    AddRule, DefaultRuleKey, RemoveRule, RuleAction, RuleActionType, RuleState, SetAuthor, SetRuleCover, SetRuleName,
+    AddRule, AddRules, DefaultRuleKey, RemoveRule, RuleAction, RuleActionType, RuleState, SetAuthor, SetRuleCover, SetRuleName,
 } from '@models/store/reducer/ruleReducer';
 import { Rule, Version } from '@models/services/ruleService';
 
@@ -19,7 +19,7 @@ const initialState: RuleState = {
     },
 };
 
-export const RuleReducer = (state = initialState, action: RuleAction): RuleState => {
+export const ruleReducer = (state = initialState, action: RuleAction): RuleState => {
     switch (action.type) {
     case RuleActionType.SET_RULE_NAME: {
         const { uid, name } = action;
@@ -43,6 +43,19 @@ export const RuleReducer = (state = initialState, action: RuleAction): RuleState
     case RuleActionType.ADD_RULE: {
         const { rule } = action;
         return { ...state, ...rule };
+    }
+    case RuleActionType.ADD_RULES: {
+        const { rules } = action;
+        const newState = { ...state };
+
+        for (const rule of rules) {
+            // eslint-disable-next-line
+            for (const key in rule) {
+                newState[key] = rule[key];
+            }
+        }
+
+        return { ...newState };
     }
     case RuleActionType.REMOVE_RULE: {
         const { uid } = action;
@@ -78,4 +91,9 @@ export const removeRule = (uid: string): RemoveRule => ({
 export const addRule = (rule: Rule): AddRule => ({
     type: RuleActionType.ADD_RULE,
     rule,
+});
+
+export const addRules = (rules: Array<Rule>): AddRules => ({
+    type: RuleActionType.ADD_RULES,
+    rules,
 });
