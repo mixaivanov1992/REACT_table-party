@@ -1,9 +1,11 @@
 import { PageAlias, PageRoute } from '@models/accessiblePage';
+import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import Header from '@components/Content/Header/Header';
 import Localization from '@localization/components/content/profile';
 import React, { useState } from 'react';
 import RulesList from '@shared/RulesList/RulesList';
+import ShowMoreRule from '@shared/ShowMoreRule/ShowMoreRule';
 import styles from '@css/content/profile/Profile.module.scss';
 
 const Profile: React.FC = () => {
@@ -12,11 +14,14 @@ const Profile: React.FC = () => {
 
     const ruleEdit = PageRoute.ruleEdit.split(':')[0];
     const rulePlay = PageRoute.runRule.split(':')[0];
-
     const [activeTab, setActiveTab] = useState<number>(0);
 
+    const personalDataReducer = useTypedSelector((state) => state.personalDataReducer);
     const Content:Array<JSX.Element> = [
-        <RulesList rulePlay={rulePlay} ruleEdit={ruleEdit} />,
+        <>
+            <RulesList rulePlay={rulePlay} ruleEdit={ruleEdit} author={personalDataReducer.username} />
+            <ShowMoreRule author={personalDataReducer.username} />
+        </>,
     ];
     const li:Array<JSX.Element> = [Localization.myRules].map((name: string, index:number) => (
         <li

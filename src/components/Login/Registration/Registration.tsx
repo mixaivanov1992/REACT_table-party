@@ -45,6 +45,7 @@ const Registration: React.FC = () => {
         const result = await actionHandler(dispatch, registration);
         if (result.isSuccess) {
             setIsRegistered(true);
+            setMessage(Localization.confirmEmail);
         } else {
             setMessage(result.message);
         }
@@ -59,9 +60,9 @@ const Registration: React.FC = () => {
                     && (
                         <>
                             <Field text={Localization.email} value={email} type="email" id="email" setState={setEmail} />
-                            <Field text={Localization.username} value={username} type="password" id="username" setState={setUsername} />
+                            <Field text={Localization.username} value={username} type="text" id="username" setState={setUsername} />
                             <Field text={Localization.password} value={password} type="password" id="password" setState={setPassword} />
-                            <Field text={Localization.confirm} value={confirm} type="text" id="confirm" setState={setConfirm} />
+                            <Field text={Localization.confirm} value={confirm} type="password" id="confirm" setState={setConfirm} />
                             <div className={styles.registration_btn}>
                                 <button
                                     onClick={onClickRegistration}

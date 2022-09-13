@@ -1,7 +1,4 @@
 import { GiReturnArrow } from 'react-icons/gi';
-// import { actionHandler } from '@store/actions/actionHandler';
-// import { actionSaveRule } from '@store/actions/ruleAction';
-// import { showMessage } from '@store/reducer/messageReducer';
 import { actionGetRule } from '@store/actions/ruleAction';
 import { actionHandler } from '@store/actions/actionHandler';
 import { showMessage } from '@store/reducer/messageReducer';
@@ -27,6 +24,7 @@ const Default: React.FC<Props> = (props) => {
         const getRule = actionGetRule(dispatch, ruleUid);
         const result = await actionHandler(dispatch, getRule);
 
+        setIsOpen(false);
         if (!result.isSuccess) {
             dispatch(showMessage(true, Localization.error, Localization.failedRestoreData));
         }

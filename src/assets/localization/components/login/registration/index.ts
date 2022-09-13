@@ -12,6 +12,7 @@ const Localization = new LocalizedStrings({
         passwordNotField: 'Поле "Пароль" не заполнено',
         confirmNotField: 'Поле "Подтвердить" не заполнено',
         passwordsNotMatch: 'Пароли не совпадают',
+        confirmEmail: 'Вам отправлено письмо. Для завершения регистрации необходимо подтвердить адрес электронной почты',
     },
     'en-US': {
         registration: 'Registration',
@@ -24,6 +25,7 @@ const Localization = new LocalizedStrings({
         passwordNotField: 'The "Password" field is not filled in',
         confirmNotField: 'The "Confirm" field is not filled in',
         passwordsNotMatch: "Passwords don't match",
+        confirmEmail: 'An email has been sent to you. To complete the registration, you need to confirm the email address',
     },
 });
 export default Localization;

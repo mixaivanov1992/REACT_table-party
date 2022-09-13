@@ -15,44 +15,36 @@ import React, {
 import styles from '@css/runRule/RunRule.module.scss';
 
 interface Parameters {
-    url: string
+    id: string
 }
 
 const RunRule: React.FC = () => {
-    console.info('RunRule');
-    Localization.setLanguage(navigator.language);
-    const { url } = useParams<Parameters>();
     const dispatch = useDispatch();
+    Localization.setLanguage(navigator.language);
+    const { id: ruleId } = useParams<Parameters>();
     const [selectedChapter, setSelectedChapter] = useState<number>(0);
     const [selectedSheet, setSelectedSheet] = useState<number>(0);
 
-    const rules = useTypedSelector((state) => state.ruleReducer);
-    const ruleId = Object.keys(rules).filter((key) => rules[key].url === url)[0];
+    const rule = useTypedSelector((state) => state.ruleReducer[ruleId]);
     const chapters = useTypedSelector((state) => state.chapterReducer[ruleId]);
     const sheets = useTypedSelector((state) => chapters && state.sheetReducer[chapters[selectedChapter]?.uid]);
     const runRule = useRef() as React.MutableRefObject<HTMLDivElement>;
     const history = useHistory();
+    const getRule = actionGetRule(dispatch, ruleId);
+
+    useEffect(() => {
+        if (!chapters) {
+            actionHandler(dispatch, getRule);
+        }
+    }, []);
+
+    const chapterCount = chapters?.length ? chapters.length - 1 : 0;
+    const sheetCount = sheets?.length ? sheets.length - 1 : 0;
 
     const onClickChapterSelection = (index: number) => {
         setSelectedChapter(index);
         setSelectedSheet(0);
     };
-    const navbar = useMemo(() => chapters && <Navbar chapters={chapters} selectedChapter={selectedChapter} onClickChapterSelection={onClickChapterSelection} />, [chapters, selectedChapter]);
-
-    useEffect(() => {
-        if (!chapters || !sheets) {
-            const getRule = actionGetRule(dispatch, ruleId);
-            actionHandler(dispatch, getRule);
-        }
-    }, []);
-
-    if (!chapters || !sheets) {
-        return null;
-    }
-
-    const rule = rules[ruleId];
-    const chapterCount = chapters.length ? chapters.length - 1 : 0;
-    const sheetCount = sheets.length ? sheets.length - 1 : 0;
 
     const onClickCloseRule = () => {
         history.goBack();
@@ -84,6 +76,7 @@ const RunRule: React.FC = () => {
         }
     };
 
+    const navbar = useMemo(() => chapters && <Navbar chapters={chapters} selectedChapter={selectedChapter} onClickChapterSelection={onClickChapterSelection} />, [chapters, selectedChapter]);
     const editorState = sheets ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheets[selectedSheet]?.content)), linkDecorator) : EditorState.createEmpty();
     return (
         <div className={styles.runRule} ref={runRule}>
@@ -91,11 +84,11 @@ const RunRule: React.FC = () => {
                 <AiFillCloseCircle />
                 <AiOutlineCloseCircle onClick={onClickCloseRule} />
             </div>
-            <Cover cover={rule.cover} />
+            <Cover cover={rule?.cover} />
             <div className={styles.rule}>
                 {navbar}
                 <div className={styles.container}>
-                    <div className={styles.header}>{chapters[selectedChapter]?.name}</div>
+                    <div className={styles.header}>{chapters && chapters[selectedChapter]?.name}</div>
                     <div className={styles.content}>
                         <Editor
                             editorState={editorState}

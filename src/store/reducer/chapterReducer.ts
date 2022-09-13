@@ -12,11 +12,7 @@ import { Chapters } from '@models/services/ruleService';
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 
 const initialState: ChapterState = {
-    [DefaultRuleKey]: [{
-        uid: '',
-        name: '',
-        cover: '',
-    }],
+    [DefaultRuleKey]: [],
 };
 
 export const chapterReducer = (state = initialState, action: ChapterAction): ChapterState => {

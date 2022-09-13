@@ -11,7 +11,6 @@ const initialState: RuleState = {
         author: '',
         name: '',
         cover: '',
-        url: '',
         language: navigator.language,
         isPrivate: false,
         rating: 0,

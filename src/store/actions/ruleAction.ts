@@ -3,15 +3,13 @@ import { ChapterAction } from '@models/store/reducer/chapterReducer';
 import { Chapters, Rule, Sheets } from '@models/services/ruleService';
 import { DefaultRuleKey, RuleAction } from '@models/store/reducer/ruleReducer';
 import { Dispatch } from 'react';
+import { NumberRulesResponse, RulesResponse } from '@models/services/rulesResponse';
 import { PageRoute } from '@models/accessiblePage';
 import { RuleResponse } from '@models/services/ruleResponse';
-import { RulesResponse } from '@models/services/rulesResponse';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { SheetAction } from '@models/store/reducer/sheetReducer';
 import { addChapter } from '@store/reducer/chapterReducer';
-import {
-    addRule, addRules, setRuleCover, setRuleName,
-} from '@store/reducer/ruleReducer';
+import { addRule, addRules } from '@store/reducer/ruleReducer';
 import { addSheet } from '@store/reducer/sheetReducer';
 import { saveRule } from '@src/services/ruleService';
 import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
@@ -69,8 +67,7 @@ export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | Ru
         deleteRuleItems();
         const { rule, chapters, sheets } = response.data;
 
-        dispatch(setRuleName(ruleUid, rule[ruleUid].name));
-        dispatch(setRuleCover(ruleUid, rule[ruleUid].cover));
+        dispatch(addRule(rule));
         dispatch(addChapter(chapters));
         dispatch(addSheet(sheets));
 
@@ -82,13 +79,40 @@ export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | Ru
     }
 };
 
-export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, page: number) => async ():Promise<ServerAnswer> => {
+export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, page: number, author: string, name: string) => async ():Promise<ServerAnswer> => {
     try {
-        const response = await axios.get<RulesResponse>(`${API_URL}/rules/${limit}/${page}`);
-        const { numberRecords, rules } = response.data;
+        let str = '';
+        if (author) {
+            str += `rules-author/${limit}/${page}/${author}`;
+        } else if (name) {
+            str += `rules-name/${limit}/${page}/${name}`;
+        } else {
+            str += `rules/${limit}/${page}`;
+        }
+        const response = await axios.get<RulesResponse>(`${API_URL}/${str}`);
+        const { rules } = response.data;
 
         dispatch(addRules(rules));
-        return { isSuccess: true, message: '', data: { numberRecords } };
+        return { isSuccess: true, message: '' };
+    } catch (error) {
+        const err = error as AxiosError;
+        const message = err.response?.data?.message as string || '';
+        return { isSuccess: false, message };
+    }
+};
+
+export const actionGetNumberRules = async (author: string, name: string) :Promise<ServerAnswer> => {
+    try {
+        let str = '';
+        if (author) {
+            str += `-author/${author}`;
+        } else if (name) {
+            str += `-name/${name}`;
+        }
+        const response = await axios.get<NumberRulesResponse>(`${API_URL}/number-rules${str}`);
+        const { numberRules } = response.data;
+
+        return { isSuccess: true, message: '', data: { numberRules } };
     } catch (error) {
         const err = error as AxiosError;
         const message = err.response?.data?.message as string || '';

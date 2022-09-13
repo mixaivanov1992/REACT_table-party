@@ -3,7 +3,6 @@ import { RuleAction } from '@models/store/reducer/ruleReducer';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { SetPersonalData } from '@models/store/reducer/personalDataReducer';
 import { ShowLoader } from '@models/store/reducer/loaderReducer';
-import { actionCheckAuth } from '@store/actions/authAction';
 import { showLoader } from '@store/reducer/loaderReducer';
 import Localization from '@localization/actions';
 
@@ -18,9 +17,6 @@ function errorHandler(text: string): string {
 
 export async function actionHandler(dispatch: Dispatch<ShowLoader | SetPersonalData | RuleAction>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
     dispatch(showLoader(true));
-    if (localStorage.getItem('token')) {
-        await actionCheckAuth(dispatch);
-    }
     const result = { ...await action() };
     dispatch(showLoader(false));
 

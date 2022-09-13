@@ -15,7 +15,7 @@ export enum PageRoute{
     newRule = '/new-rule',
     profile = '/profile',
     ruleEdit = '/rule-edit/:id',
-    runRule = '/run-rule/:url',
+    runRule = '/run-rule/:id',
     searchRules = '/search-rules/:name',
     page404 = '*',
 }

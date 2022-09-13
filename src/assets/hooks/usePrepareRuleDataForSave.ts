@@ -6,13 +6,12 @@ import { store } from '@store/index';
 export const usePrepareRuleDataForSave = (ruleUid: string) => () => {
     const { ruleReducer, chapterReducer, sheetReducer } = store.getState();
     const {
-        author, url, name, cover, language, isPrivate, rating, version,
+        author, name, cover, language, isPrivate, rating, version,
     } = ruleReducer[ruleUid];
 
     const rule: Rule = {
         [ruleUid]: {
             author,
-            url,
             name,
             cover,
             language,

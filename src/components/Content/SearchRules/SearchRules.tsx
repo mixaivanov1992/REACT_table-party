@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import Header from '@components/Content/Header/Header';
 import React from 'react';
 import RulesList from '@shared/RulesList/RulesList';
+import ShowMoreRule from '@shared/ShowMoreRule/ShowMoreRule';
 import styles from '@css/content/searchRules/SearchRules.module.scss';
 
 interface Parameters {
@@ -17,7 +18,8 @@ const SearchRules: React.FC = () => {
         <main className={styles.searchRules}>
             <div className={styles.container}>
                 <Header pageAlias={PageAlias.searchRules} />
-                <RulesList rulePlay={rulePlay} nameContains={name} />
+                <RulesList rulePlay={rulePlay} name={name} />
+                <ShowMoreRule name={name} />
             </div>
         </main>
     );

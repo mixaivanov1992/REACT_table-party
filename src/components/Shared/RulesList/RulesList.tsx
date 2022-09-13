@@ -1,17 +1,17 @@
-import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { IoMdImages } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { useGetRulesKeys } from '@hooks/useGetRulesKeys';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import Localization from '@localization/components/shared/rulesList';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import styles from '@css/shared/rulesList/RulesList.module.scss';
 
 interface Props {
     rulePlay: string,
     ruleEdit?: string,
-    nameContains?: string,
-    children?: ReactNode,
+    name?: string,
+    author?: string,
 }
 
 const RulesList: React.FC<Props> = (props) => {
@@ -19,26 +19,23 @@ const RulesList: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
 
     const {
-        children, rulePlay, ruleEdit, nameContains,
+        rulePlay, ruleEdit, name, author,
     } = props;
     const rulesReducer = useTypedSelector((state) => state.ruleReducer);
-
-    const rulesKey = Object.keys(rulesReducer).filter(
-        (key) => DefaultRuleKey !== key && rulesReducer[key].name.toLowerCase().includes(nameContains?.toLowerCase() || ''),
-    );
+    const rulesKey = useGetRulesKeys(rulesReducer, author || '', name || '');
     const rules = rulesKey.map((key) => {
-        const { name, cover, url } = rulesReducer[key];
+        const { name: nameRule, cover } = rulesReducer[key];
         return (
             <div key={uuidv4()} className={styles.rule}>
                 <div className={styles.logo}>
-                    {cover ? <img src={cover} alt={name} /> : <IoMdImages />}
+                    {cover ? <img src={cover} alt={nameRule} /> : <IoMdImages />}
                 </div>
                 <div className={styles.name}>
-                    {name}
+                    {nameRule}
                 </div>
                 <div className={styles.menu}>
-                    <Link to={{ pathname: rulePlay + url }}><button type="button">{Localization.play}</button></Link>
-                    {ruleEdit && <Link to={{ pathname: ruleEdit + key, state: { children: { children } } }}><button type="button">{Localization.edit}</button></Link>}
+                    <Link to={{ pathname: rulePlay + key }}><button type="button">{Localization.play}</button></Link>
+                    {ruleEdit && <Link to={{ pathname: ruleEdit + key }}><button type="button">{Localization.edit}</button></Link>}
                 </div>
             </div>
         );
@@ -50,8 +47,8 @@ const RulesList: React.FC<Props> = (props) => {
 };
 RulesList.defaultProps = {
     ruleEdit: undefined,
-    children: undefined,
-    nameContains: undefined,
+    name: undefined,
+    author: undefined,
 };
 
 export default RulesList;
