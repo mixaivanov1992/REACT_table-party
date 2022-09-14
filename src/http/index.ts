@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const API_URL = 'https://table-party.herokuapp.com'; // 'http://localhost:4001/api';
+export const API_URL = 'http://localhost:4001/api';
 const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
