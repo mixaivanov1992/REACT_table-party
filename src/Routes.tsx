@@ -48,11 +48,11 @@ const Routes: React.FC = () => {
 
     return (
         // github pages use HashRouter // Router
-        <HashRouter>
+        <Router>
             <Switch>
                 {routes}
             </Switch>
-        </HashRouter>
+        </Router>
     );
 };
 
