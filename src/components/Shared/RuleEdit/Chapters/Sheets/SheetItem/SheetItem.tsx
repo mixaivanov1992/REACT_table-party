@@ -1,5 +1,7 @@
-import { AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 import { IoMdImages } from 'react-icons/io';
+import { Offset } from '@src/assets/types/offset';
 import { deleteSheet, setSheetContent } from '@store/reducer/sheetReducer';
 import { useDispatch } from 'react-redux';
 import { useIsValidHttpUrl } from '@hooks/useIsValidHttpUrl';
@@ -14,7 +16,9 @@ interface Props {
     ruleUid: string,
     chapterUid: string,
     chapterIndex: number,
-    sheetIndex: number
+    sheetIndex: number,
+    forcePageAfterDelete(): void,
+    forcePageOffset(offset: Offset, index: number): void
 }
 
 const SheetItem:React.FC<Props> = (props) => {
@@ -24,7 +28,7 @@ const SheetItem:React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
 
     const {
-        ruleUid, sheetIndex, chapterUid, chapterIndex,
+        ruleUid, sheetIndex, chapterUid, chapterIndex, forcePageAfterDelete, forcePageOffset,
     } = props;
 
     const sheetUid = useTypedSelector((state) => state.sheetReducer[chapterUid][sheetIndex].uid);
@@ -37,9 +41,14 @@ const SheetItem:React.FC<Props> = (props) => {
         setIsRemoveOpen(true);
     };
 
+    const onClickMove = (offset: Offset) => {
+        forcePageOffset(offset, sheetIndex);
+    };
+
     const onClickConfirmRemove = (): void => {
         setIsRemoveOpen(false);
         dispatch(deleteSheet(chapterUid, sheetUid));
+        forcePageAfterDelete();
     };
 
     const onClickOpenTextEditor = () => {
@@ -55,6 +64,7 @@ const SheetItem:React.FC<Props> = (props) => {
         dispatch(setSheetContent(chapterUid, sheetUid, content));
         onClickCloseDialog();
     };
+    const editorState = sheetContent ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheetContent))) : EditorState.createEmpty();
 
     return (
         <>
@@ -98,14 +108,23 @@ const SheetItem:React.FC<Props> = (props) => {
                             : <div className={styles.pictureMissing}><IoMdImages /></div>}
                     </div>
                     <div className={styles.menu}>
-                        <button
-                            title={Localization.deleteSheetBtn}
-                            type="button"
-                            onClick={onClickDeleteSheet}
-                        >
+                        <button title={Localization.moveLeft} type="button" onClick={() => { onClickMove(Offset.LEFT); }}>
+                            <AiOutlineArrowLeft />
+                        </button>
+                        <button title={Localization.deleteSheetBtn} type="button" onClick={onClickDeleteSheet}>
                             <AiFillDelete />
                         </button>
+                        <button title={Localization.moveRight} type="button" onClick={() => { onClickMove(Offset.RIGHT); }}>
+                            <AiOutlineArrowRight />
+                        </button>
                     </div>
+                </div>
+                <div className={styles.description}>
+                    <Editor
+                        editorState={editorState}
+                        onChange={() => {}}
+                        readOnly
+                    />
                 </div>
             </div>
         </>

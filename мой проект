@@ -43,6 +43,7 @@ yarn add --dev tsconfig-paths-webpack-plugin													-	плагин для �
 yarn add -D typescript-plugin-css-modules                                                       -   плагин для загрузки css в файлах typescript
 yarn add -D @pmmmwh/react-refresh-webpack-plugin react-refresh                                  -   плагин позволяет не перезагружать страницу после внесения правок в коде
 yarn add --dev fork-ts-checker-webpack-plugin                                                   -   Плагин Webpack, который запускает проверку типов TypeScript в отдельном процессе.
+npm install terser-webpack-plugin --save-dev                                                    -   Удаляет в сборке console
 
 BABLE
 npm install --save-dev babel-loader @babel/core 												-	bable позволяет компилировать новый js код для устаревших браузеров
@@ -99,3 +100,6 @@ npm install gh-pages --save-dev                                                 
 react-scripts
 module-alias
 web-vitals
+
+
+npm install http-server -g

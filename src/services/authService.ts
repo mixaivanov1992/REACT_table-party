@@ -14,6 +14,10 @@ export async function forgotPassword(email: string): Promise<AxiosResponse<AuthR
     return $api.post<AuthResponse>('/forgot-password', { email });
 }
 
+export async function passwordRecovery(link: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    return $api.post<AuthResponse>('/password-recovery', { link, password });
+}
+
 export async function logout(): Promise<void> {
     return $api.post('/logout');
 }

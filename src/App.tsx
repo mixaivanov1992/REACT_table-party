@@ -1,4 +1,5 @@
-import { actionCheckAuth } from '@store/actions/authAction';
+import { refreshToken } from '@store/actions/actionHandler';
+import { setPersonalData } from '@store/reducer/personalDataReducer';
 import { showLoader } from '@store/reducer/loaderReducer';
 import { store } from '@store/index';
 import { useDispatch } from 'react-redux';
@@ -14,8 +15,11 @@ const App: React.FC = () => {
 
     async function tokenRecovery() {
         dispatch(showLoader(true));
-        if (localStorage.getItem('token')) {
-            await actionCheckAuth(dispatch);
+        const result = await refreshToken(dispatch);
+        if (result) {
+            dispatch(setPersonalData(true, result));
+        } else {
+            dispatch(setPersonalData(false));
         }
         setIsLoading(false);
         dispatch(showLoader(false));

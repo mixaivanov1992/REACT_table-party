@@ -2,6 +2,7 @@ import {
     AddChapter,
     ChapterAction,
     ChapterActionType,
+    ChapterOffset,
     ChapterState,
     DeleteChapters,
     RemoveChapter,
@@ -65,6 +66,13 @@ export const chapterReducer = (state = initialState, action: ChapterAction): Cha
         delete newState[rule];
         return newState;
     }
+    case ChapterActionType.CHAPTER_OFFSET: {
+        const { offset, rule, index } = action;
+        const newState = { ...state };
+        const removed = newState[rule].splice(index, 1);
+        newState[rule].splice(index + offset, 0, ...removed);
+        return newState;
+    }
     default:
         return state;
     }
@@ -98,4 +106,11 @@ export const setChapterCover = (rule: string, uid: string, cover: string): SetCh
     rule,
     uid,
     cover,
+});
+
+export const chapterOffset = (offset: number, rule: string, index: number): ChapterOffset => ({
+    type: ChapterActionType.CHAPTER_OFFSET,
+    offset,
+    rule,
+    index,
 });

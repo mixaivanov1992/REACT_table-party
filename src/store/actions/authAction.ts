@@ -5,7 +5,7 @@ import { Dispatch } from 'react';
 import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
 import { SetPersonalData } from '@models/store/reducer/personalDataReducer';
 import {
-    forgotPassword, login, logout, registration,
+    forgotPassword, login, logout, passwordRecovery, registration,
 } from '@src/services/authService';
 import { setAuthor } from '@store/reducer/ruleReducer';
 import { setPersonalData } from '@store/reducer/personalDataReducer';
@@ -53,11 +53,9 @@ export const actionCheckAuth = async (dispatch:Dispatch<SetPersonalData | RuleAc
         const response = await axios.get<AuthResponse>(`${API_URL}/refresh-token`, { withCredentials: true });
         const { accessToken, userData } = response.data;
         localStorage.setItem('token', accessToken);
-        dispatch(setPersonalData(true, userData));
         dispatch(setAuthor(DefaultRuleKey, userData.username));
-        return { isSuccess: true, message: '' };
+        return { isSuccess: true, message: '', data: { userData } };
     } catch (error) {
-        dispatch(setPersonalData(false));
         const err = error as AxiosError;
         const message = err.response?.data?.message as string || '';
         return { isSuccess: false, message };
@@ -75,5 +73,16 @@ export const actionLogout = (dispatch:Dispatch<SetPersonalData>) => async ():Pro
     } finally {
         localStorage.removeItem('token');
         dispatch(setPersonalData(false));
+    }
+};
+
+export const actionPasswordRecovery = (link:string, password:string) => async ():Promise<ServerAnswer> => {
+    try {
+        await passwordRecovery(link, password);
+        return { isSuccess: true, message: '' };
+    } catch (error) {
+        const err = error as AxiosError;
+        const message = err.response?.data?.message as string || '';
+        return { isSuccess: false, message };
     }
 };

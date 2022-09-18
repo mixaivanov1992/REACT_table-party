@@ -6,7 +6,8 @@ export enum SheetActionType{
     SET_SHEET_CONTENT = 'SET_SHEET_CONTENT',
     ADD_SHEETS = 'ADD_SHEETS',
     DELETE_SHEET = 'DELETE_SHEET',
-    DELETE_SHEETS = 'DELETE_SHEETS'
+    DELETE_SHEETS = 'DELETE_SHEETS',
+    SHEET_OFFSET = 'SHEET_OFFSET'
 }
 
 export interface AddSheet{
@@ -32,4 +33,11 @@ export interface SetSheetContent{
     content: string
 }
 
-export type SheetAction = SetSheetContent | AddSheet | DeleteSheet | DeleteSheets;
+export interface SheetOffset{
+    type: SheetActionType.SHEET_OFFSET,
+    offset: number,
+    chapter: string,
+    index: number
+}
+
+export type SheetAction = SetSheetContent | AddSheet | DeleteSheet | DeleteSheets | SheetOffset;

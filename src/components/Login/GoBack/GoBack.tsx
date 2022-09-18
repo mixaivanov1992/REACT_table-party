@@ -22,4 +22,4 @@ const GoBack: React.FC = () => {
     );
 };
 
-export default GoBack;
+export default React.memo(GoBack);

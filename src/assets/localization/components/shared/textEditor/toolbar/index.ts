@@ -10,6 +10,7 @@ const Localization = new LocalizedStrings({
         alignLeft: 'Выровнять по левому краю',
         alignCenter: 'Выровнять по центру',
         alignRight: 'Выровнять по правому краю',
+        enterUrlLink: 'Введите URL-адрес вашей ссылки',
     },
     'en-US': {
         linkImage: 'Link to the image',
@@ -20,6 +21,7 @@ const Localization = new LocalizedStrings({
         alignLeft: 'Align to the left',
         alignCenter: 'Align to the center',
         alignRight: 'Align to the right edge',
+        enterUrlLink: 'Enter the URL of your link',
     },
 });
 export default Localization;

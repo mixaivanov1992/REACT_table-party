@@ -14,6 +14,8 @@ const Localization = new LocalizedStrings({
         ruleNameAlreadyExist: 'Правило с таким именем уже существует',
         usernameAlreadyExist: 'Имя пользователя уже существует',
         failedGetRule: 'Не удалось получить правило',
+        emailNotConfirmed: 'Email не подтвержден',
+        linkNotValid: 'Ссылка не валидна',
     },
     'en-US': {
         userNotFound: 'Invalid username or password',
@@ -28,6 +30,8 @@ const Localization = new LocalizedStrings({
         ruleNameAlreadyExist: 'The rule with that name already exists',
         usernameAlreadyExist: 'The username already exist',
         failedGetRule: 'Failed get rule',
+        emailNotConfirmed: 'Email not confirmed',
+        linkNotValid: 'The link is not valid',
     },
 });
 export default Localization;

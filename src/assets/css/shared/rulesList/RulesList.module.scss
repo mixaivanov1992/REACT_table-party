@@ -3,6 +3,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	margin: 1em 0;
 	.rule {
 		display: flex;
 		flex-direction: column;
@@ -10,8 +11,6 @@
 		align-items: center;
 		text-align: center;
 		border: 0.1em solid core.$border;
-		margin: 1em;
-		border-radius: 0.25em;
 		.logo {
 			> img {
 				width: 100%;
@@ -19,7 +18,7 @@
 			}
 		}
 		.name {
-			margin: 1em;
+			margin-bottom: 1em;
 		}
 		.menu {
 			padding-bottom: 1em;
@@ -27,9 +26,8 @@
 		}
 	}
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px), screen and (min-width: 601px) {
 	.rule {
-		width: calc(100% - 2em);
 		.logo {
 			width: 14em;
 			height: 14em;
@@ -39,21 +37,8 @@
 		}
 	}
 }
-@media screen and (min-width: 601px) {
-	.rule {
-		width: calc(50% - 2em);
-		.logo {
-			width: 10em;
-			height: 10em;
-			svg {
-				font-size: 10em;
-			}
-		}
-	}
-}
 @media screen and (min-width: 1200px) {
 	.rule {
-		width: calc(33% - 2em);
 		.logo {
 			width: 13em;
 			height: 13em;

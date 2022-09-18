@@ -1,36 +1,42 @@
 @use "../../core";
 .paginate {
-    margin-top: 1rem;
-    ul {
-        display: flex;
-        list-style: none;
-        justify-content: center;
-        padding: 0;
-        flex-wrap: wrap;
-        .paginate_item {
-            cursor: pointer;
-            display: inline-block;
-            margin: 0.1em;
-            text-decoration: none;
-            transition: background-color 0.3s;
-            border: 0.1em solid core.$border;
-            &:hover {
-                background-color: core.$first-color;
-                color: core.$third-color;
-            }
-            .paginate_link {
-                padding: 0.5em 1em;
-                display: inline-block;
-            }
-        }
-        .active {
-            background-color: core.$second-color;
-            color: core.$third-color;
-            border: 0.1em solid core.$second-color;
-            &:hover {
-                background-color: core.$second-color;
-                opacity: 0.9;
-            }
-        }
-    }
+	margin-top: 0.5rem;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	ul {
+		display: flex;
+		list-style: none;
+		justify-content: center;
+		padding: 0;
+		flex-wrap: wrap;
+		.paginate_item {
+			cursor: pointer;
+			display: inline-block;
+			margin: 0.1em;
+			text-decoration: none;
+			transition: background-color 0.3s;
+			border: 0.1em solid core.$border;
+			&:hover {
+				background-color: core.$first-color;
+				color: core.$third-color;
+			}
+			.paginate_link {
+				padding: 0.5em 1em;
+				display: inline-block;
+			}
+		}
+		.active {
+			background-color: core.$second-color;
+			color: core.$third-color;
+			border: 0.1em solid core.$second-color;
+			&:hover {
+				background-color: core.$second-color;
+				opacity: 0.9;
+			}
+		}
+	}
 }

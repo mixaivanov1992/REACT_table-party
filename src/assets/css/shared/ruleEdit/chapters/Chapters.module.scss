@@ -20,4 +20,11 @@
 		padding: 2em;
 		text-align: center;
 	}
+	.offset {
+		& :first-child {
+			margin-right: 0.5em;
+		}
+		text-align: center;
+		margin-top: 0.5em;
+	}
 }

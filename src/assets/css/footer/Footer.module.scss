@@ -1,53 +1,56 @@
 @use "../core";
 .footer {
-    width: 100%;
-    background: core.$second-color;
-    color: core.$third-color;
-    min-height: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 3em;
-    justify-content: space-around;
-    .wrapper {
-        .site_name {
-            font-weight: bold;
-            font-size: 1.3em;
-            margin-bottom: 0.5em;
-        }
-        .links {
-            a {
-                color: core.$third-color;
-                text-decoration: none;
-            }
-        }
-        .copyright {
-            margin-top: 5rem;
-        }
-        .logo {
-            background-color: core.$logo-background;
-            color: core.$logo-color;
-            font-weight: bold;
-            padding: 2em;
-            font-size: 1.3em;
-            display: inline-block;
-            border-radius: 50%;
-            position: relative;
-            span:first-child {
-                position: absolute;
-                right: 0.5em;
-                top: 0.95em;
-            }
-            span:last-child {
-                position: absolute;
-                left: 0.5em;
-                bottom: 0.95em;
-            }
-        }
-        &:last-child {
-            text-align: right;
-            -moz-user-select: none;
-            -khtml-user-select: none;
-            user-select: none;
-        }
-    }
+	width: 100%;
+	background: core.$second-color;
+	color: core.$third-color;
+	min-height: 100px;
+	display: flex;
+	flex-wrap: wrap;
+	padding-top: 3em;
+	justify-content: space-around;
+	.wrapper {
+		.site_name {
+			font-weight: bold;
+			font-size: 1.3em;
+			margin-bottom: 0.5em;
+		}
+		.links {
+			a {
+				color: core.$third-color;
+				text-decoration: none;
+			}
+		}
+		.copyright {
+			margin-top: 5rem;
+		}
+		.logo {
+			background-color: core.$logo-background;
+			color: core.$logo-color;
+			font-weight: bold;
+			padding: 2em;
+			font-size: 1.3em;
+			display: inline-block;
+			border-radius: 50%;
+			position: relative;
+			span:first-child {
+				position: absolute;
+				right: 0.5em;
+				top: 0.95em;
+			}
+			span:last-child {
+				position: absolute;
+				left: 0.5em;
+				bottom: 0.95em;
+			}
+		}
+		.projectAssistance > div {
+			margin-bottom: 0.5rem;
+		}
+		&:last-child {
+			text-align: right;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			user-select: none;
+		}
+	}
 }

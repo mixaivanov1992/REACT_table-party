@@ -24,11 +24,14 @@ const RulesList: React.FC<Props> = (props) => {
     const rulesReducer = useTypedSelector((state) => state.ruleReducer);
     const rulesKey = useGetRulesKeys(rulesReducer, author || '', name || '');
     const rules = rulesKey.map((key) => {
-        const { name: nameRule, cover } = rulesReducer[key];
+        const { name: nameRule, author: authorRule, cover } = rulesReducer[key];
         return (
             <div key={uuidv4()} className={styles.rule}>
                 <div className={styles.logo}>
                     {cover ? <img src={cover} alt={nameRule} /> : <IoMdImages />}
+                </div>
+                <div className={styles.author}>
+                    {`${Localization.author} - ${authorRule}`}
                 </div>
                 <div className={styles.name}>
                     {nameRule}

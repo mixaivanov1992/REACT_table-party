@@ -1,44 +1,37 @@
-import PaginateItems from '@shared/Paginate/PaginateItems';
-import React, { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import React, { Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
 import styles from '@css/shared/paginate/Paginate.module.scss';
 
 interface Props {
     renderContent(index: number): JSX.Element,
+    onPageChange(event: {selected: number}): void,
     itemCount: number,
-    itemsPerPage: number
+    itemsPerPage: number,
+    forcePage: number,
+    pageCount: number
 }
 
 const Paginate: React.FC<Props> = (props) => {
     console.info('Paginate');
 
-    const { renderContent, itemCount, itemsPerPage } = props;
-    const paginateItems = [...Array(itemCount)].map((empty, i) => i);
+    const {
+        renderContent, onPageChange, itemCount, itemsPerPage, forcePage, pageCount,
+    } = props;
 
-    const [pageCount, setPageCount] = useState<number>(Math.ceil(itemCount / itemsPerPage));
-    const [itemOffset, setItemOffset] = useState<number>(0);
+    const paginateItems = [...Array(itemCount)].map((empty, i) => i);
+    const itemOffset = ((forcePage * itemsPerPage) % itemCount);
     const currentItems = paginateItems.slice(itemOffset, itemOffset + itemsPerPage);
 
-    useEffect(() => {
-        setPageCount(Math.ceil(itemCount / itemsPerPage));
-    }, [itemCount, itemsPerPage]);
-
-    const handlePageClick = (event: {selected: number}) => {
-        const newOffset = (event.selected * itemsPerPage) % itemCount;
-        setItemOffset(newOffset);
-    };
-    if (itemOffset === itemCount) {
-        setItemOffset((prevState) => prevState - 1);
-    }
     return (
         <>
-            <PaginateItems renderContent={renderContent} currentItems={currentItems} />
+            {currentItems.map((item) => (<Fragment key={uuidv4()}>{renderContent(item)}</Fragment>))}
             <div className={styles.paginate}>
                 <ReactPaginate
-                    forcePage={itemOffset}
+                    forcePage={forcePage}
                     breakLabel="..."
                     nextLabel="»"
-                    onPageChange={handlePageClick}
+                    onPageChange={onPageChange}
                     pageRangeDisplayed={5}
                     pageCount={pageCount}
                     previousLabel="«"

@@ -13,13 +13,14 @@ import Settings from '@shared/RuleEdit/Settings/Settings';
 interface Props {
     ruleUid: string,
     chapterIndex: number,
+    forcePageAfterDelete(): void,
 }
 
 const ChapterController: React.FC<Props> = (props) => {
     console.info('ChapterController');
     const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
-    const { ruleUid, chapterIndex } = props;
+    const { ruleUid, chapterIndex, forcePageAfterDelete } = props;
 
     const chapterUid = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].uid);
     const chapterName = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].name);
@@ -59,6 +60,7 @@ const ChapterController: React.FC<Props> = (props) => {
         setIsOpen(false);
         dispatch(deleteSheets([chapterUid]));
         dispatch(removeChapter(ruleUid, chapterUid));
+        forcePageAfterDelete();
     };
 
     const onClickCloseDialog = (): void => {

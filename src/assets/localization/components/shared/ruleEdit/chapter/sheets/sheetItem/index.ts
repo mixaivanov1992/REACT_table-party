@@ -8,6 +8,8 @@ const Localization = new LocalizedStrings({
         confirm: 'Подтвердить',
         deleteSheet: 'Вы действительно хотите удалить лист?',
         deleteSheetBtn: 'Удалить лист',
+        moveLeft: 'Сдвинуть влево',
+        moveRight: 'Сдвинуть вправо',
     },
     'en-US': {
         dataEntry: 'Data entry',
@@ -16,6 +18,8 @@ const Localization = new LocalizedStrings({
         confirm: 'Confirm',
         deleteSheet: 'Do you really want to delete the sheet?',
         deleteSheetBtn: 'Delete a sheet',
+        moveLeft: 'Move to the left',
+        moveRight: 'Move to the right',
     },
 });
 export default Localization;

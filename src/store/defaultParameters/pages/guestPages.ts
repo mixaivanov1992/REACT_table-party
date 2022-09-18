@@ -33,4 +33,12 @@ export const GuestPages: AccessiblePages = [{
     component: 'Login/ForgotPassword/ForgotPassword',
     isContentComponent: false,
     sort: 0,
+}, {
+    linkLocation: [],
+    pageRoute: PageRoute.passwordRecovery,
+    pageAlias: PageAlias.passwordRecovery,
+    exact: true,
+    component: 'Login/PasswordRecovery/PasswordRecovery',
+    isContentComponent: false,
+    sort: 0,
 }];

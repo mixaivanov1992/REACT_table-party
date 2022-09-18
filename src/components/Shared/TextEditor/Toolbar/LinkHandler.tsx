@@ -1,6 +1,7 @@
 import { AiOutlineLink } from 'react-icons/ai';
 import { DialogList } from '@models/components/textEditor';
 import { EditorState, RichUtils } from 'draft-js';
+import Localization from '@localization/components/shared/textEditor/toolbar';
 import React from 'react';
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const LinkHandler: React.FC<Props> = (props) => {
+    Localization.setLanguage(navigator.language);
     const {
         editorState, setEditorState, setIsOpen,
     } = props;
@@ -17,7 +19,7 @@ const LinkHandler: React.FC<Props> = (props) => {
     const handleAddLink = (e: React.MouseEvent | React.KeyboardEvent) => {
         e.preventDefault();
         const selection = editorState.getSelection();
-        const link = prompt('Please enter the URL of your link');
+        const link = prompt(Localization.enterUrlLink);
         if (!link) {
             setEditorState(RichUtils.toggleLink(editorState, selection, null));
             return;

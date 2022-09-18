@@ -17,7 +17,7 @@ const Registration: React.FC = () => {
     const [password, setPassword] = useState<string>('');
     const [confirm, setConfirm] = useState<string>('');
     const [message, setMessage] = useState<string>('');
-    const [isRegistered, setIsRegistered] = useState<boolean>(false);
+    const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
     async function onClickRegistration() {
         setMessage('');
@@ -44,7 +44,7 @@ const Registration: React.FC = () => {
         const registration = actionRegistration(email, username, password);
         const result = await actionHandler(dispatch, registration);
         if (result.isSuccess) {
-            setIsRegistered(true);
+            setIsSuccess(true);
             setMessage(Localization.confirmEmail);
         } else {
             setMessage(result.message);
@@ -56,7 +56,7 @@ const Registration: React.FC = () => {
             <div className={styles.wrapper}>
                 <GoBack />
                 <div className={styles.header}>{Localization.registration}</div>
-                { !isRegistered
+                { !isSuccess
                     && (
                         <>
                             <Field text={Localization.email} value={email} type="email" id="email" setState={setEmail} />

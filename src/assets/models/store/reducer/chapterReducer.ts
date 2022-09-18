@@ -8,6 +8,7 @@ export enum ChapterActionType{
     SET_CHAPTER_NAME = 'SET_CHAPTER_NAME',
     SET_CHAPTER_COVER = 'SET_CHAPTER_COVER',
     DELETE_CHAPTERS = 'DELETE_CHAPTERS',
+    CHAPTER_OFFSET = 'CHAPTER_OFFSET'
 }
 
 export interface SetChapterName{
@@ -40,4 +41,11 @@ export interface SetChapterCover{
     cover: string
 }
 
-export type ChapterAction = AddChapter | RemoveChapter | SetChapterName | DeleteChapters | SetChapterCover;
+export interface ChapterOffset{
+    type: ChapterActionType.CHAPTER_OFFSET,
+    offset: number,
+    rule: string,
+    index: number
+}
+
+export type ChapterAction = AddChapter | RemoveChapter | SetChapterName | DeleteChapters | SetChapterCover | ChapterOffset;

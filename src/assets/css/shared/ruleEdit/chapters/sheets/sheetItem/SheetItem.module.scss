@@ -3,8 +3,7 @@
 
 .sheet {
 	display: flex;
-	flex-direction: column;
-	padding-top: 1em;
+	padding: 1em 1em 0;
 	width: calc(100% - 2em);
 	.item {
 		width: 15em;
@@ -21,7 +20,7 @@
 			height: 100%;
 			position: absolute;
 			display: flex;
-			justify-content: center;
+			justify-content: space-around;
 			align-items: flex-end;
 			button {
 				z-index: 2;
@@ -57,6 +56,12 @@
 				}
 			}
 		}
+	}
+	.description {
+		padding-left: 1em;
+		height: 15em;
+		flex: 1;
+		overflow: hidden;
 	}
 }
 

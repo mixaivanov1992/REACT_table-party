@@ -5,15 +5,13 @@ import {
     SetSheetContent,
     SheetAction,
     SheetActionType,
+    SheetOffset,
     SheetState,
 } from '@models/store/reducer/sheetReducer';
 import { Sheets } from '@models/services/ruleService';
 
 const initialState: SheetState = {
-    0: [{
-        uid: '',
-        content: '',
-    }],
+    0: [],
 };
 
 export const sheetReducer = (state = initialState, action: SheetAction): SheetState => {
@@ -52,6 +50,13 @@ export const sheetReducer = (state = initialState, action: SheetAction): SheetSt
         });
         return newState;
     }
+    case SheetActionType.SHEET_OFFSET: {
+        const { offset, chapter, index } = action;
+        const newState = { ...state };
+        const removed = newState[chapter].splice(index, 1);
+        newState[chapter].splice(index + offset, 0, ...removed);
+        return newState;
+    }
     default:
         return state;
     }
@@ -77,4 +82,11 @@ export const setSheetContent = (chapter: string, uid: string, content: string): 
     chapter,
     uid,
     content,
+});
+
+export const sheetOffset = (offset: number, chapter: string, index: number): SheetOffset => ({
+    type: SheetActionType.SHEET_OFFSET,
+    offset,
+    chapter,
+    index,
 });

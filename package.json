@@ -32,7 +32,8 @@
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "deploy": "gh-pages -d dist",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "start-server": "cd ./dist & http-server --port 8080 -P http://localhost:8080?"
   },
   "eslintConfig": {
     "extends": [
@@ -105,6 +106,7 @@
     "redux-devtools-extension": "^2.13.9",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.2.1",
+    "terser-webpack-plugin": "^5.3.6",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.4.4",
     "typescript-plugin-css-modules": "^3.4.0",

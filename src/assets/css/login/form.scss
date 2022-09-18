@@ -26,6 +26,7 @@
 		padding: 3% 5%;
 		text-align: center;
 		position: relative;
+		min-width: 40%;
 		.header {
 			word-wrap: break-word;
 			font-size: 2em;
@@ -34,7 +35,8 @@
 		.message {
 			transition: all 0.1s;
 			color: core.$danger;
-			margin-bottom: 1em;
+			margin: 0 auto 1em;
+			max-width: 80%;
 		}
 	}
 	@media screen and (max-width: 600px) {

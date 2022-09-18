@@ -25,6 +25,7 @@ const ForgotPassword: React.FC = () => {
         const forgotPassword = actionForgotPassword(email);
         const result = await actionHandler(dispatch, forgotPassword);
         if (result.isSuccess) {
+            setMessage(Localization.passwordRecoverySent);
             setIsSent(true);
         } else {
             setMessage(result.message);
