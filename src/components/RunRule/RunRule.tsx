@@ -2,7 +2,11 @@ import { AiFillCloseCircle, AiOutlineCloseCircle } from 'react-icons/ai';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 import { actionGetRule } from '@store/actions/ruleAction';
 import { actionHandler } from '@store/actions/actionHandler';
+import {
+    colors, fontsFamily, fontsSize, textAlign,
+} from '@shared/TextEditor/styleMap';
 import { linkDecorator } from '@shared/TextEditor/Link';
+import { mediaBlockRenderer } from '@shared/TextEditor/Media';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { useTypedSelector } from '@hooks/useTypedSelector';
@@ -77,7 +81,7 @@ const RunRule: React.FC = () => {
     };
 
     const navbar = useMemo(() => chapters && <Navbar chapters={chapters} selectedChapter={selectedChapter} onClickChapterSelection={onClickChapterSelection} />, [chapters, selectedChapter]);
-    const editorState = sheets ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheets[selectedSheet]?.content)), linkDecorator) : EditorState.createEmpty();
+    const editorState = sheets && sheets[selectedSheet] ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheets[selectedSheet]?.content)), linkDecorator) : EditorState.createEmpty();
     return (
         <div className={styles.runRule} ref={runRule}>
             <div className={styles.close}>
@@ -92,8 +96,12 @@ const RunRule: React.FC = () => {
                     <div className={styles.content}>
                         <Editor
                             editorState={editorState}
+                            blockRendererFn={mediaBlockRenderer}
+                            blockStyleFn={textAlign}
+                            customStyleMap={{ ...colors, ...fontsFamily, ...fontsSize }}
                             onChange={() => {}}
                             readOnly
+
                         />
                     </div>
                 </div>

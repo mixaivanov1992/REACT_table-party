@@ -1,3 +1,5 @@
+import { ContentBlock } from 'draft-js';
+
 export const colors = {
     black: {
         color: 'rgba(0, 0, 0, 1.0)',
@@ -93,4 +95,20 @@ export const fontsFamily = {
     verdana: {
         fontFamily: 'Verdana',
     },
+};
+
+export const textAlign = (contentBlock: ContentBlock) => {
+    const type = contentBlock.getType();
+    switch (type) {
+    case 'align-left':
+        return 'align-left';
+    case 'align-center':
+        return 'align-center';
+    case 'align-right':
+        return 'align-right';
+    case 'color-red':
+        return 'color-red';
+    default:
+        return '';
+    }
 };

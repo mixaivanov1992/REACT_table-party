@@ -15,11 +15,13 @@ export const Image = (props: BlockComponentProps) => {
 const Media = (props: BlockComponentProps) => {
     const { contentState, block } = props;
 
-    const entity = contentState.getEntity(block.getEntityAt(0));
-    const type = entity.getType();
+    if (block.getEntityAt(0)) {
+        const entity = contentState.getEntity(block.getEntityAt(0));
+        const type = entity.getType();
 
-    if (type === 'image') {
-        return <Image contentState={contentState} block={block} />;
+        if (type === 'image') {
+            return <Image contentState={contentState} block={block} />;
+        }
     }
 
     return null;

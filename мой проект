@@ -100,6 +100,3 @@ npm install gh-pages --save-dev                                                 
 react-scripts
 module-alias
 web-vitals
-
-
-npm install http-server -g

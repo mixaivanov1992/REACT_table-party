@@ -1,10 +1,12 @@
 import '@css/shared/textEditor/textEditor.css';
 import 'draft-js/dist/Draft.css';
-import {
-    ContentBlock, DraftEditorCommand, Editor, EditorState, RichUtils, convertFromRaw, convertToRaw,
-} from 'draft-js';
 import { DialogList } from '@models/components/textEditor';
-import { colors, fontsFamily, fontsSize } from '@shared/TextEditor/styleMap';
+import {
+    Editor, EditorState, Modifier, convertFromRaw, convertToRaw, getDefaultKeyBinding,
+} from 'draft-js';
+import {
+    colors, fontsFamily, fontsSize, textAlign,
+} from '@shared/TextEditor/styleMap';
 import { linkDecorator } from '@shared/TextEditor/Link';
 import { mediaBlockRenderer } from '@shared/TextEditor/Media';
 import ColorHandler from '@shared/TextEditor/Toolbar/ColorHandler';
@@ -45,29 +47,18 @@ const TextEditor: React.FC<Props> = (props) => {
         editor.current?.focus();
     };
 
-    const handleKeyCommand = (command: DraftEditorCommand) => {
-        const newState = RichUtils.handleKeyCommand(editorState, command);
-        if (newState) {
-            setEditorState(newState);
-            return 'handled';
+    const keyBindingFn = (e: React.KeyboardEvent<{}>) => {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const tabCharacter = '    ';
+            const newContentState = Modifier.replaceText(
+                editorState.getCurrentContent(),
+                editorState.getSelection(),
+                tabCharacter,
+            );
+            setEditorState(EditorState.push(editorState, newContentState, 'insert-characters'));
         }
-        return 'not-handled';
-    };
-
-    const getBlockStyle = (contentBlock: ContentBlock) => {
-        const type = contentBlock.getType();
-        switch (type) {
-        case 'align-left':
-            return 'align-left';
-        case 'align-center':
-            return 'align-center';
-        case 'align-right':
-            return 'align-right';
-        case 'color-red':
-            return 'color-red';
-        default:
-            return '';
-        }
+        return getDefaultKeyBinding(e);
     };
 
     return (
@@ -89,14 +80,14 @@ const TextEditor: React.FC<Props> = (props) => {
                 <Editor
                     editorState={editorState}
                     onChange={setEditorState}
-                    handleKeyCommand={handleKeyCommand}
                     blockRendererFn={mediaBlockRenderer}
-                    blockStyleFn={getBlockStyle}
+                    blockStyleFn={textAlign}
                     customStyleMap={{ ...colors, ...fontsFamily, ...fontsSize }}
                     placeholder={Localization.createRule}
                     ref={(element) => {
                         editor.current = element;
                     }}
+                    keyBindingFn={keyBindingFn}
                 />
             </div>
             <div className={styles.footer}>
