@@ -18,6 +18,7 @@ export enum PageRoute{
     ruleEdit = '/rule-edit/:id',
     runRule = '/run-rule/:id',
     searchRules = '/search-rules/:name',
+    googleAuthError = '/google-auth-error/:error',
     page404 = '*',
 }
 export enum PageAlias{
@@ -33,6 +34,7 @@ export enum PageAlias{
     ruleEdit = 'ruleEdit',
     runRule = 'runRule',
     searchRules = 'searchRules',
+    googleAuthError = 'googleAuthError',
     page404 = 'page404',
 }
 

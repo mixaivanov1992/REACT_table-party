@@ -15,19 +15,22 @@ export const Image = (props: BlockComponentProps) => {
 const Media = (props: BlockComponentProps) => {
     const { contentState, block } = props;
 
-    if (block.getEntityAt(0)) {
-        const entity = contentState.getEntity(block.getEntityAt(0));
-        const type = entity.getType();
+    const entity = contentState.getEntity(block.getEntityAt(0));
+    const type = entity.getType();
 
-        if (type === 'image') {
-            return <Image contentState={contentState} block={block} />;
-        }
+    if (type === 'image') {
+        return <Image contentState={contentState} block={block} />;
     }
 
     return null;
 };
 
 export const mediaBlockRenderer = (contentBlock: ContentBlock) => {
+    const entity = contentBlock.getEntityAt(0);
+    if (!entity) {
+        return null;
+    }
+
     const type = contentBlock.getType();
     switch (type) {
     case 'atomic':

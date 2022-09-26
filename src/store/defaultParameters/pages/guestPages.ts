@@ -41,4 +41,12 @@ export const GuestPages: AccessiblePages = [{
     component: 'Login/PasswordRecovery/PasswordRecovery',
     isContentComponent: false,
     sort: 0,
+}, {
+    linkLocation: [],
+    pageRoute: PageRoute.googleAuthError,
+    pageAlias: PageAlias.googleAuthError,
+    exact: true,
+    component: 'Login/GoogleAuthError/GoogleAuthError',
+    isContentComponent: false,
+    sort: 0,
 }];

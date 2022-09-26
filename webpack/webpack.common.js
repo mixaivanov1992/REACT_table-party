@@ -1,5 +1,6 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
     entry: {
@@ -44,6 +45,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
+        new Dotenv(),
     ],
     stats: 'errors-only',
 };

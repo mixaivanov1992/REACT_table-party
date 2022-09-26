@@ -30,8 +30,9 @@
 			position: relative;
 			display: flex;
 			flex-direction: column;
-			width: 100%;
+			flex: 1;
 			height: calc(100% - 5em);
+			overflow: auto;
 			.header {
 				text-align: center;
 				min-height: 3.1em;

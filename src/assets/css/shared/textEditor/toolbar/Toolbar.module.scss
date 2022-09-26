@@ -27,6 +27,9 @@
 	}
 	.imageHandler {
 		padding: 1em;
+		.upload_file {
+			margin-bottom: 1em;
+		}
 		.size {
 			display: flex;
 			> label {

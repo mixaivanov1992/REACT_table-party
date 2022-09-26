@@ -6,6 +6,7 @@ import { ShowLoader } from '@models/store/reducer/loaderReducer';
 import { actionCheckAuth } from '@store/actions/authAction';
 import { showLoader } from '@store/reducer/loaderReducer';
 import Localization from '@localization/actions';
+import cookies from 'js-cookie';
 
 function errorHandler(text: string): string {
     Localization.setLanguage(navigator.language);
@@ -17,7 +18,9 @@ function errorHandler(text: string): string {
 }
 
 export async function refreshToken(dispatch: Dispatch<SetPersonalData | RuleAction>): Promise<null | UserData> {
-    if (localStorage.getItem('token')) {
+    const token = cookies.get('login');
+    if (localStorage.getItem('token') || token) {
+        cookies.remove('login');
         const result = await actionCheckAuth(dispatch);
         if (result.isSuccess) {
             const { userData } = result.data as {userData: UserData};

@@ -2,7 +2,6 @@
 
 .navbar {
 	.chapters {
-		height: calc(100% - 4em);
 		.chapter {
 			padding: 1em 0;
 			transition: transform 300ms;
@@ -14,6 +13,7 @@
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
+				min-height: 1.1em;
 			}
 			.cover {
 				border: 0.1em solid core.$border;
@@ -128,6 +128,7 @@
 }
 @media screen and (min-width: 901px) {
 	.navbar {
+		height: calc(100% - 5em);
 		border-right: 0.1em solid core.$border;
 		position: relative;
 		width: calc(25% - 0.2em);

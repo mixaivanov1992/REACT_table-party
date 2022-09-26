@@ -61,6 +61,29 @@ const ImageHandler: React.FC<Props> = (props) => {
     const onInputWidth = (value: string): void => {
         setWidth(+value);
     };
+
+    const onChangeImage = (e: React.FormEvent<HTMLInputElement>): void => {
+        const { files } = e.currentTarget;
+        if (!files) {
+            return;
+        }
+        if (files[0].type !== 'image/jpeg') {
+            e.currentTarget.value = '';
+            return;
+        }
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]);
+
+        fileReader.onload = () => {
+            if (typeof fileReader.result === 'string') {
+                setSrc(fileReader.result);
+            }
+        };
+        fileReader.onerror = (error: ProgressEvent<FileReader>) => {
+            console.log('Error: ', error);
+        };
+    };
+
     return (
         <>
             <button type="button" onMouseDown={imageSelection}>
@@ -70,6 +93,7 @@ const ImageHandler: React.FC<Props> = (props) => {
             {isOpen === DialogList.IMAGE ? (
                 <div className={styles.selectionWindow}>
                     <div className={styles.imageHandler}>
+                        <input className={styles.upload_file} type="file" accept=".jpg, .jpeg" onChange={onChangeImage} />
                         <InputWrapper
                             htmlFor="selectionWindow"
                             text={Localization.linkImage}
@@ -114,8 +138,8 @@ const ImageHandler: React.FC<Props> = (props) => {
                             </select>
                         </div>
                         <div>
-                            <button type="button" onMouseDown={addImage}>Добавить</button>
-                            <button type="button" onMouseDown={() => setIsOpen(null)}>Отмена</button>
+                            <button type="button" onMouseDown={addImage}>{Localization.add}</button>
+                            <button type="button" onMouseDown={() => setIsOpen(null)}>{Localization.close}</button>
                         </div>
                     </div>
                 </div>

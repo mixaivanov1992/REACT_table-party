@@ -2,7 +2,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useHistory } from 'react-router-dom';
 import { PageRoute } from '@models/accessiblePage';
 import { actionHandler } from '@store/actions/actionHandler';
-import { actionLogin } from '@store/actions/authAction';
+import { actionLogin, getGoogleOAuthURL } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import Field from '@components/Login/Field/Field';
@@ -66,10 +66,10 @@ const Login: React.FC = () => {
                     </div>
                 </div>
                 <div className={styles.social}>
-                    <div className={styles.google}>
+                    <a className={styles.google} href={getGoogleOAuthURL()}>
                         <FcGoogle />
                         <span>{Localization.google}</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

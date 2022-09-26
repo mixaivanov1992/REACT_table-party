@@ -44,6 +44,7 @@ yarn add -D typescript-plugin-css-modules                                       
 yarn add -D @pmmmwh/react-refresh-webpack-plugin react-refresh                                  -   плагин позволяет не перезагружать страницу после внесения правок в коде
 yarn add --dev fork-ts-checker-webpack-plugin                                                   -   Плагин Webpack, который запускает проверку типов TypeScript в отдельном процессе.
 npm install terser-webpack-plugin --save-dev                                                    -   Удаляет в сборке console
+npm install --save-dev dotenv-webpack                                                           -   .env
 
 BABLE
 npm install --save-dev babel-loader @babel/core 												-	bable позволяет компилировать новый js код для устаревших браузеров
@@ -80,6 +81,8 @@ npm install --save-dev @types/react-paginate                                    
 
 npm install redux-persist --save
 npm install --save-dev @types/redux-persist
+npm install js-cookie --save
+npm install @types/js-cookie --save-dev
 
 DEBUG
 npm install --save-dev redux-devtools-extension													-	дополнение для браузера, для разработки
