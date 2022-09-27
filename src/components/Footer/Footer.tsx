@@ -31,8 +31,7 @@ const Footer: React.FC<Props> = (props) => {
                 </div>
                 <p className={styles.copyright}>
                     &copy;
-                    {` ${new Date().getFullYear()}`}
-                    {/* {` ${new Date().getFullYear()} TP.COM`} */}
+                    {` ${new Date().getFullYear()} table-party.site`}
                 </p>
             </div>
             <div className={styles.wrapper}>

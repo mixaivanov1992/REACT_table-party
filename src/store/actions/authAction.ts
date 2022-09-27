@@ -56,6 +56,7 @@ export const actionCheckAuth = async (dispatch:Dispatch<SetPersonalData | RuleAc
         dispatch(setAuthor(DefaultRuleKey, userData.username));
         return { isSuccess: true, message: '', data: { userData } };
     } catch (error) {
+        localStorage.removeItem('token');
         const err = error as AxiosError;
         const message = err.response?.data?.message as string || '';
         return { isSuccess: false, message };
@@ -89,8 +90,10 @@ export const actionPasswordRecovery = (link:string, password:string) => async ()
 
 export function getGoogleOAuthURL() {
     const rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
+    const redirectUri = process.env.name === 'prod' ? process.env.PROD_GOOGLE_AUTH_REDIRECT : process.env.DEV_GOOGLE_AUTH_REDIRECT;
+
     const options = {
-        redirect_uri: process.env.GOOGLE_AUTH_REDIRECT as string,
+        redirect_uri: redirectUri as string,
         client_id: process.env.GOOGLE_AUTH_ID as string,
         access_type: 'offline',
         response_type: 'code',

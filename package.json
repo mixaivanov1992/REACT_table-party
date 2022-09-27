@@ -33,8 +33,7 @@
     "start": "webpack serve --config webpack/webpack.config.js --env env=dev",
     "build": "webpack --config webpack/webpack.config.js --env env=prod",
     "deploy": "gh-pages -d dist",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
-    "start-server": "cd ./dist & http-server --port 8080 -P http://localhost:8080?"
+    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
   },
   "eslintConfig": {
     "extends": [
@@ -88,7 +87,6 @@
     "@typescript-eslint/parser": "^5.17.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.2.0",
     "dotenv-webpack": "^8.0.1",
