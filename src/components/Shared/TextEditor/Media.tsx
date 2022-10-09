@@ -9,6 +9,10 @@ interface BlockComponentProps {
 export const Image = (props: BlockComponentProps) => {
     const { block, contentState } = props;
     const { src, style, parentStyle } = contentState.getEntity(block.getEntityAt(0)).getData();
+
+    style.maxWidth = '100%';
+    style.maxHeight = '100%';
+
     return <div style={parentStyle}><img src={src} alt={src} role="presentation" style={style} /></div>;
 };
 

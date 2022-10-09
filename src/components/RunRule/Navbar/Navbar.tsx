@@ -1,4 +1,4 @@
-import { AiOutlineMenu } from 'react-icons/ai';
+import { AiOutlineLeftCircle, AiOutlineRightCircle } from 'react-icons/ai';
 import { CSSTransition } from 'react-transition-group';
 import { ChapterData } from '@models/services/ruleService';
 import { IoMdImages } from 'react-icons/io';
@@ -27,9 +27,16 @@ const Navbar: React.FC<Props> = (props) => {
 
     return (
         <>
-            <div className={styles.show_hide_navbar}>
-                <AiOutlineMenu onClick={onClickShowHideNavbar} />
-            </div>
+            {isOpenNavbar
+                ? (
+                    <div className={styles.hide_navbar}>
+                        <AiOutlineLeftCircle onClick={onClickShowHideNavbar} />
+                    </div>
+                ) : (
+                    <div className={styles.show_navbar}>
+                        <AiOutlineRightCircle onClick={onClickShowHideNavbar} />
+                    </div>
+                )}
             <CSSTransition
                 in={isOpenNavbar}
                 timeout={500}
@@ -51,7 +58,7 @@ const Navbar: React.FC<Props> = (props) => {
                                     role="button"
                                     tabIndex={-1}
                                     onKeyPress={() => {}}
-                                    onClick={() => { onClickChapterSelection(index); }}
+                                    onClick={() => { onClickChapterSelection(index); onClickShowHideNavbar(); }}
                                     className={`${styles.chapter} ${index === selectedChapter ? styles.selected : ''}`}
                                 >
                                     <div className={styles.name}>{item.name}</div>

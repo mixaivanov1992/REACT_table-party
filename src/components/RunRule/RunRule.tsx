@@ -14,7 +14,7 @@ import Cover from '@components/RunRule/Cover/Cover';
 import Localization from '@localization/components/runRule';
 import Navbar from '@components/RunRule/Navbar/Navbar';
 import React, {
-    useEffect, useMemo, useRef, useState,
+    useLayoutEffect, useMemo, useRef, useState,
 } from 'react';
 import styles from '@css/runRule/RunRule.module.scss';
 
@@ -36,7 +36,7 @@ const RunRule: React.FC = () => {
     const history = useHistory();
     const getRule = actionGetRule(dispatch, ruleId);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!chapters) {
             actionHandler(dispatch, getRule);
         }
