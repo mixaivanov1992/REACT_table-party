@@ -1,0 +1,58 @@
+@use "../../core";
+
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	.results {
+		text-align: center;
+		.box {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border: 0.1rem solid core.$border;
+			width: 2em;
+			height: 2em;
+			font-size: 3em;
+			border-radius: 0.5em;
+			box-shadow: core.$shadow;
+			color: core.$second-color;
+			background: core.$fourth-color;
+		}
+	}
+	.dice {
+		text-align: center;
+		button {
+			border: 0.1rem solid core.$border;
+			color: core.$second-color;
+			text-shadow: 0px 0.1em 0.5em core.$shadow;
+			border-radius: 0.5em;
+			width: 5em;
+			height: 5em;
+			margin: 0.5em;
+			background: core.$fourth-color;
+			cursor: pointer;
+			&:hover {
+				background: darken(core.$fourth-color, 20%);
+				color: core.$fourth-color;
+			}
+		}
+	}
+	.multiplier {
+		text-align: center;
+		margin-bottom: 1em;
+		input {
+			border: 0.1rem solid core.$border;
+			width: 5em;
+			text-align: center;
+			font-size: 1.5em;
+			padding: 0.5em 0;
+			border-radius: 0.5em;
+			box-shadow: core.$shadow;
+			background: core.$fourth-color;
+			color: core.$second-color;
+		}
+	}
+}

@@ -4,14 +4,24 @@ const Localization = new LocalizedStrings({
     'ru-RU': {
         back: 'Назад',
         forward: 'Вперед',
-        chapters: 'Главы',
-        sheets: 'Листы',
+        prevChapter: 'Предыдущая глава',
+        nextChapter: 'Следующая глава',
+        prevSheet: 'Предыдущий лист',
+        nextSheet: 'Следующий лист',
+        rollDice: 'Бросок кубика',
+        counter: 'Счетчик',
+        gameElements: 'Элементы игры',
     },
     'en-US': {
         back: 'Back',
         forward: 'Forward',
-        chapters: 'Chapters',
-        sheets: 'Sheets',
+        prevChapter: 'Previous chapter',
+        nextChapter: 'Next chapter',
+        prevSheet: 'Previous sheet',
+        nextSheet: 'Next sheet',
+        rollDice: 'Roll of the dice',
+        counter: 'Counter',
+        gameElements: 'Game Elements',
     },
 });
 export default Localization;
