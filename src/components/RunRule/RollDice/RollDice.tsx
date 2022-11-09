@@ -22,7 +22,7 @@ const RollDice: React.FC = () => {
         const toRender = [];
         for (let i = 0; i < dice.length; i += 1) {
             toRender.push(
-                <button value={dice[i]} key={uuidv4()} type="button" onClick={(e) => { calculateTotal(e); }}>
+                <button value={dice[i]} key={uuidv4()} type="button" onClick={calculateTotal}>
                     D
                     {dice[i]}
                 </button>,

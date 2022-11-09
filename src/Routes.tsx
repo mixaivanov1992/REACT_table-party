@@ -1,7 +1,4 @@
-import {
-    // eslint-disable-next-line
-    HashRouter, Route, BrowserRouter as Router, Switch,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { LinkLocation } from '@models/accessiblePage';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
@@ -47,12 +44,11 @@ const Routes: React.FC = () => {
     });
 
     return (
-        // github pages use HashRouter // Router
-        <Router>
+        <BrowserRouter>
             <Switch>
                 {routes}
             </Switch>
-        </Router>
+        </BrowserRouter>
     );
 };
 

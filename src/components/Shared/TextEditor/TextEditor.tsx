@@ -39,7 +39,8 @@ const TextEditor: React.FC<Props> = (props) => {
     );
     const editor = useRef() as any;
 
-    const handleSave = () => {
+    const handleSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
         editorSave(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
     };
 
@@ -91,7 +92,7 @@ const TextEditor: React.FC<Props> = (props) => {
                 />
             </div>
             <div className={styles.footer}>
-                <button className="save" type="button" onClick={(e) => { e.preventDefault(); handleSave(); }}>{Localization.save}</button>
+                <button className="save" type="button" onClick={handleSave}>{Localization.save}</button>
                 {children}
             </div>
         </div>

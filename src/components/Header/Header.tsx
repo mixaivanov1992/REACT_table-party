@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { actionHandler } from '@store/actions/actionHandler';
 import { actionLogout } from '@store/actions/authAction';
 import { useDispatch } from 'react-redux';
+import { useIsValidHttpUrl } from '@hooks/useIsValidHttpUrl';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import DynamicIcon from '@shared/DynamicIcon/DynamicIcon';
@@ -20,10 +21,11 @@ const Header: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
 
     const [search, setSearch] = useState<string>('');
-    const { isAuthorized } = useTypedSelector((state) => state.personalDataReducer);
+    const { isAuthorized, avatar } = useTypedSelector((state) => state.personalDataReducer);
     const { accessiblePages } = props;
 
     const history = useHistory();
+    const isValidHttpUrl = useIsValidHttpUrl();
     const onClickLogout = ():void => {
         const logout = actionLogout(dispatch);
         actionHandler(dispatch, logout);
@@ -54,9 +56,16 @@ const Header: React.FC<Props> = (props) => {
                                 pageRoute, pageAlias, linkIcon,
                             } = accessiblePage;
 
+                            if (isValidHttpUrl(avatar)) {
+                                return (
+                                    <Link key={uuidv4()} className={styles[pageAlias]} to={pageRoute}>
+                                        <img src={`${avatar}`} alt="avatar" />
+                                    </Link>
+                                );
+                            }
                             return (
                                 <Link key={uuidv4()} className={styles[pageAlias]} to={pageRoute}>
-                                    { linkIcon ? <DynamicIcon path={linkIcon.path} name={linkIcon.name} /> : '' }
+                                    {linkIcon ? <DynamicIcon path={linkIcon.path} name={linkIcon.name} /> : '' }
                                 </Link>
                             );
                         })}

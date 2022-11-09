@@ -58,7 +58,7 @@ const Dialog: React.FC<Props> = (props) => {
                                         role="button"
                                         tabIndex={-1}
                                         onKeyPress={() => {}}
-                                        onClick={() => { onClickCloseDialog(); }}
+                                        onClick={onClickCloseDialog}
                                         className={styles.close}
                                     >
                                         &#10005;
