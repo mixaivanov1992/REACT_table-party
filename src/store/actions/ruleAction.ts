@@ -6,7 +6,7 @@ import { Dispatch } from 'react';
 import { NumberRulesResponse, RulesResponse } from '@models/services/rulesResponse';
 import { PageRoute } from '@models/accessiblePage';
 import { RuleResponse } from '@models/services/ruleResponse';
-import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
+import { ServerResponse, ServerResponseNumberRules } from '@models/store/actions/serverResponseAction';
 import { SheetAction } from '@models/store/reducer/sheetReducer';
 import { addChapter } from '@store/reducer/chapterReducer';
 import { addRule, addRules } from '@store/reducer/ruleReducer';
@@ -15,7 +15,7 @@ import { saveRule } from '@src/services/ruleService';
 import { useDeleteRuleItems } from '@hooks/useDeleteRuleItems';
 import axios, { AxiosError } from 'axios';
 
-export const actionSaveRule = (dispatch:Dispatch<ChapterAction | SheetAction | RuleAction>, rule: Rule, chapters: Chapters, sheets: Sheets, history: any) => async ():Promise<ServerAnswer> => {
+export const actionSaveRule = (dispatch:Dispatch<ChapterAction | SheetAction | RuleAction>, rule: Rule, chapters: Chapters, sheets: Sheets, history: any) => async ():Promise<ServerResponse> => {
     try {
         const response = await saveRule(rule, chapters, sheets);
         const { rule: ruleResult, chapters: chaptersResult, sheets: sheetsResult } = response.data;
@@ -41,7 +41,7 @@ export const actionSaveRule = (dispatch:Dispatch<ChapterAction | SheetAction | R
     }
 };
 
-export const actionDeleteRule = (ruleUid: string) => async ():Promise<ServerAnswer> => {
+export const actionDeleteRule = (ruleUid: string) => async ():Promise<ServerResponse> => {
     try {
         await axios.delete<void>(`${API_URL}/rule/${ruleUid}`, {
             headers: {
@@ -56,7 +56,7 @@ export const actionDeleteRule = (ruleUid: string) => async ():Promise<ServerAnsw
     }
 };
 
-export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | RuleAction>, ruleUid: string) => async ():Promise<ServerAnswer> => {
+export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | RuleAction>, ruleUid: string) => async ():Promise<ServerResponse> => {
     try {
         const response = await axios.get<RuleResponse>(`${API_URL}/rule/${ruleUid}`, {
             headers: {
@@ -73,13 +73,13 @@ export const actionGetRule = (dispatch:Dispatch<ChapterAction | SheetAction | Ru
 
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, page: number, author: string, name: string) => async ():Promise<ServerAnswer> => {
+export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, page: number, author: string, name: string) => async ():Promise<ServerResponse> => {
     try {
         let str = '';
         if (author) {
@@ -89,19 +89,19 @@ export const actionGetRules = (dispatch:Dispatch<RuleAction>, limit: number, pag
         } else {
             str += `rules/${limit}/${page}`;
         }
-        const response = await axios.get<RulesResponse>(`${API_URL}/${str}`);
-        const { rules } = response.data;
+        const { data } = await axios.get<RulesResponse>(`${API_URL}/${str}`);
+        const { rules } = data;
 
         dispatch(addRules(rules));
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionGetNumberRules = async (author: string, name: string) :Promise<ServerAnswer> => {
+export const actionGetNumberRules = async (author: string, name: string) :Promise<ServerResponseNumberRules> => {
     try {
         let str = '';
         if (author) {
@@ -109,13 +109,13 @@ export const actionGetNumberRules = async (author: string, name: string) :Promis
         } else if (name) {
             str += `-name/${name}`;
         }
-        const response = await axios.get<NumberRulesResponse>(`${API_URL}/number-rules${str}`);
-        const { numberRules } = response.data;
+        const { data } = await axios.get<NumberRulesResponse>(`${API_URL}/number-rules${str}`);
+        const { numberRules } = data;
 
-        return { isSuccess: true, message: '', data: { numberRules } };
+        return { isSuccess: true, message: '', numberRules };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };

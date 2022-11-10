@@ -39,6 +39,9 @@
 			img {
 				width: 2.8em;
 				border-radius: 50%;
+				&:hover {
+					opacity: 0.9;
+				}
 			}
 		}
 		a {

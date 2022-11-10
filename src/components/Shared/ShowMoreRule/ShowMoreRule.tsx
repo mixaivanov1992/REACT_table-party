@@ -27,8 +27,8 @@ const ShowMoreRule: React.FC<Props> = (props) => {
 
     async function getNumberRules() {
         const result = await actionGetNumberRules(author || '', name || '');
-        if (result.isSuccess && result.data) {
-            setNumberRules((result.data as {numberRules: number}).numberRules);
+        if (result.numberRules) {
+            setNumberRules(result.numberRules);
         }
     }
 

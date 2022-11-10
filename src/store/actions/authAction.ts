@@ -2,7 +2,7 @@ import { API_URL } from '@src/http';
 import { AuthResponse } from '@models/services/authResponse';
 import { DefaultRuleKey, RuleAction } from '@models/store/reducer/ruleReducer';
 import { Dispatch } from 'react';
-import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
+import { ServerResponse, ServerResponseCheckAuth } from '@models/store/actions/serverResponseAction';
 import { SetPersonalData } from '@models/store/reducer/personalDataReducer';
 import {
     forgotPassword, login, logout, passwordRecovery, registration,
@@ -11,65 +11,65 @@ import { setAuthor } from '@store/reducer/ruleReducer';
 import { setPersonalData } from '@store/reducer/personalDataReducer';
 import axios, { AxiosError } from 'axios';
 
-export const actionRegistration = (email:string, username:string, password:string) => async ():Promise<ServerAnswer> => {
+export const actionRegistration = (email:string, username:string, password:string) => async ():Promise<ServerResponse> => {
     try {
         await registration(email, username, password);
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionLogin = (dispatch:Dispatch<SetPersonalData | RuleAction>, email:string, password:string) => async ():Promise<ServerAnswer> => {
+export const actionLogin = (dispatch:Dispatch<SetPersonalData | RuleAction>, email:string, password:string) => async ():Promise<ServerResponse> => {
     try {
-        const response = await login(email, password);
-        const { accessToken, userData } = response.data;
+        const { data } = await login(email, password);
+        const { accessToken, userData } = data;
         localStorage.setItem('token', accessToken);
         dispatch(setPersonalData(true, userData));
         dispatch(setAuthor(DefaultRuleKey, userData.username));
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionForgotPassword = (email:string) => async ():Promise<ServerAnswer> => {
+export const actionForgotPassword = (email:string) => async ():Promise<ServerResponse> => {
     try {
         await forgotPassword(email);
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionCheckAuth = async (dispatch:Dispatch<SetPersonalData | RuleAction>):Promise<ServerAnswer> => {
+export const actionCheckAuth = async (dispatch:Dispatch<SetPersonalData | RuleAction>):Promise<ServerResponseCheckAuth> => {
     try {
-        const response = await axios.get<AuthResponse>(`${API_URL}/refresh-token`, { withCredentials: true });
-        const { accessToken, userData } = response.data;
+        const { data } = await axios.get<AuthResponse>(`${API_URL}/refresh-token`, { withCredentials: true });
+        const { accessToken, userData } = data;
         localStorage.setItem('token', accessToken);
         dispatch(setAuthor(DefaultRuleKey, userData.username));
-        return { isSuccess: true, message: '', data: { userData } };
+        return { isSuccess: true, message: '', userData };
     } catch (error) {
         localStorage.removeItem('token');
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };
 
-export const actionLogout = (dispatch:Dispatch<SetPersonalData>) => async ():Promise<ServerAnswer> => {
+export const actionLogout = (dispatch:Dispatch<SetPersonalData>) => async ():Promise<ServerResponse> => {
     try {
         await logout();
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     } finally {
         localStorage.removeItem('token');
@@ -77,13 +77,13 @@ export const actionLogout = (dispatch:Dispatch<SetPersonalData>) => async ():Pro
     }
 };
 
-export const actionPasswordRecovery = (link:string, password:string) => async ():Promise<ServerAnswer> => {
+export const actionPasswordRecovery = (link:string, password:string) => async ():Promise<ServerResponse> => {
     try {
         await passwordRecovery(link, password);
         return { isSuccess: true, message: '' };
     } catch (error) {
-        const err = error as AxiosError;
-        const message = err.response?.data?.message as string || '';
+        const { response } = error as AxiosError;
+        const message = response?.data?.message as string || '';
         return { isSuccess: false, message };
     }
 };

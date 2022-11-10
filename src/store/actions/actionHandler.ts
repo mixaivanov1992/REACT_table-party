@@ -1,6 +1,6 @@
 import { Dispatch } from 'react';
 import { RuleAction } from '@models/store/reducer/ruleReducer';
-import { ServerAnswer } from '@models/store/actions/serverAnswerAction';
+import { ServerResponse } from '@models/store/actions/serverResponseAction';
 import { SetPersonalData, UserData } from '@models/store/reducer/personalDataReducer';
 import { ShowLoader } from '@models/store/reducer/loaderReducer';
 import { actionCheckAuth } from '@store/actions/authAction';
@@ -21,16 +21,15 @@ export async function refreshToken(dispatch: Dispatch<SetPersonalData | RuleActi
     const token = cookies.get('login');
     if (localStorage.getItem('token') || token) {
         cookies.remove('login');
-        const result = await actionCheckAuth(dispatch);
-        if (result.isSuccess) {
-            const { userData } = result.data as {userData: UserData};
+        const { userData } = await actionCheckAuth(dispatch);
+        if (userData) {
             return userData;
         }
     }
     return null;
 }
 
-export async function actionHandler(dispatch: Dispatch<ShowLoader | SetPersonalData | RuleAction>, action: ()=>Promise<ServerAnswer>): Promise<ServerAnswer> {
+export async function actionHandler(dispatch: Dispatch<ShowLoader | SetPersonalData | RuleAction>, action: ()=>Promise<ServerResponse>): Promise<ServerResponse> {
     dispatch(showLoader(true));
     await refreshToken(dispatch);
     const result = { ...await action() };
