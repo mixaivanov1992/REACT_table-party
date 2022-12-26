@@ -1,4 +1,4 @@
-import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
+import { ContentTypes } from '@models/contentTypes';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDispatch } from 'react-redux';
 import { useImageProcessing } from '@hooks/useImageProcessing';
@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import styles from '@css/shared/ruleEdit/settings/Settings.module.scss';
 
 interface Props {
-    settingsType: SettingsType,
+    contentTypes: ContentTypes,
     title: string,
     countItem: number,
     stateCount: number,
@@ -29,7 +29,7 @@ const Settings: React.FC<Props> = (props) => {
 
     const dispatch = useDispatch();
     const {
-        settingsType, title, countItem, stateCount, cover, onChangeTitle, onInputCountItem, onChangeCover, addItem, onClickConfirmRemove,
+        contentTypes, title, countItem, stateCount, cover, onChangeTitle, onInputCountItem, onChangeCover, addItem, onClickConfirmRemove,
     } = props;
 
     const onClickAddItem = (): void => {
@@ -61,7 +61,7 @@ const Settings: React.FC<Props> = (props) => {
                 <div>
                     <InputWrapper
                         htmlFor={`cover${uniqueId}`}
-                        text={Localization[settingsType].cover}
+                        text={Localization[contentTypes].cover}
                         value={cover}
                     >
                         <input
@@ -79,7 +79,7 @@ const Settings: React.FC<Props> = (props) => {
                 <div>
                     <InputWrapper
                         htmlFor={`title${uniqueId}`}
-                        text={Localization[settingsType].title}
+                        text={Localization[contentTypes].title}
                         value={title}
                     >
                         <input
@@ -89,12 +89,12 @@ const Settings: React.FC<Props> = (props) => {
                             onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
                         />
                     </InputWrapper>
-                    <div><button type="button" onClick={() => { setIsOpen(true); }}>{Localization[settingsType].deleteItem}</button></div>
+                    <div><button type="button" onClick={() => { setIsOpen(true); }}>{Localization[contentTypes].deleteItem}</button></div>
                 </div>
                 <div>
                     <InputWrapper
                         htmlFor={`count${uniqueId}`}
-                        text={Localization[settingsType].countItem}
+                        text={Localization[contentTypes].countItem}
                         value={countItem}
                     >
                         <InputNumber
@@ -110,7 +110,7 @@ const Settings: React.FC<Props> = (props) => {
                 isOpen={isOpen}
                 onClickCloseDialog={() => { setIsOpen(false); }}
                 title={Localization.removal}
-                content={<div>{Localization[settingsType].delete}</div>}
+                content={<div>{Localization[contentTypes].delete}</div>}
                 footer={(
                     <>
                         <button type="button" onClick={() => { setIsOpen(false); onClickConfirmRemove(); }}>{Localization.confirm}</button>

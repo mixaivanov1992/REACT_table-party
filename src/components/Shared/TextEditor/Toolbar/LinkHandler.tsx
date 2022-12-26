@@ -1,22 +1,20 @@
 import { AiOutlineLink } from 'react-icons/ai';
-import { DialogList } from '@models/components/textEditor';
 import { EditorState, RichUtils } from 'draft-js';
 import Localization from '@localization/components/shared/textEditor/toolbar';
 import React from 'react';
 
 interface Props {
     editorState: EditorState,
-    setEditorState: React.Dispatch<React.SetStateAction<EditorState>>,
-    setIsOpen: React.Dispatch<React.SetStateAction<DialogList | null>>
+    setEditorState: (state: EditorState)=>void;
 }
 
 const LinkHandler: React.FC<Props> = (props) => {
     Localization.setLanguage(navigator.language);
     const {
-        editorState, setEditorState, setIsOpen,
+        editorState, setEditorState,
     } = props;
 
-    const handleAddLink = (e: React.MouseEvent | React.KeyboardEvent) => {
+    const onClickAddLink = (e: React.MouseEvent | React.KeyboardEvent) => {
         e.preventDefault();
         const selection = editorState.getSelection();
         const link = prompt(Localization.enterUrlLink);
@@ -34,7 +32,7 @@ const LinkHandler: React.FC<Props> = (props) => {
     };
     return (
 
-        <button type="button" onMouseDown={handleAddLink} disabled={editorState.getSelection().isCollapsed()}>
+        <button type="button" onClick={onClickAddLink} disabled={editorState.getSelection().isCollapsed()}>
             <AiOutlineLink />
             &#8203;
         </button>

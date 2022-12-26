@@ -40,7 +40,7 @@ const ForgotPassword: React.FC = () => {
                 { !isSent
                 && (
                     <>
-                        <Field text={Localization.email} value={email} type="email" id="email" setState={setEmail} />
+                        <Field text={Localization.email} value={email} type="email" id="email" fillField={setEmail} />
                         <button
                             className={styles.recover_btn}
                             onClick={onClickRecover}

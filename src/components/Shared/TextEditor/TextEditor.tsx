@@ -39,7 +39,7 @@ const TextEditor: React.FC<Props> = (props) => {
     );
     const editor = useRef() as any;
 
-    const handleSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const onClickSave = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
         editorSave(JSON.stringify(convertToRaw(editorState.getCurrentContent())));
     };
@@ -67,7 +67,7 @@ const TextEditor: React.FC<Props> = (props) => {
             <div className={styles.toolbar}>
                 <SimpleButtons editorState={editorState} setEditorState={setEditorState} />
                 <ColorHandler editorState={editorState} setEditorState={setEditorState} isOpen={isOpen} setIsOpen={setIsOpen} />
-                <LinkHandler editorState={editorState} setEditorState={setEditorState} setIsOpen={setIsOpen} />
+                <LinkHandler editorState={editorState} setEditorState={setEditorState} />
                 <ImageHandler editorState={editorState} setEditorState={setEditorState} isOpen={isOpen} setIsOpen={setIsOpen} />
                 <UndoRedoButton editorState={editorState} setEditorState={setEditorState} />
             </div>
@@ -92,7 +92,7 @@ const TextEditor: React.FC<Props> = (props) => {
                 />
             </div>
             <div className={styles.footer}>
-                <button className="save" type="button" onClick={handleSave}>{Localization.save}</button>
+                <button className="save" type="button" onClick={onClickSave}>{Localization.save}</button>
                 {children}
             </div>
         </div>

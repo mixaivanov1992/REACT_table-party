@@ -15,5 +15,5 @@ http.createServer((request, response) => {
         }
     });
 }).listen(8080, () => {
-    console.log('Server started at 8080');
+    console.info('Server started at 8080');
 });

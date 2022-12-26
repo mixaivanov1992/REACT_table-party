@@ -10,6 +10,7 @@ const Localization = new LocalizedStrings({
         deleteSheetBtn: 'Удалить лист',
         moveLeft: 'Сдвинуть влево',
         moveRight: 'Сдвинуть вправо',
+        edit: 'Редактировать',
     },
     'en-US': {
         dataEntry: 'Data entry',
@@ -20,6 +21,7 @@ const Localization = new LocalizedStrings({
         deleteSheetBtn: 'Delete a sheet',
         moveLeft: 'Move to the left',
         moveRight: 'Move to the right',
+        edit: 'Edit',
     },
 });
 export default Localization;

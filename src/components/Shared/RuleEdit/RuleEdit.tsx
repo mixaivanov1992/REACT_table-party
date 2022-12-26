@@ -1,7 +1,7 @@
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from 'react-icons/ai';
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { PageAlias } from '@models/accessiblePage';
-import Chapters from '@shared/RuleEdit/Chapters/Chapters';
+import Chapters from '@shared/RuleEdit/Content/ChapterController';
 import Default from '@shared/RuleEdit/Menu/Default';
 import Header from '@components/Content/Header/Header';
 import Localization from '@localization/components/shared/ruleEdit';

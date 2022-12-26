@@ -1,4 +1,4 @@
-import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
+import { ContentTypes } from '@models/contentTypes';
 import { addSheet, deleteSheets } from '@store/reducer/sheetReducer';
 import { removeChapter, setChapterCover, setChapterName } from '@store/reducer/chapterReducer';
 import { useDispatch } from 'react-redux';
@@ -41,7 +41,7 @@ const ChapterController: React.FC<Props> = (props) => {
 
     return (
         <Settings
-            settingsType={SettingsType.CHAPTER}
+            contentTypes={ContentTypes.CHAPTER}
             title={chapterName}
             countItem={countItem}
             stateCount={stateCount}

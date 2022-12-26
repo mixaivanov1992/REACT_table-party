@@ -1,0 +1,8 @@
+@import "./Chapter.scss";
+@import "./Sheet.scss";
+.chapter {
+	@include chapter;
+}
+.sheet {
+	@include sheet;
+}

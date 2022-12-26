@@ -8,7 +8,7 @@ import React from 'react';
 
 interface Props {
     editorState: EditorState,
-    setEditorState: React.Dispatch<React.SetStateAction<EditorState>>;
+    setEditorState: (state: EditorState)=>void;
 }
 
 const SimpleButtons: React.FC<Props> = (props) => {
@@ -68,7 +68,7 @@ const SimpleButtons: React.FC<Props> = (props) => {
         icon: MdFormatStrikethrough,
     }];
 
-    const handleActionClick = (e: React.MouseEvent | React.KeyboardEvent, method: string, blockType: string) => {
+    const onClickAction = (e: React.MouseEvent | React.KeyboardEvent, method: string, blockType: string) => {
         e.preventDefault();
         setEditorState(RichUtils[method](editorState, blockType));
     };
@@ -81,7 +81,7 @@ const SimpleButtons: React.FC<Props> = (props) => {
                     <button
                         key={uuidv4()}
                         type="button"
-                        onMouseDown={(event) => handleActionClick(event, item.method, item.arguments)}
+                        onClick={(event) => onClickAction(event, item.method, item.arguments)}
                     >
                         {Icon ? <Icon /> : item.content}
                     </button>

@@ -6,12 +6,12 @@ interface Props {
     value: string,
     type: string,
     id: string,
-    setState: React.Dispatch<React.SetStateAction<string>>;
+    fillField: (value:string)=>void;
 }
 
 const Field: React.FC<Props> = (props) => {
     const {
-        text, value, type, id, setState,
+        text, value, type, id, fillField,
     } = props;
     return (
         <div>
@@ -21,7 +21,7 @@ const Field: React.FC<Props> = (props) => {
                 value={value}
             >
                 <input
-                    onChange={(e) => { setState(e.currentTarget.value.trim()); }}
+                    onChange={(e) => { fillField(e.currentTarget.value.trim()); }}
                     type={type}
                     id={id}
                     value={value}
@@ -30,4 +30,4 @@ const Field: React.FC<Props> = (props) => {
         </div>
     );
 };
-export default Field;
+export default React.memo(Field);

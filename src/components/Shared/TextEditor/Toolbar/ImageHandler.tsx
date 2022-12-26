@@ -1,6 +1,8 @@
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { Align, DialogList } from '@models/components/textEditor';
 import { AtomicBlockUtils, EditorState } from 'draft-js';
+import { showMessage } from '@store/reducer/messageReducer';
+import { useDispatch } from 'react-redux';
 import { useImageProcessing } from '@hooks/useImageProcessing';
 import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
@@ -10,12 +12,13 @@ import styles from '@css/shared/textEditor/toolbar/Toolbar.module.scss';
 
 interface Props {
     editorState: EditorState,
-    setEditorState: React.Dispatch<React.SetStateAction<EditorState>>,
+    setEditorState: (state: EditorState)=>void;
     isOpen: DialogList | null;
-    setIsOpen: React.Dispatch<React.SetStateAction<DialogList | null>>
+    setIsOpen: (state: DialogList | null)=>void;
 }
 
 const ImageHandler: React.FC<Props> = (props) => {
+    const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
     const {
         editorState, setEditorState, isOpen, setIsOpen,
@@ -25,7 +28,7 @@ const ImageHandler: React.FC<Props> = (props) => {
     const [width, setWidth] = useState<number>(0);
     const [align, setAlign] = useState<Align>(Align.LEFT);
 
-    const addImage = () => {
+    const onClickAddImage = () => {
         if (!src) {
             return;
         }
@@ -49,7 +52,7 @@ const ImageHandler: React.FC<Props> = (props) => {
         setIsOpen(null);
     };
 
-    const imageSelection = () => {
+    const onClickImageSelection = () => {
         if (isOpen === DialogList.IMAGE) {
             setIsOpen(null);
         } else {
@@ -64,7 +67,7 @@ const ImageHandler: React.FC<Props> = (props) => {
             if (!error) {
                 setSrc(data);
             } else {
-                console.log(error);
+                dispatch(showMessage(true, Localization.error, error));
             }
         };
         imageProcessing(getFileData, files, 'image/jpeg');
@@ -72,7 +75,7 @@ const ImageHandler: React.FC<Props> = (props) => {
 
     return (
         <>
-            <button type="button" onMouseDown={imageSelection}>
+            <button type="button" onClick={onClickImageSelection}>
                 <AiOutlineFileImage />
                 &#8203;
             </button>
@@ -124,8 +127,8 @@ const ImageHandler: React.FC<Props> = (props) => {
                             </select>
                         </div>
                         <div>
-                            <button type="button" onMouseDown={addImage}>{Localization.add}</button>
-                            <button type="button" onMouseDown={() => setIsOpen(null)}>{Localization.close}</button>
+                            <button type="button" onClick={onClickAddImage}>{Localization.add}</button>
+                            <button type="button" onClick={() => setIsOpen(null)}>{Localization.close}</button>
                         </div>
                     </div>
                 </div>

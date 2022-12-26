@@ -1,5 +1,5 @@
-@use "../../../../core";
-.sheets {
+@use "../../../core";
+@mixin sheet {
 	display: flex;
 	justify-content: center;
 	margin-top: 1em;
@@ -9,11 +9,11 @@
 	> div:last-child {
 		width: 100%;
 	}
-	.navigation {
+	> .navigation {
 		text-align: center;
 		margin-bottom: 1em;
 	}
-	.noData {
+	> .noData {
 		padding: 2em;
 		text-align: center;
 	}

@@ -8,9 +8,9 @@ import styles from '@css/shared/textEditor/toolbar/Toolbar.module.scss';
 
 interface Props {
     editorState: EditorState,
-    setEditorState: React.Dispatch<React.SetStateAction<EditorState>>;
+    setEditorState: (state: EditorState)=>void;
     isOpen: DialogList | null;
-    setIsOpen: React.Dispatch<React.SetStateAction<DialogList | null>>;
+    setIsOpen: (state: DialogList | null)=>void;
 }
 
 const ColorHandler: React.FC<Props> = (props) => {
@@ -18,10 +18,9 @@ const ColorHandler: React.FC<Props> = (props) => {
         editorState, setEditorState, isOpen, setIsOpen,
     } = props;
 
-    const changeColor = (toggledColor: string) => {
+    const onClickChangeColor = (toggledColor: string) => {
         const selection = editorState.getSelection();
 
-        // Let's just allow one color at a time. Turn off all active colors.
         const nextContentState = Object.keys(colors)
             .reduce((contentState, color) => Modifier.removeInlineStyle(contentState, selection, color), editorState.getCurrentContent());
 
@@ -42,7 +41,7 @@ const ColorHandler: React.FC<Props> = (props) => {
         setEditorState(nextEditorState);
     };
 
-    const colorSelection = () => {
+    const onClickColorSelection = () => {
         if (isOpen === DialogList.COLORS) {
             setIsOpen(null);
         } else {
@@ -52,7 +51,7 @@ const ColorHandler: React.FC<Props> = (props) => {
 
     return (
         <>
-            <button type="button" onMouseDown={colorSelection}>
+            <button type="button" onClick={onClickColorSelection}>
                 <VscSymbolColor />
             </button>
             {isOpen === DialogList.COLORS ? (
@@ -63,7 +62,7 @@ const ColorHandler: React.FC<Props> = (props) => {
                                 key={uuidv4()}
                                 role="button"
                                 tabIndex={-1}
-                                onMouseDown={() => changeColor(index)}
+                                onClick={() => onClickChangeColor(index)}
                                 onKeyPress={() => {}}
                                 style={{ backgroundColor: colors[index].color }}
                             >

@@ -1,6 +1,6 @@
+import { ContentTypes } from '@models/contentTypes';
 import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { PageRoute } from '@models/accessiblePage';
-import { SettingsType } from '@models/shared/ruleEdit/settings/settings';
 import { actionDeleteRule } from '@store/actions/ruleAction';
 import { actionHandler } from '@store/actions/actionHandler';
 import { addChapter } from '@store/reducer/chapterReducer';
@@ -60,7 +60,7 @@ const RuleController: React.FC<Props> = (props) => {
 
     return (
         <Settings
-            settingsType={SettingsType.RULE}
+            contentTypes={ContentTypes.RULE}
             title={ruleName}
             countItem={countItem}
             stateCount={stateCount}

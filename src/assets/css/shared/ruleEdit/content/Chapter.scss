@@ -1,5 +1,5 @@
 @use "../../../core";
-.chapter {
+@mixin chapter {
 	display: flex;
 	flex-direction: column;
 	flex: 1;
@@ -10,10 +10,10 @@
 		flex: 1;
 		margin-top: 2em;
 	}
-	.navigation {
+	> .navigation {
 		text-align: center;
 	}
-	.noData {
+	> .noData {
 		margin-top: 1em;
 		border: 0.1em solid core.$border;
 		background-color: core.$fourth-color;

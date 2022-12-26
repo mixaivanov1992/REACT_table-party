@@ -162,3 +162,12 @@ input:-webkit-autofill:active {
 	transform: scale(0.9);
 	transition: opacity 300ms, transform 300ms;
 }
+//second dialog
+#root + div + div {
+	> div {
+		z-index: 93;
+		+ div {
+			z-index: 92;
+		}
+	}
+}

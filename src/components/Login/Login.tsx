@@ -45,8 +45,8 @@ const Login: React.FC = () => {
             <div className={styles.wrapper}>
                 <GoBack />
                 <div className={styles.header}>{Localization.entrance}</div>
-                <Field text={Localization.email} value={email} type="email" id="email" setState={setEmail} />
-                <Field text={Localization.password} value={password} type="password" id="password" setState={setPassword} />
+                <Field text={Localization.email} value={email} type="email" id="email" fillField={setEmail} />
+                <Field text={Localization.password} value={password} type="password" id="password" fillField={setPassword} />
                 <div>
                     <div className={styles.message}>{message}</div>
                     <Link key={uuidv4()} className={styles.forgot_password} to={PageRoute.forgotPassword}>

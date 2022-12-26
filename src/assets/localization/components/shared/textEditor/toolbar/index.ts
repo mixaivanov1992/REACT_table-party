@@ -2,6 +2,7 @@ import LocalizedStrings from 'react-localization';
 
 const Localization = new LocalizedStrings({
     'ru-RU': {
+        error: 'Ошибка',
         linkImage: 'Ссылка на изображение',
         add: 'Добавить',
         close: 'Закрыть',
@@ -13,6 +14,7 @@ const Localization = new LocalizedStrings({
         enterUrlLink: 'Введите URL-адрес вашей ссылки',
     },
     'en-US': {
+        error: 'Error',
         linkImage: 'Link to the image',
         add: 'Add',
         close: 'Close',

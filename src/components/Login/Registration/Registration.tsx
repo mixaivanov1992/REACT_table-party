@@ -59,10 +59,10 @@ const Registration: React.FC = () => {
                 { !isSuccess
                     && (
                         <>
-                            <Field text={Localization.email} value={email} type="email" id="email" setState={setEmail} />
-                            <Field text={Localization.username} value={username} type="text" id="username" setState={setUsername} />
-                            <Field text={Localization.password} value={password} type="password" id="password" setState={setPassword} />
-                            <Field text={Localization.confirm} value={confirm} type="password" id="confirm" setState={setConfirm} />
+                            <Field text={Localization.email} value={email} type="email" id="email" fillField={setEmail} />
+                            <Field text={Localization.username} value={username} type="text" id="username" fillField={setUsername} />
+                            <Field text={Localization.password} value={password} type="password" id="password" fillField={setPassword} />
+                            <Field text={Localization.confirm} value={confirm} type="password" id="confirm" fillField={setConfirm} />
                             <div className={styles.registration_btn}>
                                 <button
                                     onClick={onClickRegistration}

@@ -50,8 +50,8 @@ const PasswordRecovery: React.FC = () => {
         <div className={styles.passwordRecovery}>
             <div className={styles.wrapper}>
                 <div className={styles.header}>{Localization.passwordRecovery}</div>
-                <Field text={Localization.password} value={password} type="password" id="password" setState={setPassword} />
-                <Field text={Localization.confirm} value={confirm} type="password" id="confirm" setState={setConfirm} />
+                <Field text={Localization.password} value={password} type="password" id="password" fillField={setPassword} />
+                <Field text={Localization.confirm} value={confirm} type="password" id="confirm" fillField={setConfirm} />
                 <div className={styles.recovery}>
                     <button
                         onClick={onClickPasswordRecovery}

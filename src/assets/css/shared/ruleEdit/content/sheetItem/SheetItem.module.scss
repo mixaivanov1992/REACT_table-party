@@ -1,5 +1,5 @@
-@use "../../../../../core";
-@import "../../../../../core";
+@use "../../../../core";
+@import "../../../../core";
 
 .sheet {
 	display: flex;
@@ -10,7 +10,6 @@
 		width: 15em;
 		height: 15em;
 		margin: 0 auto 0.5em;
-		cursor: pointer;
 		position: relative;
 		display: flex;
 		border: 0.1em solid core.$border;
@@ -43,17 +42,6 @@
 				svg {
 					width: 100%;
 					height: 100%;
-				}
-			}
-			&:hover {
-				&::after {
-					content: "";
-					background-color: core.$layer;
-					width: 100%;
-					height: 100%;
-					top: 0;
-					left: 0;
-					position: absolute;
 				}
 			}
 		}
