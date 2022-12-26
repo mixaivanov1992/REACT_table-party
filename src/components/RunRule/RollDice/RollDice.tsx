@@ -31,17 +31,13 @@ const RollDice: React.FC = () => {
         return toRender;
     };
 
-    const onInputMultiplier = (value: string): void => {
-        setMultiplier(+value);
-    };
-
     return (
         <div className={styles.container}>
             <div className={styles.multiplier}>
                 <InputNumber
-                    uid={uuidv4()}
+                    id={uuidv4()}
                     value={multiplier}
-                    onInputData={onInputMultiplier}
+                    onInputData={(value: number) => { setMultiplier(value); }}
                 />
             </div>
             <div className={styles.dice}>

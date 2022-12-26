@@ -1,6 +1,7 @@
 import { AiOutlineFileImage } from 'react-icons/ai';
 import { Align, DialogList } from '@models/components/textEditor';
 import { AtomicBlockUtils, EditorState } from 'draft-js';
+import { useImageProcessing } from '@hooks/useImageProcessing';
 import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
 import Localization from '@localization/components/shared/textEditor/toolbar';
@@ -28,7 +29,9 @@ const ImageHandler: React.FC<Props> = (props) => {
         if (!src) {
             return;
         }
-        const style = { height: 'auto', width: 'auto' };
+        const style = {
+            height: 'auto', width: 'auto', maxWidth: '100%', maxHeight: '00%',
+        };
         if (height) {
             style.height = `${height}px`;
         }
@@ -54,34 +57,17 @@ const ImageHandler: React.FC<Props> = (props) => {
         }
     };
 
-    const onInputHeight = (value: string): void => {
-        setHeight(+value);
-    };
-
-    const onInputWidth = (value: string): void => {
-        setWidth(+value);
-    };
-
+    const imageProcessing = useImageProcessing();
     const onChangeImage = (e: React.FormEvent<HTMLInputElement>): void => {
         const { files } = e.currentTarget;
-        if (!files) {
-            return;
-        }
-        if (files[0].type !== 'image/jpeg') {
-            e.currentTarget.value = '';
-            return;
-        }
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(files[0]);
-
-        fileReader.onload = () => {
-            if (typeof fileReader.result === 'string') {
-                setSrc(fileReader.result);
+        const getFileData = (error: string, data: string) => {
+            if (!error) {
+                setSrc(data);
+            } else {
+                console.log(error);
             }
         };
-        fileReader.onerror = (error: ProgressEvent<FileReader>) => {
-            console.log('Error: ', error);
-        };
+        imageProcessing(getFileData, files, 'image/jpeg');
     };
 
     return (
@@ -113,9 +99,9 @@ const ImageHandler: React.FC<Props> = (props) => {
                                 value={height}
                             >
                                 <InputNumber
-                                    uid="selectionWindow-height"
+                                    id="selectionWindow-height"
                                     value={height}
-                                    onInputData={onInputHeight}
+                                    onInputData={(value: number) => { setHeight(value); }}
                                 />
                             </InputWrapper>
                             <InputWrapper
@@ -124,9 +110,9 @@ const ImageHandler: React.FC<Props> = (props) => {
                                 value={width}
                             >
                                 <InputNumber
-                                    uid="selectionWindow-width"
+                                    id="selectionWindow-width"
                                     value={width}
-                                    onInputData={onInputWidth}
+                                    onInputData={(value: number) => { setWidth(value); }}
                                 />
                             </InputWrapper>
                         </div>

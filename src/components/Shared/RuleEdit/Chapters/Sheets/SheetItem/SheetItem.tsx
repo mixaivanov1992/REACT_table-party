@@ -103,7 +103,7 @@ const SheetItem:React.FC<Props> = (props) => {
                         onKeyPress={() => {}}
                         onClick={onClickOpenTextEditor}
                     >
-                        {isValidHttpUrl(chapterCover)
+                        {isValidHttpUrl(chapterCover) || /data:image\//.test(chapterCover)
                             ? <img src={chapterCover} alt={chapterCover} />
                             : <div className={styles.pictureMissing}><IoMdImages /></div>}
                     </div>
