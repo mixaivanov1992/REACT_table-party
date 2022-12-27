@@ -6,6 +6,10 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	.text {
+		margin-bottom: 0.5em;
+	}
 	.results {
 		text-align: center;
 		.box {
@@ -20,6 +24,7 @@
 			box-shadow: core.$shadow;
 			color: core.$second-color;
 			background: core.$fourth-color;
+			margin: 0;
 		}
 	}
 	.dice {
