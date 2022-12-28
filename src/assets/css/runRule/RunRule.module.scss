@@ -3,24 +3,6 @@
 	overflow: hidden;
 	height: 100vh;
 	position: relative;
-	> .close {
-		position: absolute;
-		top: 0.3em;
-		right: 0.4em;
-		> svg:first-child {
-			position: absolute;
-			fill: core.$second-color;
-		}
-		> svg:last-child {
-			position: relative;
-			fill: core.$fourth-color;
-		}
-		> svg {
-			z-index: 1;
-			cursor: pointer;
-			font-size: 2.5em;
-		}
-	}
 	> .rule {
 		position: relative;
 		width: 100vw;

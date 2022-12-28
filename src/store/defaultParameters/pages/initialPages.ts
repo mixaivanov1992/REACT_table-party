@@ -54,7 +54,7 @@ export const InitialPages: AccessiblePages = [{
     pageRoute: PageRoute.runRule,
     pageAlias: PageAlias.runRule,
     exact: true,
-    component: 'RunRule/RunRule',
+    component: 'RunRule/RuleLoading',
     isContentComponent: false,
     sort: 0,
 }, {
