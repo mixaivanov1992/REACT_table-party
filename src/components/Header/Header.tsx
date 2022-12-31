@@ -59,7 +59,7 @@ const Header: React.FC<Props> = (props) => {
                             if (isValidHttpUrl(avatar)) {
                                 return (
                                     <Link key={uuidv4()} className={styles[pageAlias]} to={pageRoute}>
-                                        <img src={`${avatar}`} alt="avatar" />
+                                        <img src={`${avatar}`} alt="" />
                                     </Link>
                                 );
                             }

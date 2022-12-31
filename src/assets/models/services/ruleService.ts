@@ -22,5 +22,5 @@ export enum Version {
     V0_0_1 = 'V0_0_1'
 }
 
-type SheetData = Array<{uid: string, content: string}>;
+export type SheetData = Array<{uid: string, content: string}>;
 export type ChapterData = Array<{uid: string, name: string, cover: string}>

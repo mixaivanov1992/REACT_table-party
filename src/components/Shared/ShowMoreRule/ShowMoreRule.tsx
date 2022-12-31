@@ -1,57 +1,51 @@
 import { actionGetNumberRules, actionGetRules } from '@store/actions/ruleAction';
 import { useDispatch } from 'react-redux';
-import { useGetRulesKeys } from '@hooks/useGetRulesKeys';
-import { useTypedSelector } from '@hooks/useTypedSelector';
 import Localization from '@localization/components/shared/showMoreRule';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '@css/shared/showMoreRule/ShowMoreRule.module.scss';
 
 interface Props {
-    author?: string,
-    name?: string,
+    author?: string,// eslint-disable-line
+    name?: string,// eslint-disable-line
 }
+
+const defaultProps = {
+    name: '',
+    author: '',
+};
 
 const ShowMoreRule: React.FC<Props> = (props) => {
     console.info('ShowMoreRule');
-    const dispatch = useDispatch();
     Localization.setLanguage(navigator.language);
-    const { name, author } = props;
+
+    const dispatch = useDispatch();
+    const { name, author } = { ...defaultProps, ...props };
     const limit = 12;
 
-    const rulesReducer = useTypedSelector((state) => state.ruleReducer);
-    const numberRulesReducer = useGetRulesKeys(rulesReducer, author || '', name || '').length;
+    const [numberRules, setNumberRules] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState<number>(0);
+    const getRules = actionGetRules(dispatch, limit, currentPage, author, name);
 
-    const [numberRules, setNumberRules] = useState<number>(numberRulesReducer);
-    const [currentPage, setCurrentPage] = useState<number>((Math.ceil(numberRulesReducer / limit)));
-    const getRules = actionGetRules(dispatch, limit, currentPage, author || '', name || '');
-
-    async function getNumberRules() {
-        const result = await actionGetNumberRules(author || '', name || '');
-        if (result.numberRules) {
-            setNumberRules(result.numberRules);
-        }
-    }
-
-    useLayoutEffect(() => {
-        getNumberRules();
-        if (!currentPage) {
-            getRules();
-            setCurrentPage((prevState) => prevState + 1);
-        }
-    }, []);
-
-    const onClickShowMore = () => {
+    const showMore = () => {
         getRules();
         setCurrentPage((prevState) => prevState + 1);
     };
 
+    useEffect(() => {
+        (async () => {
+            const { numberRules: result } = await actionGetNumberRules(author, name);
+            if (result) {
+                setNumberRules(result);
+            }
+            if (!currentPage) {
+                showMore();
+            }
+        })();
+    }, []);
+
     return (
-        (numberRules > limit * currentPage) ? <div className={styles.show_more}><button type="button" onClick={onClickShowMore}>{Localization.showMore}</button></div> : null
+        (numberRules > limit * currentPage) ? <div className={styles.show_more}><button type="button" onClick={showMore}>{Localization.showMore}</button></div> : null
     );
-};
-ShowMoreRule.defaultProps = {
-    name: undefined,
-    author: undefined,
 };
 
 export default ShowMoreRule;

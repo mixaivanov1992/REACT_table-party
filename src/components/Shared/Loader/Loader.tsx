@@ -60,8 +60,7 @@ const Loader: React.FC = () => {
                     </div>
                 </div>
             )
-            // eslint-disable-next-line
-            : <></>
+            : null
     );
 };
 

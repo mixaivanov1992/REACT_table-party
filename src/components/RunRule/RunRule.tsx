@@ -1,15 +1,12 @@
-import {
-    CgChevronDoubleLeftO, CgChevronDoubleRightO, CgChevronLeftO, CgChevronRightO,
-} from 'react-icons/cg';
 import { ChapterData, RuleData } from '@models/services/ruleService';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
-import { GiLifeBar, GiPerspectiveDiceSixFacesSix, GiSecretBook } from 'react-icons/gi';
 import {
     colors, fontsFamily, fontsSize, textAlign,
 } from '@shared/TextEditor/styleMap';
 import { linkDecorator } from '@shared/TextEditor/Link';
 import { mediaBlockRenderer } from '@shared/TextEditor/Media';
 import { useTypedSelector } from '@hooks/useTypedSelector';
+import BottomMenu from '@components/RunRule/BottomMenu/BottomMenu';
 import Close from '@components/RunRule/Close/Close';
 import Cover from '@components/RunRule/Cover/Cover';
 import Dialog from '@shared/Dialog/Dialog';
@@ -38,8 +35,10 @@ const RunRule: React.FC<Props> = (props) => {
     const runRule = useRef() as React.MutableRefObject<HTMLDivElement>;
     const blink = useRef() as React.MutableRefObject<HTMLDivElement>;
 
-    const chapterCount = chapters.length ? chapters.length - 1 : 0;
-    const sheetCount = sheets.length ? sheets.length - 1 : 0;
+    const onClickChapterSelection = (index: number) => {
+        setSelectedChapter(index);
+        setSelectedSheet(0);
+    };
 
     const blinkHandler = () => {
         blink.current.classList.add(styles.blink);
@@ -48,52 +47,12 @@ const RunRule: React.FC<Props> = (props) => {
         }, 500);
     };
 
-    const onClickChapterSelection = (index: number) => {
-        setSelectedChapter(index);
-        setSelectedSheet(0);
-    };
-
-    const onClickNextChapter = () => {
-        if (selectedChapter < chapterCount) {
-            setSelectedChapter(selectedChapter + 1);
-            setSelectedSheet(0);
-            blinkHandler();
-        }
-    };
-
-    const onClickPrevChapter = () => {
-        if (selectedChapter > 0) {
-            setSelectedChapter(selectedChapter - 1);
-            setSelectedSheet(0);
-            blinkHandler();
-        }
-    };
-
-    const onClickNextSheet = () => {
-        if (selectedSheet < sheetCount) {
-            setSelectedSheet(selectedSheet + 1);
-            blinkHandler();
-        }
-    };
-
-    const onClickPrevSheet = () => {
-        if (selectedSheet > 0) {
-            setSelectedSheet(selectedSheet - 1);
-            blinkHandler();
-        }
-    };
-
     const navbar = useMemo(() => <Navbar chapters={chapters} selectedChapter={selectedChapter} onClickChapterSelection={onClickChapterSelection} />, [chapters, selectedChapter]);
-    const editorState = sheets && sheets[selectedSheet] && sheets[selectedSheet].content ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheets[selectedSheet]?.content)), linkDecorator) : EditorState.createEmpty();
+    const dialog = useMemo(() => <Dialog isOpen={isOpen} onClickCloseDialog={() => { setIsOpen(false); }} title={Localization.rollDice} dialogSize="90" content={<RollDice />} />, [isOpen]);
+    const editorState = sheets && sheets[selectedSheet] && sheets[selectedSheet].content ? EditorState.createWithContent(convertFromRaw(JSON.parse(sheets[selectedSheet].content)), linkDecorator) : EditorState.createEmpty();
     return (
         <>
-            <Dialog
-                isOpen={isOpen}
-                onClickCloseDialog={() => { setIsOpen(false); }}
-                title={Localization.rollDice}
-                dialogSize="90"
-                content={<RollDice />}
-            />
+            {dialog}
             <main className={styles.runRule} ref={runRule}>
                 <Close />
                 <Cover cover={rule?.cover} />
@@ -112,15 +71,16 @@ const RunRule: React.FC<Props> = (props) => {
                             />
                         </div>
                     </div>
-                    <div className={styles.menu}>
-                        <CgChevronDoubleLeftO title={Localization.prevChapter} className={`${!selectedChapter && styles.disabled}`} onClick={onClickPrevChapter} />
-                        <CgChevronLeftO title={Localization.prevSheet} className={`${!selectedSheet && styles.disabled}`} onClick={onClickPrevSheet} />
-                        <GiLifeBar title={Localization.counter} />
-                        <GiSecretBook title={Localization.gameElements} />
-                        <GiPerspectiveDiceSixFacesSix title={Localization.rollDice} onClick={() => { setIsOpen(true); }} />
-                        <CgChevronRightO title={Localization.nextSheet} className={`${selectedSheet >= sheetCount && styles.disabled}`} onClick={onClickNextSheet} />
-                        <CgChevronDoubleRightO title={Localization.nextChapter} className={`${selectedChapter >= chapterCount && styles.disabled}`} onClick={onClickNextChapter} />
-                    </div>
+                    <BottomMenu
+                        chapters={chapters}
+                        sheets={sheets}
+                        selectedChapter={selectedChapter}
+                        selectedSheet={selectedSheet}
+                        blinkHandler={blinkHandler}
+                        onClickOpenDialog={() => { setIsOpen(true); }}
+                        changeChapter={(chapter: number) => { setSelectedChapter(chapter); }}
+                        changeSheet={(sheet: number) => { setSelectedSheet(sheet); }}
+                    />
                 </div>
             </main>
         </>

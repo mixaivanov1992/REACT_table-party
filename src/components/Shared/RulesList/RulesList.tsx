@@ -7,12 +7,20 @@ import Localization from '@localization/components/shared/rulesList';
 import React from 'react';
 import styles from '@css/shared/rulesList/RulesList.module.scss';
 
+/* eslint-disable */
 interface Props {
     rulePlay: string,
     ruleEdit?: string,
     name?: string,
     author?: string,
 }
+/* eslint-enable */
+
+const defaultProps = {
+    ruleEdit: '',
+    name: '',
+    author: '',
+};
 
 const RulesList: React.FC<Props> = (props) => {
     console.info('RulesList');
@@ -20,9 +28,9 @@ const RulesList: React.FC<Props> = (props) => {
 
     const {
         rulePlay, ruleEdit, name, author,
-    } = props;
+    } = { ...defaultProps, ...props };
     const rulesReducer = useTypedSelector((state) => state.ruleReducer);
-    const rulesKey = useGetRulesKeys(rulesReducer, author || '', name || '');
+    const rulesKey = useGetRulesKeys(rulesReducer, author, name);
     const rules = rulesKey.map((key) => {
         const { name: nameRule, author: authorRule, cover } = rulesReducer[key];
         return (
@@ -47,11 +55,6 @@ const RulesList: React.FC<Props> = (props) => {
     return (
         <div className={styles.rulesList}>{rules}</div>
     );
-};
-RulesList.defaultProps = {
-    ruleEdit: undefined,
-    name: undefined,
-    author: undefined,
 };
 
 export default RulesList;

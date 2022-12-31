@@ -4,6 +4,7 @@ import React from 'react';
 import styles from '@css/runRule/close/Close.module.scss';
 
 const Close: React.FC = () => {
+    console.info('Close');
     const history = useHistory();
 
     return (
@@ -14,4 +15,4 @@ const Close: React.FC = () => {
     );
 };
 
-export default Close;
+export default React.memo(Close);

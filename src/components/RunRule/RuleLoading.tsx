@@ -31,11 +31,16 @@ const RuleLoading: React.FC = () => {
         }
     }, []);
 
-    if (!isLoading) {
+    if (!isLoading && !rule) {
         return null;
     }
     if (isLoading && !rule) {
-        return <Page404 />;
+        return (
+            <>
+                <Page404 />
+                <Close />
+            </>
+        );
     }
 
     return chapters ? <RunRule rule={rule} chapters={chapters} /> : <Close />;
