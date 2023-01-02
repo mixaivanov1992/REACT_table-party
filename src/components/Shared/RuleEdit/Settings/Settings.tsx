@@ -68,6 +68,21 @@ const Settings: React.FC<Props> = (props) => {
         <div className={styles.settings}>
             <div>
                 <InputWrapper
+                    htmlFor={`title${uniqueId}`}
+                    text={Localization[contentTypes].title}
+                    value={title}
+                >
+                    <input
+                        type="text"
+                        id={`title${uniqueId}`}
+                        value={title}
+                        onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
+                    />
+                </InputWrapper>
+                <div><button type="button" onClick={onClickOpenDialog}>{Localization[contentTypes].deleteItem}</button></div>
+            </div>
+            <div>
+                <InputWrapper
                     htmlFor={`cover${uniqueId}`}
                     text={Localization[contentTypes].cover}
                     value={cover}
@@ -83,21 +98,6 @@ const Settings: React.FC<Props> = (props) => {
                     <input type="file" accept=".jpg, .jpeg" onChange={onChangeImage} />
                     <button type="button">{Localization.review}</button>
                 </div>
-            </div>
-            <div>
-                <InputWrapper
-                    htmlFor={`title${uniqueId}`}
-                    text={Localization[contentTypes].title}
-                    value={title}
-                >
-                    <input
-                        type="text"
-                        id={`title${uniqueId}`}
-                        value={title}
-                        onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
-                    />
-                </InputWrapper>
-                <div><button type="button" onClick={onClickOpenDialog}>{Localization[contentTypes].deleteItem}</button></div>
             </div>
             <div>
                 <InputWrapper

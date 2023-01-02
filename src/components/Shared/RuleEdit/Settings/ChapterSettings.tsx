@@ -18,10 +18,9 @@ const ChapterSettings: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
     const { ruleUid, chapterIndex, forcePageAfterDelete } = props;
 
-    const [chapterUid, chapterName, chapterCover] = useTypedSelector((state) => {
-        const { uid, name, cover } = state.chapterReducer[ruleUid][chapterIndex];
-        return [uid, name, cover];
-    });
+    const chapterUid = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].uid);
+    const chapterName = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].name);
+    const chapterCover = useTypedSelector((state) => state.chapterReducer[ruleUid][chapterIndex].cover);
     const stateCount = useTypedSelector((state) => state.sheetReducer[chapterUid]?.length || 0);
 
     const [countItem, SetCountItem] = useState<number>(1);

@@ -27,8 +27,10 @@ const RuleSettings: React.FC<Props> = (props) => {
     const { ruleUid } = props;
     const history = useHistory();
 
-    const [ruleName, ruleCover] = useTypedSelector((state) => [state.ruleReducer[ruleUid].name, state.ruleReducer[ruleUid].cover]);
+    const ruleCover = useTypedSelector((state) => state.ruleReducer[ruleUid].cover);
+    const ruleName = useTypedSelector((state) => state.ruleReducer[ruleUid].name);
     const stateCount = useTypedSelector((state) => state.chapterReducer[ruleUid]?.length || 0);
+
     const deleteRuleItems = useDeleteRuleItems(dispatch, ruleUid);
 
     const [countItem, SetCountItem] = useState<number>(1);
