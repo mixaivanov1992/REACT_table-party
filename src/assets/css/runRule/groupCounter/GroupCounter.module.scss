@@ -1,0 +1,46 @@
+@use "../../core";
+.group_counter {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	> div {
+		width: 100%;
+	}
+	.content {
+		overflow: auto;
+		display: flex;
+		flex-wrap: wrap;
+		flex: 1;
+		margin-bottom: 0.5em;
+		.wrapper {
+			border: 0.1em solid core.$border;
+			padding: 1em;
+			margin-bottom: 1em;
+			width: 50%;
+			.group_name {
+				display: flex;
+				label {
+					flex: 1;
+				}
+			}
+		}
+	}
+	.add_group {
+		border-top: 0.1em solid core.$border;
+		padding-top: 1em;
+		display: flex;
+		label {
+			flex: 1;
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.group_counter {
+		.content {
+			.wrapper {
+				width: 100%;
+			}
+		}
+	}
+}

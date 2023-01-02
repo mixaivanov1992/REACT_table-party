@@ -1,35 +1,28 @@
 import { ChapterData, RuleData } from '@models/services/ruleService';
-import { DialogSize } from '@models/store/reducer/dialogReducer';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 import {
     colors, fontsFamily, fontsSize, textAlign,
 } from '@shared/TextEditor/styleMap';
 import { linkDecorator } from '@shared/TextEditor/Link';
 import { mediaBlockRenderer } from '@shared/TextEditor/Media';
-import { openDialog } from '@store/reducer/dialogReducer';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import BottomMenu from '@components/RunRule/BottomMenu/BottomMenu';
 import Close from '@components/RunRule/Close/Close';
 import Cover from '@components/RunRule/Cover/Cover';
-import Localization from '@localization/components/runRule';
 import Navbar from '@components/RunRule/Navbar/Navbar';
 import React, { useMemo, useRef, useState } from 'react';
-import RollDice from '@components/RunRule/RollDice/RollDice';
 import styles from '@css/runRule/RunRule.module.scss';
 
 interface Props {
+    ruleId: string,
     rule: RuleData,
     chapters: ChapterData
 }
 
 const RunRule: React.FC<Props> = (props) => {
     console.info('RunRule');
-    Localization.setLanguage(navigator.language);
-    const dispatch = useDispatch();
 
-    const { rule, chapters } = props;
-
+    const { ruleId, rule, chapters } = props;
     const [selectedChapter, setSelectedChapter] = useState<number>(0);
     const [selectedSheet, setSelectedSheet] = useState<number>(0);
 
@@ -47,10 +40,6 @@ const RunRule: React.FC<Props> = (props) => {
         setTimeout(() => {
             blink.current.classList.remove(styles.blink);
         }, 500);
-    };
-
-    const onClickOpenDialog = () => {
-        dispatch(openDialog(Localization.rollDice, <RollDice />, DialogSize.auto));
     };
 
     const navbar = useMemo(() => <Navbar chapters={chapters} selectedChapter={selectedChapter} onClickChapterSelection={onClickChapterSelection} />, [chapters, selectedChapter]);
@@ -75,12 +64,12 @@ const RunRule: React.FC<Props> = (props) => {
                     </div>
                 </div>
                 <BottomMenu
+                    ruleId={ruleId}
                     chapters={chapters}
                     sheets={sheets}
                     selectedChapter={selectedChapter}
                     selectedSheet={selectedSheet}
                     blinkHandler={blinkHandler}
-                    onClickOpenDialog={onClickOpenDialog}
                     changeChapter={(chapter: number) => { setSelectedChapter(chapter); }}
                     changeSheet={(sheet: number) => { setSelectedSheet(sheet); }}
                 />

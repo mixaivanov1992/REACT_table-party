@@ -43,7 +43,7 @@ const RuleLoading: React.FC = () => {
         );
     }
 
-    return chapters ? <RunRule rule={rule} chapters={chapters} /> : <Close />;
+    return chapters ? <RunRule ruleId={ruleId} rule={rule} chapters={chapters} /> : <Close />;
 };
 
 export default RuleLoading;

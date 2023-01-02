@@ -1,0 +1,21 @@
+@use "../../../core";
+.counter {
+	display: flex;
+	flex-direction: column;
+	.content {
+		display: flex;
+		flex-direction: column;
+		.wrapper {
+			display: flex;
+			label {
+				flex: 1;
+			}
+		}
+	}
+	.add_counter {
+		display: flex;
+		label {
+			flex: 1;
+		}
+	}
+}
