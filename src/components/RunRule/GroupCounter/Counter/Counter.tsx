@@ -5,7 +5,7 @@ import { useTypedSelector } from '@hooks/useTypedSelector';
 import { v4 as uuidv4 } from 'uuid';
 import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
-import Localization from '@localization/components/runRule/counter';
+import Localization from '@localization/components/runRule/groupCounter/counter';
 import React, { useState } from 'react';
 import styles from '@css/runRule/groupCounter/counter/Counter.module.scss';
 
