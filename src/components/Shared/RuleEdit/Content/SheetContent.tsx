@@ -11,8 +11,8 @@ interface Props {
     ruleUid: string,
     chapterIndex: number,
 }
-const Sheets: React.FC<Props> = (props) => {
-    console.info('Sheets');
+const SheetContent: React.FC<Props> = (props) => {
+    console.info('SheetContent');
     Localization.setLanguage(navigator.language);
 
     const { ruleUid, chapterIndex } = props;
@@ -42,4 +42,4 @@ const Sheets: React.FC<Props> = (props) => {
     );
 };
 
-export default Sheets;
+export default SheetContent;

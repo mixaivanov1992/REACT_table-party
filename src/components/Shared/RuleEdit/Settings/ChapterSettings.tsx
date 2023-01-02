@@ -13,8 +13,8 @@ interface Props {
     forcePageAfterDelete(): void,
 }
 
-const ChapterController: React.FC<Props> = (props) => {
-    console.info('ChapterController');
+const ChapterSettings: React.FC<Props> = (props) => {
+    console.info('ChapterSettings');
     const dispatch = useDispatch();
     const { ruleUid, chapterIndex, forcePageAfterDelete } = props;
 
@@ -55,4 +55,4 @@ const ChapterController: React.FC<Props> = (props) => {
     );
 };
 
-export default ChapterController;
+export default ChapterSettings;

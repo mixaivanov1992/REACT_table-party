@@ -19,8 +19,8 @@ interface Props{
     ruleUid: string,
 }
 
-const RuleController: React.FC<Props> = (props) => {
-    console.info('RuleController');
+const RuleSettings: React.FC<Props> = (props) => {
+    console.info('RuleSettings');
     Localization.setLanguage(navigator.language);
 
     const dispatch = useDispatch();
@@ -73,4 +73,4 @@ const RuleController: React.FC<Props> = (props) => {
         />
     );
 };
-export default RuleController;
+export default RuleSettings;
