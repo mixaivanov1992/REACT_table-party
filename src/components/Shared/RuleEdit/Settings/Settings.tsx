@@ -1,13 +1,14 @@
 import { ContentTypes } from '@models/contentTypes';
+import { DialogSize } from '@models/store/reducer/dialogReducer';
+import { closeDialog, openDialog } from '@store/reducer/dialogReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDispatch } from 'react-redux';
 import { useImageProcessing } from '@hooks/useImageProcessing';
 import { v4 as uuidv4 } from 'uuid';
-import Dialog from '@shared/Dialog/Dialog';
 import InputNumber from '@shared/InputNumber/InputNumber';
 import InputWrapper from '@shared/InputWrapper/InputWrapper';
 import Localization from '@localization/components/shared/ruleEdit/settings';
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '@css/shared/ruleEdit/settings/Settings.module.scss';
 
 interface Props {
@@ -53,72 +54,66 @@ const Settings: React.FC<Props> = (props) => {
         imageProcessing(getFileData, files, 'image/jpeg');
     };
 
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const onClickOpenDialog = () => {
+        const footer = (
+            <>
+                <button type="button" onClick={() => { dispatch(closeDialog()); onClickConfirmRemove(); }}>{Localization.confirm}</button>
+                <button type="button" onClick={() => { dispatch(closeDialog()); }}>{Localization.close}</button>
+            </>
+        );
+        dispatch(openDialog(Localization.removal, Localization[contentTypes].delete, DialogSize.auto, footer));
+    };
     const uniqueId = uuidv4();
     return (
-        <>
-            <div className={styles.settings}>
-                <div>
-                    <InputWrapper
-                        htmlFor={`cover${uniqueId}`}
-                        text={Localization[contentTypes].cover}
+        <div className={styles.settings}>
+            <div>
+                <InputWrapper
+                    htmlFor={`cover${uniqueId}`}
+                    text={Localization[contentTypes].cover}
+                    value={cover}
+                >
+                    <input
+                        onChange={(e) => { onChangeCover(e.currentTarget.value); }}
+                        id={`cover${uniqueId}`}
+                        type="text"
                         value={cover}
-                    >
-                        <input
-                            onChange={(e) => { onChangeCover(e.currentTarget.value); }}
-                            id={`cover${uniqueId}`}
-                            type="text"
-                            value={cover}
-                        />
-                    </InputWrapper>
-                    <div>
-                        <input type="file" accept=".jpg, .jpeg" onChange={onChangeImage} />
-                        <button type="button">{Localization.review}</button>
-                    </div>
-                </div>
+                    />
+                </InputWrapper>
                 <div>
-                    <InputWrapper
-                        htmlFor={`title${uniqueId}`}
-                        text={Localization[contentTypes].title}
-                        value={title}
-                    >
-                        <input
-                            type="text"
-                            id={`title${uniqueId}`}
-                            value={title}
-                            onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
-                        />
-                    </InputWrapper>
-                    <div><button type="button" onClick={() => { setIsOpen(true); }}>{Localization[contentTypes].deleteItem}</button></div>
-                </div>
-                <div>
-                    <InputWrapper
-                        htmlFor={`count${uniqueId}`}
-                        text={Localization[contentTypes].countItem}
-                        value={countItem}
-                    >
-                        <InputNumber
-                            id={`count${uniqueId}`}
-                            value={countItem}
-                            onInputData={onInputCountItem}
-                        />
-                    </InputWrapper>
-                    <div><button type="button" onClick={onClickAddItem}>{Localization.addItem}</button></div>
+                    <input type="file" accept=".jpg, .jpeg" onChange={onChangeImage} />
+                    <button type="button">{Localization.review}</button>
                 </div>
             </div>
-            <Dialog
-                isOpen={isOpen}
-                onClickCloseDialog={() => { setIsOpen(false); }}
-                title={Localization.removal}
-                content={<div>{Localization[contentTypes].delete}</div>}
-                footer={(
-                    <>
-                        <button type="button" onClick={() => { setIsOpen(false); onClickConfirmRemove(); }}>{Localization.confirm}</button>
-                        <button type="button" onClick={() => { setIsOpen(false); }}>{Localization.close}</button>
-                    </>
-                )}
-            />
-        </>
+            <div>
+                <InputWrapper
+                    htmlFor={`title${uniqueId}`}
+                    text={Localization[contentTypes].title}
+                    value={title}
+                >
+                    <input
+                        type="text"
+                        id={`title${uniqueId}`}
+                        value={title}
+                        onChange={(e) => { onChangeTitle(e.currentTarget.value); }}
+                    />
+                </InputWrapper>
+                <div><button type="button" onClick={onClickOpenDialog}>{Localization[contentTypes].deleteItem}</button></div>
+            </div>
+            <div>
+                <InputWrapper
+                    htmlFor={`count${uniqueId}`}
+                    text={Localization[contentTypes].countItem}
+                    value={countItem}
+                >
+                    <InputNumber
+                        id={`count${uniqueId}`}
+                        value={countItem}
+                        onInputData={onInputCountItem}
+                    />
+                </InputWrapper>
+                <div><button type="button" onClick={onClickAddItem}>{Localization.addItem}</button></div>
+            </div>
+        </div>
     );
 };
 

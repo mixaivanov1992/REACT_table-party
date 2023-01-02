@@ -3,20 +3,26 @@ import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styles from '@css/shared/dialog/Dialog.module.scss';
 
+/* eslint-disable */
 interface Props {
     onClickCloseDialog(): void,
     isOpen: boolean,
     title: string,
-    content: JSX.Element,
-    beforeFooter?: JSX.Element,
-    footer?: JSX.Element,
-    dialogSize?: string,
+    content: JSX.Element | string,
+    footer: JSX.Element | string,
+    dialogSize: string,
 }
+/* eslint-enable */
+
+const defaultProps = {
+    footer: '',
+};
+
 const Dialog: React.FC<Props> = (props) => {
     console.info('Dialog');
     const {
-        onClickCloseDialog, isOpen, title, content, beforeFooter, footer, dialogSize,
-    } = props;
+        onClickCloseDialog, isOpen, title, content, footer, dialogSize,
+    } = { ...defaultProps, ...props };
     const root = document.createElement('div');
 
     useEffect(() => {
@@ -51,7 +57,7 @@ const Dialog: React.FC<Props> = (props) => {
                 {ReactDOM.createPortal(
                     <>
                         <div className={styles.wrapper}>
-                            <div className={`${styles.dialog} ${styles[`dialog_${dialogSize}`]}`}>
+                            <div className={`${styles.dialog} ${styles[`${dialogSize}`]}`}>
                                 <div className={styles.header}>
                                     <div className={styles.title}>{title}</div>
                                     <div
@@ -67,11 +73,6 @@ const Dialog: React.FC<Props> = (props) => {
                                 <div className={styles.container}>
                                     {content}
                                 </div>
-                                {beforeFooter && (
-                                    <div className={styles.before_footer}>
-                                        {beforeFooter}
-                                    </div>
-                                )}
                                 {footer && (
                                     <div className={styles.footer}>
                                         {footer}
@@ -87,10 +88,4 @@ const Dialog: React.FC<Props> = (props) => {
         </CSSTransition>
     );
 };
-Dialog.defaultProps = {
-    beforeFooter: undefined,
-    footer: undefined,
-    dialogSize: 'auto',
-};
-
 export default Dialog;

@@ -1,6 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { chapterReducer } from '@store/reducer/chapterReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { dialogReducer } from '@store/reducer/dialogReducer';
 import { loaderReducer } from '@store/reducer/loaderReducer';
 import { messageReducer } from '@store/reducer/messageReducer';
 import { persistReducer, persistStore } from 'redux-persist';
@@ -13,7 +14,7 @@ import thunk from 'redux-thunk';
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['loaderReducer', 'messageReducer', 'ruleReducer', 'chapterReducer', 'sheetReducer'],
+    blacklist: ['loaderReducer', 'messageReducer', 'ruleReducer', 'chapterReducer', 'sheetReducer', 'dialogReducer'],
 };
 // localStorage.clear();
 export const rootReducer = combineReducers({
@@ -23,6 +24,7 @@ export const rootReducer = combineReducers({
     sheetReducer,
     loaderReducer,
     messageReducer,
+    dialogReducer,
 });
 
 const persistedReducer = persistReducer<RootState, any>(persistConfig, rootReducer);

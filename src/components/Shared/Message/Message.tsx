@@ -1,3 +1,4 @@
+import { DialogSize } from '@models/store/reducer/dialogReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
@@ -19,6 +20,8 @@ const Message: React.FC = () => {
             onClickCloseDialog={onClickCloseDialog}
             title={title}
             content={<div>{content}</div>}
+            dialogSize={DialogSize.auto}
+            footer=""
         />
     );
 };
