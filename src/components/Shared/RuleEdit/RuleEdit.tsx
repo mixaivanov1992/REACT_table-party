@@ -3,6 +3,7 @@ import { DefaultRuleKey } from '@models/store/reducer/ruleReducer';
 import { PageAlias } from '@models/accessiblePage';
 import ChapterContent from '@shared/RuleEdit/Content/ChapterContent';
 import Default from '@shared/RuleEdit/Menu/Default';
+import GameElement from '@shared/RuleEdit/Menu/GameElement';
 import Header from '@components/Content/Header/Header';
 import Localization from '@localization/components/shared/ruleEdit';
 import React, { useState } from 'react';
@@ -28,6 +29,7 @@ const RuleEdit: React.FC<Props> = (props) => {
                     &#8203;
                 </button>
                 {DefaultRuleKey !== ruleUid && <Default ruleUid={ruleUid} />}
+                <GameElement ruleUid={ruleUid} />
                 <Save ruleUid={ruleUid} />
             </div>
             <div className={styles.container}>

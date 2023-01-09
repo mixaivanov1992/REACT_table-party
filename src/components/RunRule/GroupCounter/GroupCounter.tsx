@@ -1,4 +1,5 @@
 import { addGroup, changeGroup, deleteGroup } from '@store/reducer/groupCounterReducer';
+import { deleteAllCounter } from '@store/reducer/counterReducer';
 import { showMessage } from '@store/reducer/messageReducer';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '@hooks/useTypedSelector';
@@ -31,6 +32,7 @@ const GroupCounter: React.FC<Props> = (props) => {
     };
 
     const onClickDeleteGroup = (groupUid: string) => {
+        dispatch(deleteAllCounter(groupUid));
         dispatch(deleteGroup(ruleId, groupUid));
     };
 

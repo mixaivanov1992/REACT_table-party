@@ -39,6 +39,15 @@ const App: React.FC = () => {
             setIsLoading(true);
             console.info('state', store.getState());
         })();
+
+        const interval = setInterval(async () => {
+            const result = await refreshToken(dispatch);
+            if (!result) {
+                clearInterval(interval);
+            }
+        }, 1500000); // 25 minutes
+
+        return () => clearInterval(interval);
     }, []);
 
     if (!isLoading) {

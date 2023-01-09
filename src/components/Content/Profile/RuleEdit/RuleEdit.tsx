@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import Edit from '@shared/RuleEdit/RuleEdit';
 import Page404 from '@components/Content/Page404/Page404';
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 
 interface Parameters {
     id: string
@@ -21,7 +21,7 @@ const RuleEdit: React.FC = () => {
     const chapters = useTypedSelector((state) => state.chapterReducer[ruleId]);
 
     const getRule = actionGetRule(dispatch, ruleId);
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!chapters) {
             actionHandler(dispatch, getRule);
         }

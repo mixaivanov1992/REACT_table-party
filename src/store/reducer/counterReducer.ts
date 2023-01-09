@@ -1,5 +1,5 @@
 import {
-    AddCounter, ChangeCounter, CounterAction, CounterActionType, CounterState, DeleteCounter,
+    AddCounter, ChangeCounter, CounterAction, CounterActionType, CounterState, DeleteAllCounter, DeleteCounter,
 } from '@models/store/reducer/counterReducer';
 
 const initialState: CounterState = {};
@@ -25,6 +25,12 @@ export const counterReducer = (state = initialState, action: CounterAction): Cou
         const { groupUid, counterUid } = action;
         const newState = { ...state };
         newState[groupUid] = newState[groupUid].filter((item) => item.uid !== counterUid);
+        return newState;
+    }
+    case CounterActionType.DELETE_ALL_COUNTER: {
+        const { groupUid } = action;
+        const newState = { ...state };
+        delete newState[groupUid];
         return newState;
     }
     case CounterActionType.CHANGE_COUNTER: {
@@ -56,6 +62,11 @@ export const deleteCounter = (groupUid: string, counterUid: string): DeleteCount
     type: CounterActionType.DELETE_COUNTER,
     groupUid,
     counterUid,
+});
+
+export const deleteAllCounter = (groupUid: string): DeleteAllCounter => ({
+    type: CounterActionType.DELETE_ALL_COUNTER,
+    groupUid,
 });
 
 export const changeCounter = (groupUid: string, counterUid: string, value: number): ChangeCounter => ({

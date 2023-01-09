@@ -8,6 +8,7 @@ export interface CounterState {
 export enum CounterActionType {
     ADD_COUNTER = 'ADD_COUNTER',
     DELETE_COUNTER = 'DELETE_COUNTER',
+    DELETE_ALL_COUNTER = 'DELETE_ALL_COUNTER',
     CHANGE_COUNTER = 'CHANGE_COUNTER',
 }
 
@@ -24,6 +25,11 @@ export interface DeleteCounter {
     counterUid: string
 }
 
+export interface DeleteAllCounter {
+    type: CounterActionType.DELETE_ALL_COUNTER,
+    groupUid: string,
+}
+
 export interface ChangeCounter {
     type: CounterActionType.CHANGE_COUNTER,
     groupUid: string,
@@ -31,4 +37,4 @@ export interface ChangeCounter {
     value: number
 }
 
-export type CounterAction = AddCounter | DeleteCounter | ChangeCounter;
+export type CounterAction = AddCounter | DeleteCounter | DeleteAllCounter | ChangeCounter;
